@@ -1,10 +1,15 @@
+import { ColorsContextProvider } from "./contexts/colorsContext";
+import LandingPage from "./components/LandingPage";
+
 import "./App.css";
 
 function App() {
   return (
-    <div className="flex justify-center items-center h-[100vh]">
-      <h1 className="font-semibold text-4xl">Hello UI Color Picker😀</h1>
-    </div>
+    <>
+      <ColorsContextProvider>
+        <LandingPage />
+      </ColorsContextProvider>
+    </>
   );
 }
 
