@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import colorsContext from "../contexts/colorsContext";
+import Navbar from "./Navbar";
 
 const LandingPage = () => {
   const colorsCtx = useContext(colorsContext);
@@ -7,8 +8,8 @@ const LandingPage = () => {
     colorsCtx.generateColors();
   }, []);
   return (
-    <div className="flex justify-center items-center h-[100vh]">
-      <h1 className="font-semibold text-4xl">Hello UI Color Picker😀</h1>
+    <div className="mx-auto">
+      <Navbar />
     </div>
   );
 };
