@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { colorMapping } from "../utils/colors";
 
 const ColorsContext = createContext({
   generateColors: null,
@@ -6,11 +7,6 @@ const ColorsContext = createContext({
 
 export const ColorsContextProvider = (props) => {
   const [colorVarients, setColorVarients] = useState({
-    slate: null,
-    gray: null,
-    zinc: null,
-    neutral: null,
-    stone: null,
     red: null,
     orange: null,
     amber: null,
@@ -28,16 +24,21 @@ export const ColorsContextProvider = (props) => {
     fuchsia: null,
     pink: null,
     rose: null,
+    slate: null,
+    gray: null,
+    zinc: null,
+    neutral: null,
+    stone: null,
   });
 
   const generateColors = () => {
     for (let color in colorVarients) {
       let array = [];
       for (let i = 100; i < 1000; i = i + 100) {
-        let colorString = `bg-${color}-${i}`;
+        let colorString = colorMapping[`bg${color}${i}`];
         array.push(colorString);
       }
-      array.unshift(`bg-${color}-50`);
+      array.unshift(colorMapping[`bg${color}50`]);
       colorVarients[color] = array;
     }
     setColorVarients(colorVarients);
