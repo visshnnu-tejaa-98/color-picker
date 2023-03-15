@@ -1,5 +1,4 @@
 import React from "react";
-import "flowbite";
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -14,7 +13,7 @@ const Navbar = () => {
               alt="Flowbite Logo"
             />
             <span className="self-center text-xl font-semibold whitespace-nowrap">
-              UI Color Picker
+              Color Picker
             </span>
           </Link>
           <button

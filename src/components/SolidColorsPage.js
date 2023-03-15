@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ColorsContext from "../contexts/colorsContext";
 import ColorBlock from "./ColorBlock";
+import Footer from "./Footer";
 
 const SolidColorsPage = () => {
   const [colors, setColors] = useState([]);
@@ -25,6 +26,7 @@ const SolidColorsPage = () => {
         colorKeys.map((c, idx) => (
           <ColorBlock colors={colors[`${c}`]} mainColor={c} key={idx} />
         ))}
+      <Footer />
     </div>
   );
 };
