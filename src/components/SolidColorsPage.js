@@ -26,7 +26,6 @@ const SolidColorsPage = () => {
         colorKeys.map((c, idx) => (
           <ColorBlock colors={colors[`${c}`]} mainColor={c} key={idx} />
         ))}
-      <Footer />
     </div>
   );
 };
