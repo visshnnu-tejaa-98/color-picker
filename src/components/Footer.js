@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="px-[7%]">
       <footer className="bg-inherit mt-5">
         <div className="mx-auto w-full container p-4 sm:p-6">
           <div className="md:flex md:justify-between">
