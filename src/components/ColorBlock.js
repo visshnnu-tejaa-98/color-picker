@@ -24,11 +24,12 @@ const ColorBlock = ({ mainColor, colors }) => {
                   display: "flex",
                   justifyContent: "center",
                   marginBottom: "1rem",
+                  cursor: "pointer",
                 }}
                 className="color-tile"
                 onClick={() => {
                   setIsCopied(true);
-                  navigator.clipboard.writeText(clr);
+                  navigator.clipboard.writeText(clr.toUpperCase());
                   setTimeout(() => {
                     setIsCopied(false);
                   }, 500);
@@ -38,14 +39,14 @@ const ColorBlock = ({ mainColor, colors }) => {
                   <p
                     onClick={() => {
                       setIsCopied(true);
-                      navigator.clipboard.writeText(clr);
+                      navigator.clipboard.writeText(clr.toUpperCase());
                       setTimeout(() => {
                         setIsCopied(false);
                       }, 500);
                     }}
                   >
                     <span className={!isCopied ? "" : "text-[#22CB5C]"}>
-                      {clr}
+                      {clr?.toUpperCase()}
                     </span>
                     {!isCopied ? (
                       <span className="material-symbols-outlined scale-75">

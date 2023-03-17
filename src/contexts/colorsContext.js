@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { colorMapping } from "../utils/colors";
+import { solidColorMapping } from "../utils/solidColors";
 
 const ColorsContext = createContext({
   generateColors: null,
@@ -35,10 +35,10 @@ export const ColorsContextProvider = (props) => {
     for (let color in colorVarients) {
       let array = [];
       for (let i = 100; i < 1000; i = i + 100) {
-        let colorString = colorMapping[`bg${color}${i}`];
+        let colorString = solidColorMapping[`bg${color}${i}`];
         array.push(colorString);
       }
-      array.unshift(colorMapping[`bg${color}50`]);
+      array.unshift(solidColorMapping[`bg${color}50`]);
       colorVarients[color] = array;
     }
     setColorVarients(colorVarients);
