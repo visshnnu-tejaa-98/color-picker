@@ -1,4 +1,4 @@
-export const colorMapping = {
+export const solidColorMapping = {
   bgslate50: "#f8fafc",
   bgslate100: "#f1f5f9",
   bgslate200: "#e2e8f0",
