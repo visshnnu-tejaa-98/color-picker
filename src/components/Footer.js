@@ -35,6 +35,14 @@ const Footer = () => {
                       Gradient Colors
                     </Link>
                   </li>
+                  <li className="mb-4">
+                    <Link
+                      to="/palette              "
+                      className="hover:underline"
+                    >
+                      Palette
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>
