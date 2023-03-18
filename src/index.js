@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SolidColorsPage from "./components/SolidColorsPage";
 import GradientColorsPage from "./components/GradientColorsPage";
+import PalettePage from "./components/PalettePage";
 
 const appRouter = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/gradient",
         element: <GradientColorsPage />,
+      },
+      {
+        path: "/palette",
+        element: <PalettePage />,
       },
     ],
   },
