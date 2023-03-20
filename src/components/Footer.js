@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -9,11 +10,7 @@ const Footer = () => {
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <a href="https://flowbite.com/" className="flex items-center">
-                <img
-                  src="https://flowbite.com/docs/images/logo.svg"
-                  className="h-8 mr-3"
-                  alt="FlowBite Logo"
-                />
+                <img src={Logo} className="h-8 mr-3" alt="FlowBite Logo" />
                 <span className="self-center text-[#cccccc] text-2xl font-semibold whitespace-nowrap">
                   Color Picker
                 </span>
