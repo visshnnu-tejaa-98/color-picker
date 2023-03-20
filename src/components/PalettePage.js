@@ -1,4 +1,6 @@
 import React from "react";
+import { palletColors } from "../utils/palleteColors";
+import PalleteColorCopy from "./PalleteColorCopy";
 
 const PalettePage = () => {
   return (
@@ -6,6 +8,42 @@ const PalettePage = () => {
       <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center">
         Color Palette
       </h1>
+      <h2 className="text-center text-3xl mt-12 mb-10">Click to Copy!</h2>
+      <div className="flex justify-center my-12">
+        <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {palletColors &&
+              palletColors.map((color) => (
+                <div className="w-[200px] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow">
+                  <div
+                    style={{ backgroundColor: color[0] }}
+                    className="w-[200px] h-[75px] bg-teal-500 relative pallete-color"
+                  >
+                    <PalleteColorCopy color={color[0]} />
+                  </div>
+                  <div
+                    style={{ backgroundColor: color[1] }}
+                    className="w-[200px] h-[55px] bg-teal-300 relative pallete-color"
+                  >
+                    <PalleteColorCopy color={color[1]} />
+                  </div>
+                  <div
+                    style={{ backgroundColor: color[2] }}
+                    className="w-[200px] h-[40px] bg-teal-200 relative pallete-color"
+                  >
+                    <PalleteColorCopy color={color[2]} />
+                  </div>
+                  <div
+                    style={{ backgroundColor: color[3] }}
+                    className="w-[200px] h-[30px] bg-teal-100 relative pallete-color"
+                  >
+                    <PalleteColorCopy color={color[3]} />
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

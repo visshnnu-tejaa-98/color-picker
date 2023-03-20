@@ -7,6 +7,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SolidColorsPage from "./components/SolidColorsPage";
 import GradientColorsPage from "./components/GradientColorsPage";
 import PalettePage from "./components/PalettePage";
+import { element } from "prop-types";
+import GradientTwoTone from "./components/GradientTwoTone";
+import GradientThreeTone from "./components/GradientThreeTone";
 
 const appRouter = createBrowserRouter([
   {
@@ -20,6 +23,18 @@ const appRouter = createBrowserRouter([
       {
         path: "/gradient",
         element: <GradientColorsPage />,
+        children: [
+          {
+            path: "",
+            element: <GradientTwoTone />,
+            msg: "twotone",
+          },
+          {
+            path: "threetone",
+            element: <GradientThreeTone />,
+            msg: "twotone",
+          },
+        ],
       },
       {
         path: "/palette",

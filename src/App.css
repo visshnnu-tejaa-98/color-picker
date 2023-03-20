@@ -49,3 +49,15 @@
 .gradient-tile:hover span {
   visibility: visible;
 }
+
+.pallete-color span {
+  visibility: hidden;
+}
+
+.pallete-color:hover span {
+  visibility: visible;
+}
+
+.bg {
+  background-color: #00000059;
+}
