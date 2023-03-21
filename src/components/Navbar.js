@@ -7,7 +7,7 @@ const Navbar = () => {
     <div className="text-[#CCCCCC] px-[7%] sticky top-0 bg-[#1E0927] z-10 shadow-[0_8px_6px_-6px_rgba(204,204,204,0.3)] mb-5">
       <nav className="bg-transparent border-gray-200 px-2 sm:px-4 py-2.5">
         <div className="container flex flex-wrap items-center justify-between mx-auto">
-          <Link to="#" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img src={Logo} className="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
             <span className="self-center text-xl font-semibold whitespace-nowrap">
               Color Picker
@@ -42,7 +42,7 @@ const Navbar = () => {
             <ul className="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
               <li>
                 <NavLink
-                  to="/"
+                  to="/solid"
                   className={({ isActive }) =>
                     isActive
                       ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
