@@ -10,6 +10,7 @@ import PalettePage from "./components/PalettePage";
 import { element } from "prop-types";
 import GradientTwoTone from "./components/GradientTwoTone";
 import GradientThreeTone from "./components/GradientThreeTone";
+import Home from "./components/Home.js";
 
 const appRouter = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/solid",
         element: <SolidColorsPage />,
       },
       {
