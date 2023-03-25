@@ -12,7 +12,6 @@ const LandingPage = () => {
   return (
     <div className="mx-auto">
       <Navbar />
-      <Outlet />
       <Footer />
     </div>
   );
