@@ -16,9 +16,6 @@ const Home = () => {
           <Link to="/solid" className="w-[144px]">
             <span className="py-1.5 px-3 bg-[#7E22CE] text-xl font-semibold rounded hover:text-[#cccccc] border border-[#7E22CE] hover:bg-transparent hover:border-[#cccccc] hover:ease-in-out hover:duration-300">
               <span>Copy Color</span>
-              <span class="material-symbols-outlined relative top-[5px] right-[-4px] pr-1">
-                arrow_forward
-              </span>
             </span>
           </Link>
         </div>
