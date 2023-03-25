@@ -130,7 +130,7 @@ const Navbar = () => {
                   to="/"
                   className={({ isActive }) =>
                     isActive
-                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FDE68A] font-semibold"
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
@@ -143,7 +143,7 @@ const Navbar = () => {
                   to="/solid"
                   className={({ isActive }) =>
                     isActive
-                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FDE68A] font-semibold"
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
@@ -185,7 +185,7 @@ const Navbar = () => {
                       to="/gradient"
                       className={() =>
                         location.pathname === "/gradient"
-                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] text-[#FDE68A] font-semibold"
+                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
                           : "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff]"
                       }
                     >
@@ -197,7 +197,7 @@ const Navbar = () => {
                       to="/gradient/threetone"
                       className={() => {
                         return location.pathname === "/gradient/threetone"
-                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] text-[#FDE68A] font-semibold"
+                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
                           : "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff]";
                       }}
                     >
@@ -211,7 +211,7 @@ const Navbar = () => {
                   to="/palette"
                   className={({ isActive }) =>
                     isActive
-                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FDE68A] font-semibold"
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
