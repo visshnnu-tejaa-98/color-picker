@@ -65,3 +65,7 @@
 .home-page {
   width: 100% !important;
 }
+
+.active-sidebar {
+  color: #fde68a;
+}

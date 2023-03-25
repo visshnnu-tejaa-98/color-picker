@@ -113,6 +113,14 @@ const Navbar = () => {
                           Three Tone Gradient
                         </Link>
                       </li>
+                      <li>
+                        <Link
+                          to="/gradient/generate"
+                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Generate Gradient
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 </li>
@@ -130,7 +138,7 @@ const Navbar = () => {
                   to="/"
                   className={({ isActive }) =>
                     isActive
-                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
@@ -143,7 +151,7 @@ const Navbar = () => {
                   to="/solid"
                   className={({ isActive }) =>
                     isActive
-                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
@@ -185,7 +193,7 @@ const Navbar = () => {
                       to="/gradient"
                       className={() =>
                         location.pathname === "/gradient"
-                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
+                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
                           : "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff]"
                       }
                     >
@@ -197,11 +205,23 @@ const Navbar = () => {
                       to="/gradient/threetone"
                       className={() => {
                         return location.pathname === "/gradient/threetone"
-                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
+                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
                           : "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff]";
                       }}
                     >
                       Three Tone Colors
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/gradient/generate"
+                      className={() => {
+                        return location.pathname === "/gradient/generate"
+                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
+                          : "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff]";
+                      }}
+                    >
+                      Generate Gradient
                     </NavLink>
                   </li>
                 </ul>
@@ -211,7 +231,7 @@ const Navbar = () => {
                   to="/palette"
                   className={({ isActive }) =>
                     isActive
-                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] text-[#FEF08A] font-semibold"
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >

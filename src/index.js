@@ -11,6 +11,7 @@ import { element } from "prop-types";
 import GradientTwoTone from "./components/GradientTwoTone";
 import GradientThreeTone from "./components/GradientThreeTone";
 import Home from "./components/Home.js";
+import GenerateGradient from "./components/GenerateGradient";
 
 const appRouter = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const appRouter = createBrowserRouter([
           {
             path: "threetone",
             element: <GradientThreeTone />,
-            msg: "twotone",
+            msg: "threetone",
+          },
+          {
+            path: "generate",
+            element: <GenerateGradient />,
           },
         ],
       },
