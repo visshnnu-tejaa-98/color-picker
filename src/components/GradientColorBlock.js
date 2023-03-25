@@ -15,7 +15,7 @@ const GradientColorBlock = ({ color, varient }) => {
       {varient === twoTone && (
         <div>
           <div
-            className={`w-[260px] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
+            className={`w-[100%] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
             style={{
               background: `linear-gradient(to right, ${color[0]} , ${color[1]})`,
             }}
@@ -55,7 +55,7 @@ const GradientColorBlock = ({ color, varient }) => {
       {varient === threeTone && (
         <div>
           <div
-            className={`w-[260px] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
+            className={`w-[100%] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
             style={{
               background: `linear-gradient(to right, ${color[0]} , ${color[1]}, ${color[2]})`,
             }}
@@ -85,13 +85,13 @@ const GradientColorBlock = ({ color, varient }) => {
               )}
             </span>
           </div>
-          {/* <span className="flex flex-col items-center md:flex-row md:items-center md:justify-center md:my-1">
+          <div className="flex items-center justify-center gap-4 my-1">
             <GradientColorCodeCopy clr={color[0]} />
-            <span class="material-symbols-outlined">arrow_right_alt</span>
-            <GradientColorCodeCopy clr={color[1]} />
+            {/* <span class="material-symbols-outlined">arrow_right_alt</span>
+            <GradientColorCodeCopy clr={color[1]} /> */}
             <span class="material-symbols-outlined">arrow_right_alt</span>
             <GradientColorCodeCopy clr={color[2]} />
-          </span> */}
+          </div>
         </div>
       )}
     </span>

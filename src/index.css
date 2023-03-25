@@ -40,3 +40,7 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: #8425af;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}

@@ -3,13 +3,13 @@ import React, { useState } from "react";
 const ColorBlock = ({ mainColor, colors }) => {
   const [isCopied, setIsCopied] = useState(false);
   return (
-    <div className="flex justify-center gap-5">
+    <div>
       <div>
         <h2 className="text-center md:text-left text-3xl my-5">
           Feeling {mainColor}
         </h2>
         <div
-          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-10"
+          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5"
           style={{ gap: "1rem" }}
         >
           {colors &&
@@ -17,8 +17,6 @@ const ColorBlock = ({ mainColor, colors }) => {
               <div
                 key={clr}
                 style={{
-                  width: "100px",
-                  height: "220px",
                   backgroundColor: `${clr}`,
                   position: "relative",
                   display: "flex",
@@ -26,7 +24,7 @@ const ColorBlock = ({ mainColor, colors }) => {
                   marginBottom: "1rem",
                   cursor: "pointer",
                 }}
-                className="color-tile"
+                className="w-[100%] h-[100px] color-tile"
                 onClick={() => {
                   setIsCopied(true);
                   navigator.clipboard.writeText(clr.toUpperCase());
@@ -46,7 +44,7 @@ const ColorBlock = ({ mainColor, colors }) => {
                     }}
                   >
                     <span className={!isCopied ? "" : "text-[#22CB5C]"}>
-                      {clr?.toUpperCase()}
+                      {!isCopied ? `${clr?.toUpperCase()}` : "Copied!"}
                     </span>
                     {!isCopied ? (
                       <span className="material-symbols-outlined scale-75">
