@@ -128,11 +128,11 @@ const GenerateGradient = () => {
             {!isCopied ? (
               <div className=" flex items-center gap-1 ">
                 <span>Copy </span>
-                <span class="material-symbols-outlined">code</span>
+                <span className="material-symbols-outlined">code</span>
               </div>
             ) : (
               <div className=" flex items-center gap-1 text-green-300">
-                <span class="material-symbols-outlined text-green-300">
+                <span className="material-symbols-outlined text-green-300">
                   check
                 </span>
                 <span>Copied!</span>

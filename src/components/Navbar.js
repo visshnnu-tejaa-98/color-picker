@@ -1,11 +1,13 @@
 import { Footer } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import "flowbite";
 
 const Navbar = () => {
   const location = useLocation();
+  const [isOpenSide, setIsOpenSide] = useState(true);
+  const [isOpenTop, setIsOpenTop] = useState(false);
   return (
     <div>
       <div className="text-[#CCCCCC] px-[7%] sticky top-0 bg-[#1E0927] z-10 shadow-[0_8px_6px_-6px_rgba(204,204,204,0.3)]   ">
@@ -18,7 +20,7 @@ const Navbar = () => {
               </span>
             </Link>
             <button
-              data-collapse-toggle="navbar-default"
+              // data-collapse-toggle="navbar-default"
               type="button"
               className="inline-flex items-center p-2 ml-3 text-sm text-[#CCCCCC] rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
               aria-controls="navbar-default"
@@ -70,59 +72,89 @@ const Navbar = () => {
                 </li>
                 <li>
                   <button
-                    id="dropdownNavbarLink"
-                    data-dropdown-toggle="dropdownNavbar"
-                    class="flex py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    // id="dropdownNavbarLink"
+                    // data-dropdown-toggle="dropdownNavbar"
+                    className="flex py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    onClick={() => setIsOpenTop((prev) => !prev)}
                   >
                     Gradient
                     <svg
-                      class="w-5 h-5 ml-1"
+                      className="w-5 h-5 ml-1"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       ></path>
                     </svg>
                   </button>
+                  {isOpenTop && (
+                    <div className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute">
+                      <ul className="py-2 text-sm text-gray-700">
+                        <li>
+                          <Link
+                            to="/gradient"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                            onClick={() => setIsOpenTop(false)}
+                          >
+                            Two Tone Gradient
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/gradient/threetone"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                            onClick={() => setIsOpenTop(false)}
+                          >
+                            Three Tone Gradient
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/gradient/generate"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                            onClick={() => setIsOpenTop(false)}
+                          >
+                            Generate Gradient
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
 
-                  <div
-                    id="dropdownNavbar"
-                    class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
-                  >
-                    <ul
-                      class="py-2 text-sm text-gray-700 dark:text-gray-400"
-                      aria-labelledby="dropdownLargeButton"
-                    >
-                      <li>
-                        <Link
-                          to="/gradient"
-                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Two Tone Gradient
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/gradient/threetone"
-                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Three Tone Gradient
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/gradient/generate"
-                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Generate Gradient
-                        </Link>
-                      </li>
-                    </ul>
+                  <div className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                    {isOpenTop && (
+                      <ul className="py-2 text-sm text-gray-700">
+                        <li>
+                          <Link
+                            to="/gradient"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Two Tone Gradient
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/gradient/threetone"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Three Tone Gradient
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/gradient/generate"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Generate Gradient
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
                   </div>
                 </li>
               </ul>
@@ -132,8 +164,8 @@ const Navbar = () => {
       </div>
       <div className="flex" style={{ height: "calc(100vh - 5rem)" }}>
         <div className=" w-[20%] h-[100%] bg-red-300 hidden md:block">
-          <div class="h-full px-3 py-4 overflow-y-auto bg-[#310f41]">
-            <ul class="space-y-2 font-medium">
+          <div className="h-full px-3 py-4 overflow-y-auto bg-[#310f41]">
+            <ul className="space-y-2 font-medium">
               <li>
                 <NavLink
                   to="/"
@@ -143,8 +175,8 @@ const Navbar = () => {
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
-                  <span class="material-symbols-outlined">home</span>
-                  <span class="ml-3">Home</span>
+                  <span className="material-symbols-outlined">home</span>
+                  <span className="ml-3">Home</span>
                 </NavLink>
               </li>
               <li>
@@ -156,39 +188,35 @@ const Navbar = () => {
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
-                  <span class="material-symbols-outlined">colorize</span>
-                  <span class="ml-3">Solid Colors</span>
+                  <span className="material-symbols-outlined">colorize</span>
+                  <span className="ml-3">Solid Colors</span>
                 </NavLink>
               </li>
-              <li>
-                <button
-                  type="button"
-                  class="flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff]"
-                  aria-controls="dropdown-example"
-                  data-collapse-toggle="dropdown-example"
+              <button
+                type="button"
+                className="flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff]"
+                onClick={() => setIsOpenSide((prev) => !prev)}
+              >
+                <span className="material-symbols-outlined">invert_colors</span>
+                <span className="flex-1 ml-3 text-left whitespace-nowrap">
+                  Gradient
+                </span>
+                <span>{isOpenSide}</span>
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <span class="material-symbols-outlined">invert_colors</span>
-                  <span
-                    class="flex-1 ml-3 text-left whitespace-nowrap"
-                    sidebar-toggle-item
-                  >
-                    Gradient
-                  </span>
-                  <svg
-                    sidebar-toggle-item
-                    class="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-                <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+              {isOpenSide && (
+                <ul>
                   <li>
                     <NavLink
                       to="/gradient"
@@ -226,7 +254,8 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                 </ul>
-              </li>
+              )}
+              <li></li>
               <li>
                 <NavLink
                   to="/palette"
@@ -236,8 +265,8 @@ const Navbar = () => {
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
-                  <span class="material-symbols-outlined">palette</span>
-                  <span class="flex-1 ml-3 whitespace-nowrap">
+                  <span className="material-symbols-outlined">palette</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap">
                     Color Palette
                   </span>
                 </NavLink>
