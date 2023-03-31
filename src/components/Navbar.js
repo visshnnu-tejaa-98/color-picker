@@ -2,6 +2,7 @@ import { Footer } from "flowbite-react";
 import React from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import "flowbite";
 
 const Navbar = () => {
   const location = useLocation();
