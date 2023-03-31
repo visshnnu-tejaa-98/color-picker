@@ -14,7 +14,10 @@ const PalettePage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {palletColors &&
               palletColors.map((color) => (
-                <div className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow">
+                <div
+                  key={color}
+                  className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow"
+                >
                   <div
                     style={{ backgroundColor: color[0] }}
                     className="w-[100%] h-[75px] bg-teal-500 relative pallete-color"

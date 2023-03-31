@@ -22,7 +22,10 @@ const GradientColorCodeCopy = ({ clr }) => {
           style={{ backgroundColor: clr }}
         ></div>
       ) : (
-        <span class="material-symbols-outlined text-sm" style={{ color: clr }}>
+        <span
+          className="material-symbols-outlined text-sm"
+          style={{ color: clr }}
+        >
           check
         </span>
       )}

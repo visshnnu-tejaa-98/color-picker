@@ -33,11 +33,11 @@ const GradientColorBlock = ({ color, varient }) => {
               {!isCopied ? (
                 <div className=" flex items-center gap-1 ">
                   <span>Copy </span>
-                  <span class="material-symbols-outlined">code</span>
+                  <span className="material-symbols-outlined">code</span>
                 </div>
               ) : (
                 <div className=" flex items-center gap-1 text-green-300">
-                  <span class="material-symbols-outlined text-green-300">
+                  <span className="material-symbols-outlined text-green-300">
                     check
                   </span>
                   <span>Copied!</span>
@@ -47,7 +47,7 @@ const GradientColorBlock = ({ color, varient }) => {
           </div>
           <span className="flex items-center justify-center gap-4 my-1">
             <GradientColorCodeCopy clr={color[0]} />
-            <span class="material-symbols-outlined">arrow_right_alt</span>
+            <span className="material-symbols-outlined">arrow_right_alt</span>
             <GradientColorCodeCopy clr={color[1]} />
           </span>
         </div>
@@ -73,11 +73,11 @@ const GradientColorBlock = ({ color, varient }) => {
               {!isCopied ? (
                 <div className=" flex items-center gap-1 ">
                   <span>Copy </span>
-                  <span class="material-symbols-outlined">code</span>
+                  <span className="material-symbols-outlined">code</span>
                 </div>
               ) : (
                 <div className=" flex items-center gap-1 text-green-300">
-                  <span class="material-symbols-outlined text-green-300">
+                  <span className="material-symbols-outlined text-green-300">
                     check
                   </span>
                   <span>Copied!</span>
@@ -87,9 +87,9 @@ const GradientColorBlock = ({ color, varient }) => {
           </div>
           <div className="flex items-center justify-center gap-4 my-1">
             <GradientColorCodeCopy clr={color[0]} />
-            {/* <span class="material-symbols-outlined">arrow_right_alt</span>
+            {/* <span className="material-symbols-outlined">arrow_right_alt</span>
             <GradientColorCodeCopy clr={color[1]} /> */}
-            <span class="material-symbols-outlined">arrow_right_alt</span>
+            <span className="material-symbols-outlined">arrow_right_alt</span>
             <GradientColorCodeCopy clr={color[2]} />
           </div>
         </div>

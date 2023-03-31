@@ -11,7 +11,7 @@ const GradientTwoTone = ({ msg }) => {
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {gradientColorMapping.twoTone.map((color) => (
-              <GradientColorBlock color={color} varient={twoTone} />
+              <GradientColorBlock color={color} varient={twoTone} key={color} />
             ))}
           </div>
         </div>

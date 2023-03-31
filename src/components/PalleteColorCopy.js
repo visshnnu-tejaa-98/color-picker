@@ -18,7 +18,7 @@ const PalleteColorCopy = ({ color }) => {
         color?.toUpperCase()
       ) : (
         <span className="flex items-center">
-          <span class="material-symbols-outlined h-1 relative top-[-9px]">
+          <span className="material-symbols-outlined h-1 relative top-[-9px]">
             check
           </span>
           <span>Copied!</span>
