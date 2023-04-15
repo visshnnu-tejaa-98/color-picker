@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { roles } from "../utils/roles";
+import { roles } from "../utils/roles.js";
 
 const Schema = mongoose.Schema;
 
@@ -47,7 +47,7 @@ userSchema.methods = {
     return await bcrypt.compare(enteredPassword, this.password);
   },
   getJWTToken: function () {
-    jwt.sign(
+    return jwt.sign(
       {
         _id: this._id,
         role: this.role,

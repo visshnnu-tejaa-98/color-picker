@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { roles } from "../utils/roles";
+import { roles } from "../utils/roles.js";
 
 const Schema = mongoose.Schema;
 
