@@ -1,8 +1,12 @@
 import express from "express";
+import mongoose from "mongoose";
+import { connectDB } from "./config/connection.js";
+
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 
-const PORT = process.env.PORT || 8000;
+connectDB();
 
 app.get("/", (req, res) =>
   res.send(`Server is up and running in port ${PORT}`)
