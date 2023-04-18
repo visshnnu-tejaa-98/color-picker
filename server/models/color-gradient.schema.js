@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { roles } from "../utils/roles.js";
 
 const Schema = mongoose.Schema;
 
@@ -10,12 +9,12 @@ const colorGradientSchema = new Schema(
       required: true,
       ref: "User",
     },
-    color: [
+    colors: [
       {
         type: String,
         validate: {
           validator: function (v) {
-            var re = /^\d{10}$/;
+            var re = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
             return !v || !v.trim().length || re.test(v);
           },
           message: "Provided Hex Color Code is invalid.",
