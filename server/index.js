@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { connectDB } from "./config/connection.js";
 import UserRoutes from "./routes/user.routes.js";
 import gradientRoutes from "./routes/gradient.routes.js";
+import paletteRoutes from "./routes/palette.routes.js";
 
 const PORT = process.env.PORT || 8000;
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) =>
 
 app.use("/api/v1/auth", UserRoutes);
 app.use("/api/v1/gradient", gradientRoutes);
+app.use("/api/v1/palette", paletteRoutes);
 
 app.listen(PORT, () =>
   console.log(`🚀🚀Color Picker server is up and running in ${PORT}🚀🚀`)

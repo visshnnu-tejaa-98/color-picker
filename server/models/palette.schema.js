@@ -1,4 +1,4 @@
-const mongoose = "mongoose";
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -9,12 +9,12 @@ const paletteSchema = new Schema(
       required: true,
       ref: "User",
     },
-    pallete: [
+    palette: [
       {
         type: String,
         validate: {
           validator: function (v) {
-            var re = /^\d{10}$/;
+            var re = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
             return !v || !v.trim().length || re.test(v);
           },
           message: "Provided Hex Color Code is invalid.",

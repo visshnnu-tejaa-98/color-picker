@@ -62,21 +62,18 @@ export const updateGradient = asyncHandler(async (req, res) => {
   const { colors, userId } = req.body;
   const { id } = req.params;
 
-  console.log(id, colors, userId);
   let colorsArray = colors.split(";");
   if (colorsArray.length > 3 || colorsArray.length < 2)
     throw new CustomError(
       "Minimum of 2 or Maximum of 3 colors are accepted",
       400
     );
-  console.log(colorsArray);
   const gradient = await Gradient.findOneAndUpdate(
     { _id: id, userId },
     { colors: colorsArray },
     { new: true, runValidators: true }
   );
 
-  console.log(gradient);
   res.status(200).json({ sucess: true, gradient });
 });
 
@@ -89,7 +86,6 @@ export const updateGradient = asyncHandler(async (req, res) => {
 
 export const deleteGradient = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   await Gradient.findByIdAndDelete({ _id: id });
   res
     .status(200)
