@@ -4,20 +4,24 @@ const Schema = mongoose.Schema;
 
 const favouritesSchema = new Schema({
   userId: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
   },
   palette: [
     {
-      paletteId: mongoose.Types.ObjectId,
-      ref: "Palette",
+      paletteId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Palette",
+      },
     },
   ],
   gradients: [
     {
-      gradientId: mongoose.Types.ObjectId,
-      ref: "Gradient",
+      gradientId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Gradient",
+      },
     },
   ],
 });
