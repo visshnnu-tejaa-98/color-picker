@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { palletColors } from "../utils/palleteColors";
 import PalleteColorCopy from "./PalleteColorCopy";
+import ApiColorsContext from "../contexts/apiColorsContext";
 
 const PalettePage = () => {
+  const ApiColorsCtx = useContext(ApiColorsContext);
+  useEffect(() => {
+    ApiColorsCtx.getAllPalette();
+  }, []);
   return (
     <div className="px-[7%] text-[#cccccc]">
       <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center">
@@ -13,7 +18,8 @@ const PalettePage = () => {
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {palletColors &&
-              palletColors.map((color) => (
+              ApiColorsCtx?.palette &&
+              [...ApiColorsCtx.palette, ...palletColors].map((color) => (
                 <div
                   key={color}
                   className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow"
