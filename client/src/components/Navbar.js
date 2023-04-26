@@ -1,5 +1,5 @@
 import { Footer } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import "flowbite";
@@ -8,6 +8,16 @@ const Navbar = () => {
   const location = useLocation();
   const [isOpenSide, setIsOpenSide] = useState(true);
   const [isOpenTop, setIsOpenTop] = useState(false);
+  const [isOpenSideNavbar, setIsOpenSideBar] = useState(true);
+  useEffect(() => {
+    let paths = ["/", "/signup", "/signin"];
+    if (paths.includes(window.location.pathname)) {
+      setIsOpenSideBar(false);
+    } else {
+      setIsOpenSideBar(true);
+    }
+  }, [window.location.pathname]);
+
   return (
     <div>
       <div className="text-[#CCCCCC] px-[7%] sticky top-0 bg-[#1E0927] z-10 shadow-[0_8px_6px_-6px_rgba(204,204,204,0.3)]   ">
@@ -46,6 +56,18 @@ const Navbar = () => {
               id="navbar-default"
             >
               <ul className="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
+                <li>
+                  <NavLink
+                    to="/signin"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    }
+                  >
+                    Sign In
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     to="/solid"
@@ -163,7 +185,11 @@ const Navbar = () => {
         </nav>
       </div>
       <div className="flex" style={{ height: "calc(100vh - 5rem)" }}>
-        <div className=" w-[20%] h-[100%] bg-red-300 hidden md:block">
+        <div
+          className={`w-[20%] h-[100%] bg-red-300 hidden md:block ${
+            !isOpenSideNavbar && "md:hidden"
+          }`}
+        >
           <div className="h-full px-3 py-4 overflow-y-auto bg-[#310f41]">
             <ul className="space-y-2 font-medium">
               <li>
@@ -274,9 +300,10 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
-
         <div
-          className={`text-white-100 md:w-[80%] h-[100%] w-[100%] overflow-auto hide-scroll`}
+          className={`text-white-100 md:w-[80%] h-[100%] w-[100%] overflow-auto hide-scroll ${
+            !isOpenSideNavbar && "md:w-[100%]"
+          }`}
         >
           <Outlet />
         </div>

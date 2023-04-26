@@ -12,6 +12,8 @@ import GradientTwoTone from "./components/GradientTwoTone";
 import GradientThreeTone from "./components/GradientThreeTone";
 import Home from "./components/Home.js";
 import GenerateGradient from "./components/GenerateGradient";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
 
 const appRouter = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/signin",
+        element: <SignIn />,
       },
       {
         path: "/solid",
