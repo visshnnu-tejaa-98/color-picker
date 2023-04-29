@@ -164,6 +164,7 @@ export const ApiColorsContextProvider = (props) => {
 
   const removeAuthToken = () => {
     localStorage.removeItem("colorPicker");
+    localStorage.removeItem("user");
   };
 
   return (

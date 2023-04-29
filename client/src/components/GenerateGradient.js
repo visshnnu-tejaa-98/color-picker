@@ -1,6 +1,10 @@
 import { Label } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { twoToneGradientCopyCode } from "../utils/variables";
+import DEV_API from "../config/config.development";
+import ApiColorsContext from "../contexts/apiColorsContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const GenerateGradient = () => {
   const [isCopied, setIsCopied] = useState(false);
@@ -8,6 +12,13 @@ const GenerateGradient = () => {
   const [color2, setColor2] = useState("#00ff00");
   const [direction, setDirection] = useState("bottom");
   const [angle, setAngle] = useState(180);
+  const [addGradientResponse, setAddGradientResponse] = useState({
+    apiStatus: 0,
+    data: null,
+    errorMessage: null,
+  });
+  const ApiColorsCtx = useContext(ApiColorsContext);
+  const navigate = useNavigate();
 
   const handleDirection = (e) => {
     setAngle(null);
@@ -17,6 +28,77 @@ const GenerateGradient = () => {
     setDirection(null);
     setAngle(e.target.value);
   };
+
+  const handleAddGradient = (gradient) => {
+    console.log(gradient);
+    addGradient(gradient);
+  };
+
+  const addGradient = async (gradient) => {
+    let data = {
+      userId: "",
+      colors: [gradient.color1, gradient.color2],
+      direction: gradient.direction,
+      angle: gradient.angle,
+    };
+    let api = DEV_API.addGradient;
+    let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };
+    let config = {
+      ...api,
+      data,
+      headers,
+    };
+    setAddGradientResponse({
+      apiStatus: 0,
+      data: null,
+      errorMessage: null,
+    });
+
+    return await axios(config)
+      .then((response) => {
+        try {
+          if (response === null) throw new Error("API Error");
+          return response;
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .then((data) => {
+        setAddGradientResponse({
+          apiStatus: 1,
+          data: data,
+          errorMessage: null,
+        });
+        return data;
+      })
+      .then((data) => {
+        ApiColorsCtx.removeAuthToken();
+        return;
+      })
+      .then((data) => {
+        ApiColorsCtx.updateAuthToken(data?.data?.token);
+        navigate("/dashboard ");
+        return;
+      })
+      .catch((error) => {
+        console.log(error);
+        let message = "";
+        switch (error?.response?.data?.message || error?.message) {
+          case "apiError":
+            message = "Sonething went wrong while fetching the data";
+            break;
+          default:
+            message = "Something went wrong";
+            break;
+        }
+        setAddGradientResponse({
+          apiStatus: -1,
+          data: null,
+          errorMessage: error?.response?.data?.message || error?.message,
+        });
+      });
+  };
+
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
       <h2 className="text-center text-3xl mt-12 mb-10">Generate Gradient</h2>
@@ -140,6 +222,16 @@ const GenerateGradient = () => {
             )}
           </span>
         </div>
+      </div>
+      <div className="flex justify-center">
+        <button
+          className="w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097]"
+          onClick={() =>
+            handleAddGradient({ color1, color2, direction, angle })
+          }
+        >
+          Generate Gradient
+        </button>
       </div>
     </div>
   );

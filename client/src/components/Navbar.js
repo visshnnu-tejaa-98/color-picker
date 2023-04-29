@@ -298,7 +298,20 @@ const Navbar = () => {
         >
           <div className="h-full px-3 py-4 overflow-y-auto bg-[#310f41]">
             <ul className="space-y-2 font-medium">
-              <li>
+              <li className={!isLoggedIn && "hidden"}>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
+                      : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
+                  }
+                >
+                  <span class="material-symbols-outlined">dashboard</span>
+                  <span className="ml-3">Dashboard</span>
+                </NavLink>
+              </li>
+              <li className={isLoggedIn && "hidden"}>
                 <NavLink
                   to="/"
                   className={({ isActive }) =>

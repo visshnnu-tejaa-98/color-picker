@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { BOTTOM, LEFT, RIGHT, TOP } from "../utils/constants.js";
 
 const Schema = mongoose.Schema;
 
@@ -21,6 +22,13 @@ const colorGradientSchema = new Schema(
         },
       },
     ],
+    direction: {
+      type: String,
+      enum: [LEFT, RIGHT, TOP, BOTTOM],
+    },
+    angle: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

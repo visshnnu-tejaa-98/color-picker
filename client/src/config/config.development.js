@@ -40,6 +40,13 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  addGradient: {
+    method: "post",
+    url: `${origin}` + "/api/v1/auth/login",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
 };
 
 export default DEV_API;

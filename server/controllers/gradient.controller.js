@@ -24,7 +24,7 @@ export const getGradientById = asyncHandler(async (req, res) => {
  ******************************************************/
 
 export const getAllGradients = asyncHandler(async (req, res) => {
-  const gradients = await Gradient.find({});
+  const gradients = await Gradient.find({}).sort({ updatedAt: "desc" });
   res.status(200).json({ sucess: true, gradients });
 });
 
