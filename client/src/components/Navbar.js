@@ -1,22 +1,115 @@
 import { Footer } from "flowbite-react";
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Logo from "../assets/logo.png";
 import "flowbite";
+import ApiColorsContext from "../contexts/apiColorsContext";
+import axios from "axios";
+import DEV_API from "../config/config.development";
 
 const Navbar = () => {
   const location = useLocation();
   const [isOpenSide, setIsOpenSide] = useState(true);
   const [isOpenTop, setIsOpenTop] = useState(false);
   const [isOpenSideNavbar, setIsOpenSideBar] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [signOutResponse, setSignOutResponse] = useState({
+    apiStatus: 0,
+    data: null,
+    errorMessage: null,
+  });
+  const ApiColorsCtx = useContext(ApiColorsContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    let paths = ["/", "/signup", "/signin"];
+    let paths = ["/", "/signup", "/signin", "/forgotPassword"];
     if (paths.includes(window.location.pathname)) {
       setIsOpenSideBar(false);
     } else {
       setIsOpenSideBar(true);
     }
   }, [window.location.pathname]);
+
+  useEffect(() => {
+    if (
+      ApiColorsCtx.getAuthToken() &&
+      ApiColorsCtx.getAuthToken() !== "undefined"
+    ) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [ApiColorsCtx.getAuthToken()]);
+
+  const handleSignOut = () => {
+    signOut();
+  };
+
+  const signOut = async (user) => {
+    let data = user;
+    let api = DEV_API.signOut;
+    let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };
+    let config = {
+      ...api,
+      data,
+      headers,
+    };
+    setSignOutResponse({
+      apiStatus: 0,
+      data: null,
+      errorMessage: null,
+    });
+
+    return await axios(config)
+      .then((response) => {
+        try {
+          if (response === null) throw new Error("API Error");
+          return response;
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .then((data) => {
+        setSignOutResponse({
+          apiStatus: 1,
+          data: data,
+          errorMessage: null,
+        });
+        return data;
+      })
+      .then((data) => {
+        ApiColorsCtx.removeAuthToken();
+        return;
+      })
+      .then((data) => {
+        ApiColorsCtx.updateAuthToken(data?.data?.token);
+        navigate("/solid");
+        return;
+      })
+      .catch((error) => {
+        console.log(error);
+        let message = "";
+        switch (error?.response?.data?.message || error?.message) {
+          case "apiError":
+            message = "Sonething went wrong while fetching the data";
+            break;
+          default:
+            message = "Something went wrong";
+            break;
+        }
+        setSignOutResponse({
+          apiStatus: -1,
+          data: null,
+          errorMessage: error?.response?.data?.message || error?.message,
+        });
+      });
+  };
 
   return (
     <div>
@@ -56,7 +149,7 @@ const Navbar = () => {
               id="navbar-default"
             >
               <ul className="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
-                <li>
+                <li className={`${isLoggedIn && "hidden"}`}>
                   <NavLink
                     to="/signin"
                     className={({ isActive }) =>
@@ -66,6 +159,19 @@ const Navbar = () => {
                     }
                   >
                     Sign In
+                  </NavLink>
+                </li>
+                <li className={`${!isLoggedIn && "hidden"}`}>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    }
+                    onClick={handleSignOut}
+                  >
+                    Sign Out
                   </NavLink>
                 </li>
                 <li>

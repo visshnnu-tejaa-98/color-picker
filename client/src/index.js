@@ -14,6 +14,7 @@ import Home from "./components/Home.js";
 import GenerateGradient from "./components/GenerateGradient";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import ForgotPassword from "./components/ForgotPassword";
 
 const appRouter = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/signin",
         element: <SignIn />,
+      },
+      {
+        path: "/forgotPassword",
+        element: <ForgotPassword />,
       },
       {
         path: "/solid",

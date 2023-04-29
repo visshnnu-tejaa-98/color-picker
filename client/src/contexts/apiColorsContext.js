@@ -6,8 +6,13 @@ const ApiColorsContext = createContext({
   twoToneColors: null,
   threeToneColors: null,
   palette: null,
+  authToken: null,
   getAllGradients: () => {},
   getAllPalette: () => {},
+  userSignUp: () => {},
+  updateAuthToken: () => {},
+  getAuthToken: () => {},
+  removeAuthToken: () => {},
 });
 
 export const ApiColorsContextProvider = (props) => {
@@ -19,13 +24,14 @@ export const ApiColorsContextProvider = (props) => {
 
   const [twoToneColors, setTwoToneColors] = useState(null);
   const [threeToneColors, setThreeToneColors] = useState(null);
-
   const [paletteResponse, setPaletteResponse] = useState({
     apiStatus: 0,
     data: null,
     errorMessage: null,
   });
   const [palette, setpalette] = useState(null);
+  const [authToken, setAuthToken] = useState(null);
+
   const getGradients = () => {
     let queryParams = {};
     let data = {};
@@ -89,6 +95,7 @@ export const ApiColorsContextProvider = (props) => {
         });
       });
   };
+
   const getPalette = () => {
     let queryParams = {};
     let data = {};
@@ -111,7 +118,6 @@ export const ApiColorsContextProvider = (props) => {
       .then((response) => {
         try {
           if (response === null) throw new Error("API Error");
-          // console.log(response);
           return response?.data?.palette;
         } catch (error) {
           console.log(error);
@@ -145,6 +151,21 @@ export const ApiColorsContextProvider = (props) => {
         });
       });
   };
+
+  const updateAuthToken = (token) => {
+    localStorage.setItem("colorPicker", token);
+    setAuthToken(token);
+  };
+
+  const getAuthToken = () => {
+    let token = authToken || localStorage.getItem("colorPicker");
+    return token;
+  };
+
+  const removeAuthToken = () => {
+    localStorage.removeItem("colorPicker");
+  };
+
   return (
     <ApiColorsContext.Provider
       value={{
@@ -152,8 +173,12 @@ export const ApiColorsContextProvider = (props) => {
         twoToneColors: twoToneColors,
         threeToneColors: threeToneColors,
         palette: palette,
+        authToken: authToken,
         getAllGradients: getGradients,
         getAllPalette: getPalette,
+        updateAuthToken: updateAuthToken,
+        getAuthToken: getAuthToken,
+        removeAuthToken: removeAuthToken,
       }}
     >
       {props.children}
