@@ -16,6 +16,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import ForgotPassword from "./components/ForgotPassword";
 import Dashboard from "./components/Dashboard";
+import UserGradients from "./components/UserGradients";
 
 const appRouter = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/dashboard/gradients",
+        element: <UserGradients />,
       },
       {
         path: "/solid",

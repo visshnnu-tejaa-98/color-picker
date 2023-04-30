@@ -4,6 +4,7 @@ import GradientColorBlock from "./GradientColorBlock";
 import { threeTone, twoTone } from "../utils/variables";
 import { AddGradientTemplate, AddPaletteTemplate } from "./AddTemplate";
 import PalleteColorCopy from "./PalleteColorCopy";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const ApiColorsCtx = useContext(ApiColorsContext);
@@ -19,7 +20,12 @@ const Dashboard = () => {
       <div>
         <div className="flex justify-between items-center mt-5">
           <h3 className="text-3xl">Gradients</h3>
-          <h3 className="text-xl cursor-pointer">See All</h3>
+          <Link to="/dashboard/gradients">
+            <div className="flex items-center text-[#FCD34D]">
+              <h3 className="text-lg cursor-pointer">See All</h3>
+              <span class="material-symbols-outlined">navigate_next</span>
+            </div>
+          </Link>
         </div>
         <hr className="opacity-50"></hr>
         <div>
@@ -43,7 +49,7 @@ const Dashboard = () => {
       <div>
         <div className="flex justify-between items-center mt-5">
           <h3 className="text-3xl">Palette</h3>
-          <h3 className="text-xl cursor-pointer">See All</h3>
+          <h3 className="text-lg cursor-pointer text-[#FCD34D]">See All</h3>
         </div>
         <hr className="opacity-50"></hr>
         <div>

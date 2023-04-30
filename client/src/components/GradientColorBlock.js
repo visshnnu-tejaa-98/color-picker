@@ -21,7 +21,7 @@ const GradientColorBlock = ({ color, varient }) => {
             }}
           >
             <span
-              className="bg-slate-500 rounded px-2 py-1 cursor-pointer"
+              className="bg-[#333333] rounded px-2 py-1 cursor-pointer"
               onClick={() => {
                 setIsCopied(true);
                 navigator.clipboard.writeText(twoToneGradientCopyCode(color));
@@ -36,8 +36,8 @@ const GradientColorBlock = ({ color, varient }) => {
                   <span className="material-symbols-outlined">code</span>
                 </div>
               ) : (
-                <div className=" flex items-center gap-1 text-green-300">
-                  <span className="material-symbols-outlined text-green-300">
+                <div className=" flex items-center gap-1 text-[#00ff00]">
+                  <span className="material-symbols-outlined text-[#00ff00]">
                     check
                   </span>
                   <span>Copied!</span>
@@ -61,7 +61,7 @@ const GradientColorBlock = ({ color, varient }) => {
             }}
           >
             <span
-              className="bg-slate-500 rounded px-2 py-1 cursor-pointer"
+              className="bg-[#333333] rounded px-2 py-1 cursor-pointer"
               onClick={() => {
                 setIsCopied(true);
                 navigator.clipboard.writeText(threeToneGradientCopyCode(color));
@@ -71,13 +71,13 @@ const GradientColorBlock = ({ color, varient }) => {
               }}
             >
               {!isCopied ? (
-                <div className=" flex items-center gap-1 ">
+                <div className="flex items-center gap-1">
                   <span>Copy </span>
                   <span className="material-symbols-outlined">code</span>
                 </div>
               ) : (
-                <div className=" flex items-center gap-1 text-green-300">
-                  <span className="material-symbols-outlined text-green-300">
+                <div className="flex items-center gap-1 text-[#00ff00]">
+                  <span className="material-symbols-outlined text-[#00ff00]">
                     check
                   </span>
                   <span>Copied!</span>
