@@ -4,6 +4,7 @@ import {
   addGradient,
   deleteGradient,
   getAllGradients,
+  getAllGradientsByUser,
   getGradientById,
   updateGradient,
 } from "../controllers/gradient.controller.js";
@@ -13,6 +14,7 @@ const router = express.Router();
 router.post("/addGradient", isLoggedIn, addGradient);
 router.delete("/deleteGradient/:id", isLoggedIn, deleteGradient);
 router.put("/updateGradient/:id", isLoggedIn, updateGradient);
+router.get("/byuser", isLoggedIn, getAllGradientsByUser);
 router.get("/:id", isLoggedIn, getGradientById);
 router.get("/", getAllGradients);
 

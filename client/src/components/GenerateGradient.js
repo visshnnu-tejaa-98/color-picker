@@ -74,7 +74,7 @@ const GenerateGradient = () => {
         return data;
       })
       .then((data) => {
-        navigate("/dashboard ");
+        navigate("/gradient");
         return;
       })
       .catch((error) => {

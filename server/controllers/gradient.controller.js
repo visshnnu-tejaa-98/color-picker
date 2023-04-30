@@ -29,6 +29,19 @@ export const getAllGradients = asyncHandler(async (req, res) => {
 });
 
 /******************************************************
+ * @Get All gradients by userId
+ * @route http://localhost:9000/api/v1/gradient/byuser
+ * @description Get the details of gradients by user
+ * @returns List of all Gradients by user
+ ******************************************************/
+export const getAllGradientsByUser = asyncHandler(async (req, res) => {
+  const gradients = await Gradient.find({ userId: req.body.userId }).sort({
+    updatedAt: "desc",
+  });
+  res.status(200).json({ sucess: true, gradients });
+});
+
+/******************************************************
  * @Get Add Gradient
  * @route http://localhost:9000/api/v1/gradient/addGradient
  * @description Add Gradient to database

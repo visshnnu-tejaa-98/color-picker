@@ -5,10 +5,12 @@ import axios from "axios";
 const ApiColorsContext = createContext({
   twoToneColors: null,
   threeToneColors: null,
+  gradientsByUser: null,
   palette: null,
   authToken: null,
   loggedInUser: null,
   getAllGradients: () => {},
+  getAllGradientsByUser: () => {},
   getAllPalette: () => {},
   userSignUp: () => {},
   updateAuthToken: () => {},
@@ -25,7 +27,13 @@ export const ApiColorsContextProvider = (props) => {
     data: null,
     errorMessage: null,
   });
-
+  const [getAllGradientsByUserResponse, setGetAllGradientsByUserResponse] =
+    useState({
+      apiStatus: 0,
+      data: null,
+      errorMessage: null,
+    });
+  const [gradientsByUser, setGradientsByUser] = useState(null);
   const [twoToneColors, setTwoToneColors] = useState(null);
   const [threeToneColors, setThreeToneColors] = useState(null);
   const [paletteResponse, setPaletteResponse] = useState({
@@ -94,6 +102,64 @@ export const ApiColorsContextProvider = (props) => {
             break;
         }
         setGradientResponse({
+          apiStatus: -1,
+          data: null,
+          errorMessage: error.message,
+        });
+      });
+  };
+  const getAllGradientsByUser = async () => {
+    let queryParams = {};
+    let data = {};
+    let headers = { Authorization: `Bearer ${getAuthToken()}` };
+    let api = DEV_API.getAllGradients;
+    let config = {
+      ...api,
+      data,
+      queryParams,
+      headers,
+    };
+    setGradientResponse({
+      apiStatus: 0,
+      data: null,
+      errorMessage: null,
+    });
+    return axios(config)
+      .then((response) => {
+        try {
+          if (response === null) throw new Error("API Error");
+          // console.log(response);
+          return response?.data?.gradients;
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .then((data) => {
+        let twoTone = [];
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].colors.length === 2) {
+            twoTone.push(data[i].colors);
+          }
+        }
+        setGradientsByUser(twoTone);
+        return setGetAllGradientsByUserResponse({
+          apiStatus: 1,
+          data: data,
+          errorMessage: null,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        let message = "";
+        switch (error.message) {
+          case "apiError":
+            message = "Sonething went wrong while fetching the data";
+            break;
+          default:
+            message = "Something went wrong";
+            break;
+        }
+        setGetAllGradientsByUserResponse({
           apiStatus: -1,
           data: null,
           errorMessage: error.message,
@@ -192,9 +258,12 @@ export const ApiColorsContextProvider = (props) => {
         gradientResponse: gradientResponse,
         twoToneColors: twoToneColors,
         threeToneColors: threeToneColors,
+        getAllGradientsByUserResponse: getAllGradientsByUserResponse,
+        gradientsByUser: gradientsByUser,
         palette: palette,
         authToken: authToken,
         getAllGradients: getGradients,
+        getAllGradientsByUser: getAllGradientsByUser,
         getAllPalette: getPalette,
         updateAuthToken: updateAuthToken,
         getAuthToken: getAuthToken,

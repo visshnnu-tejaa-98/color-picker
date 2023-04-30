@@ -8,10 +8,9 @@ import PalleteColorCopy from "./PalleteColorCopy";
 const Dashboard = () => {
   const ApiColorsCtx = useContext(ApiColorsContext);
   useEffect(() => {
-    ApiColorsCtx.getAllGradients();
+    ApiColorsCtx.getAllGradientsByUser();
     ApiColorsCtx.getAllPalette();
   }, []);
-  console.log(ApiColorsCtx?.allGradientColors);
   return (
     <div className="px-[7%] text-[#cccccc]">
       <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center mt-5">
@@ -26,9 +25,8 @@ const Dashboard = () => {
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
             <AddGradientTemplate />
-            {console.log(ApiColorsCtx?.allGradientColors)}
-            {ApiColorsCtx?.twoToneColors &&
-              [...ApiColorsCtx.twoToneColors].map((color, idx) => {
+            {ApiColorsCtx?.gradientsByUser &&
+              ApiColorsCtx?.gradientsByUser.map((color, idx) => {
                 if (idx <= 1) {
                   return (
                     <GradientColorBlock
