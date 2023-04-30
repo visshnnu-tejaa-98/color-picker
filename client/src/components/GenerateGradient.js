@@ -36,10 +36,10 @@ const GenerateGradient = () => {
 
   const addGradient = async (gradient) => {
     let data = {
-      userId: "",
-      colors: [gradient.color1, gradient.color2],
+      userId: ApiColorsCtx?.getUser()?._id,
+      colors: `${color1};${color2}`,
       direction: gradient.direction,
-      angle: gradient.angle,
+      angle: Number(gradient.angle),
     };
     let api = DEV_API.addGradient;
     let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };
@@ -48,6 +48,7 @@ const GenerateGradient = () => {
       data,
       headers,
     };
+    console.log(config);
     setAddGradientResponse({
       apiStatus: 0,
       data: null,
@@ -58,6 +59,7 @@ const GenerateGradient = () => {
       .then((response) => {
         try {
           if (response === null) throw new Error("API Error");
+          console.log(response);
           return response;
         } catch (error) {
           console.log(error);
@@ -72,11 +74,6 @@ const GenerateGradient = () => {
         return data;
       })
       .then((data) => {
-        ApiColorsCtx.removeAuthToken();
-        return;
-      })
-      .then((data) => {
-        ApiColorsCtx.updateAuthToken(data?.data?.token);
         navigate("/dashboard ");
         return;
       })
@@ -225,7 +222,12 @@ const GenerateGradient = () => {
       </div>
       <div className="flex justify-center">
         <button
-          className="w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097]"
+          className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097] ${
+            !(
+              ApiColorsCtx.getAuthToken() &&
+              ApiColorsCtx.getAuthToken() !== "undefined"
+            ) && "hidden"
+          }`}
           onClick={() =>
             handleAddGradient({ color1, color2, direction, angle })
           }

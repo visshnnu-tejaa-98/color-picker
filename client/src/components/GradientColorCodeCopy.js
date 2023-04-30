@@ -10,7 +10,7 @@ const GradientColorCodeCopy = ({ clr }) => {
       }`}
       onClick={() => {
         setIsCopied(true);
-        navigator.clipboard.writeText(clr.toUpperCase());
+        navigator.clipboard.writeText(clr?.toUpperCase());
         setTimeout(() => {
           setIsCopied(false);
         }, 500);

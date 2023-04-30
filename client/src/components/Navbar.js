@@ -85,10 +85,12 @@ const Navbar = () => {
       })
       .then((data) => {
         ApiColorsCtx.removeAuthToken();
+        ApiColorsCtx.removeUser();
         return;
       })
       .then((data) => {
         ApiColorsCtx.updateAuthToken(data?.data?.token);
+        ApiColorsCtx.updateUser(data?.data?.user);
         navigate("/solid");
         return;
       })
@@ -307,7 +309,7 @@ const Navbar = () => {
                       : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
                   }
                 >
-                  <span class="material-symbols-outlined">dashboard</span>
+                  <span className="material-symbols-outlined">dashboard</span>
                   <span className="ml-3">Dashboard</span>
                 </NavLink>
               </li>
@@ -420,8 +422,8 @@ const Navbar = () => {
           </div>
         </div>
         <div
-          className={`text-white-100 md:w-[80%] h-[100%] w-[100%] overflow-auto hide-scroll ${
-            !isOpenSideNavbar && "md:w-[100%]"
+          className={`text-white-100 h-[100%] w-[100%] overflow-auto hide-scroll ${
+            !isOpenSideNavbar ? "md:w-[100%]" : "md:w-[80%]"
           }`}
         >
           <Outlet />

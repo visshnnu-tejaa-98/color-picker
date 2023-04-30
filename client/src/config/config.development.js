@@ -42,7 +42,7 @@ const DEV_API = {
   },
   addGradient: {
     method: "post",
-    url: `${origin}` + "/api/v1/auth/login",
+    url: `${origin}` + "/api/v1/gradient/addGradient",
     headers: {
       "Content-Type": "application/json",
     },

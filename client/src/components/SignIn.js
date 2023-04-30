@@ -52,6 +52,7 @@ const SignIn = () => {
       })
       .then((data) => {
         ApiColorsCtx.updateAuthToken(data?.data?.token);
+        ApiColorsCtx.updateUser(data?.data?.user);
         navigate("/solid");
         return;
       })

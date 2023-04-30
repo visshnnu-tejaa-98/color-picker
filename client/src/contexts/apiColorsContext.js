@@ -7,12 +7,16 @@ const ApiColorsContext = createContext({
   threeToneColors: null,
   palette: null,
   authToken: null,
+  loggedInUser: null,
   getAllGradients: () => {},
   getAllPalette: () => {},
   userSignUp: () => {},
   updateAuthToken: () => {},
   getAuthToken: () => {},
   removeAuthToken: () => {},
+  updateUser: () => {},
+  getUser: () => {},
+  removeUser: () => {},
 });
 
 export const ApiColorsContextProvider = (props) => {
@@ -31,6 +35,7 @@ export const ApiColorsContextProvider = (props) => {
   });
   const [palette, setpalette] = useState(null);
   const [authToken, setAuthToken] = useState(null);
+  const [user, setUser] = useState(null);
 
   const getGradients = () => {
     let queryParams = {};
@@ -41,9 +46,9 @@ export const ApiColorsContextProvider = (props) => {
       data,
       queryParams,
     };
-    if (twoToneColors && threeToneColors) {
-      return;
-    }
+    // if (twoToneColors && threeToneColors) {
+    //   return;
+    // }
     setGradientResponse({
       apiStatus: 0,
       data: null,
@@ -96,7 +101,7 @@ export const ApiColorsContextProvider = (props) => {
       });
   };
 
-  const getPalette = () => {
+  const getPalette = async () => {
     let queryParams = {};
     let data = {};
     let api = DEV_API.getAllPalette;
@@ -105,10 +110,10 @@ export const ApiColorsContextProvider = (props) => {
       data,
       queryParams,
     };
-    if (paletteResponse.apiStatus !== 0) {
-      console.log("Simply return");
-      return;
-    }
+    // if (paletteResponse.apiStatus !== 0) {
+    //   console.log("Simply return");
+    //   return;
+    // }
     setPaletteResponse({
       apiStatus: 0,
       data: null,
@@ -153,6 +158,7 @@ export const ApiColorsContextProvider = (props) => {
   };
 
   const updateAuthToken = (token) => {
+    console.log("TOKEN:::", token);
     localStorage.setItem("colorPicker", token);
     setAuthToken(token);
   };
@@ -164,6 +170,19 @@ export const ApiColorsContextProvider = (props) => {
 
   const removeAuthToken = () => {
     localStorage.removeItem("colorPicker");
+  };
+
+  const updateUser = (user) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+  };
+
+  const getUser = () => {
+    let loggedInUser = user || JSON.parse(localStorage.getItem("user"));
+    return loggedInUser;
+  };
+
+  const removeUser = () => {
     localStorage.removeItem("user");
   };
 
@@ -180,6 +199,9 @@ export const ApiColorsContextProvider = (props) => {
         updateAuthToken: updateAuthToken,
         getAuthToken: getAuthToken,
         removeAuthToken: removeAuthToken,
+        updateUser: updateUser,
+        getUser: getUser,
+        removeUser: removeUser,
       }}
     >
       {props.children}

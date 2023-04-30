@@ -11,6 +11,7 @@ const Dashboard = () => {
     ApiColorsCtx.getAllGradients();
     ApiColorsCtx.getAllPalette();
   }, []);
+  console.log(ApiColorsCtx?.allGradientColors);
   return (
     <div className="px-[7%] text-[#cccccc]">
       <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center mt-5">
@@ -18,44 +19,21 @@ const Dashboard = () => {
       </h1>
       <div>
         <div className="flex justify-between items-center mt-5">
-          <h3 className="text-3xl">Two Tone Gradients</h3>
+          <h3 className="text-3xl">Gradients</h3>
           <h3 className="text-xl cursor-pointer">See All</h3>
         </div>
         <hr className="opacity-50"></hr>
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
             <AddGradientTemplate />
-            {ApiColorsCtx?.twoToneColors &&
-              [...ApiColorsCtx.twoToneColors].map((color, idx) => {
+            {console.log(ApiColorsCtx?.allGradientColors)}
+            {ApiColorsCtx?.allGradientColors &&
+              ApiColorsCtx?.allGradientColors?.map((color, idx) => {
                 if (idx <= 1) {
                   return (
                     <GradientColorBlock
                       color={color}
                       varient={twoTone}
-                      key={color}
-                    />
-                  );
-                }
-              })}
-          </div>
-        </div>
-      </div>
-      <div>
-        <div className="flex justify-between items-center mt-5">
-          <h3 className="text-3xl">Three Tone Gradients</h3>
-          <h3 className="text-xl cursor-pointer">See All</h3>
-        </div>
-        <hr className="opacity-50"></hr>
-        <div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
-            <AddGradientTemplate />
-            {ApiColorsCtx?.threeToneColors &&
-              [...ApiColorsCtx.threeToneColors].map((color, idx) => {
-                if (idx <= 1) {
-                  return (
-                    <GradientColorBlock
-                      color={color}
-                      varient={threeTone}
                       key={color}
                     />
                   );
