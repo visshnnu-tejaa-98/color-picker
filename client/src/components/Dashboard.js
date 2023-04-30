@@ -27,8 +27,8 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
             <AddGradientTemplate />
             {console.log(ApiColorsCtx?.allGradientColors)}
-            {ApiColorsCtx?.allGradientColors &&
-              ApiColorsCtx?.allGradientColors?.map((color, idx) => {
+            {ApiColorsCtx?.twoToneColors &&
+              [...ApiColorsCtx.twoToneColors].map((color, idx) => {
                 if (idx <= 1) {
                   return (
                     <GradientColorBlock
