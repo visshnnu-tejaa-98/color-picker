@@ -20,8 +20,8 @@ const DEV_API = {
     },
   },
   getGradientById: {
-    method: "get",
-    url: `${origin}` + "/api/v1/gradient",
+    method: "post",
+    url: `${origin}` + "/api/v1/gradient/details",
     headers: {
       "Content-Type": "application/json",
     },

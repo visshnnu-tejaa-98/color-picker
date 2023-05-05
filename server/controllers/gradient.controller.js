@@ -10,9 +10,17 @@ import CustomError from "../utils/CustomError.js";
  ******************************************************/
 
 export const getGradientById = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { id, populateUser } = req.body;
+  let gradient;
   if (!id) throw new CustomError("Please Provide appropriate ids", 400);
-  const gradient = await Gradient.find({ _id: id });
+  if (populateUser !== true) {
+    gradient = await Gradient.find({ _id: id });
+  } else {
+    gradient = await Gradient.find({ _id: id }).populate(
+      "userId",
+      "name email role"
+    );
+  }
   res.status(200).json({ sucess: true, gradient });
 });
 

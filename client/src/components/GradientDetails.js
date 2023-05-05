@@ -16,21 +16,21 @@ const GradientDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
-    getGradientById(location.pathname.split("/")[3], true); //true indicates to populate user details also
+    getGradientById(location?.pathname?.split("/")[3], true); //true indicates to populate user details also
   }, []);
 
   const getGradientById = async (id, populateUser) => {
-    let queryParams = {};
+    let queryParams = { id, populateUser };
     let data = { id, populateUser };
     let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };
     let api = DEV_API.getGradientById;
     let config = {
       ...api,
+      body: data,
       data,
-      queryParams,
       headers,
+      params: queryParams,
     };
-    console.log(config, populateUser);
     setGradientByIdResponse({
       apiStatus: 0,
       data: null,
@@ -40,14 +40,12 @@ const GradientDetails = () => {
       .then((response) => {
         try {
           if (response === null) throw new Error("API Error");
-          console.log(response);
           return response?.data.gradient;
         } catch (error) {
           console.log(error);
         }
       })
       .then((data) => {
-        console.log(data);
         return setGradientByIdResponse({
           apiStatus: 1,
           data: data,
@@ -75,7 +73,6 @@ const GradientDetails = () => {
 
   return (
     <div className="px-[7%] text-[#cccccc]">
-      {getGradientByIdResponse && console.log(getGradientByIdResponse)}
       <div className="flex justify-between items-center">
         <span
           class="material-symbols-outlined cursor-pointer hover:text-[#FCD34D]"
@@ -150,11 +147,19 @@ const GradientDetails = () => {
                   </span>
                 </p>
               )}
-              {getGradientByIdResponse.data[0].angle && (
+              {getGradientByIdResponse.data[0]?.angle && (
                 <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
                   <span className=""> Angle:</span>
                   <span className="pl-2 font-semibold tracking-wider">
                     {getGradientByIdResponse.data[0].angle + "deg"}
+                  </span>
+                </p>
+              )}
+              {getGradientByIdResponse.data[0].userId.name && (
+                <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
+                  <span className=""> User:</span>
+                  <span className="pl-2 font-semibold tracking-wider">
+                    {getGradientByIdResponse.data[0].userId.name}
                   </span>
                 </p>
               )}

@@ -15,7 +15,7 @@ router.post("/addGradient", isLoggedIn, addGradient);
 router.delete("/deleteGradient/:id", isLoggedIn, deleteGradient);
 router.put("/updateGradient/:id", isLoggedIn, updateGradient);
 router.get("/byuser", isLoggedIn, getAllGradientsByUser);
-router.get("/:id", isLoggedIn, getGradientById);
+router.post("/details", isLoggedIn, getGradientById);
 router.get("/", getAllGradients);
 
 export default router;
