@@ -61,6 +61,13 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  addPalette: {
+    method: "post",
+    url: `${origin}` + "/api/v1/palette/addPalette",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
 };
 
 export default DEV_API;

@@ -22,7 +22,7 @@ const paletteSchema = new Schema(
       },
     ],
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 export default mongoose.model("Palette", paletteSchema);

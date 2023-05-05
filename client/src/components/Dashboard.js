@@ -50,7 +50,12 @@ const Dashboard = () => {
       <div>
         <div className="flex justify-between items-center mt-5">
           <h3 className="text-3xl">Palette</h3>
-          <h3 className="text-lg cursor-pointer text-[#FCD34D]">See All</h3>
+          <Link to="/dashboard/palette">
+            <div className="flex items-center text-[#FCD34D]">
+              <h3 className="text-lg cursor-pointer">See All</h3>
+              <span class="material-symbols-outlined">navigate_next</span>
+            </div>
+          </Link>
         </div>
         <hr className="opacity-50"></hr>
         <div>

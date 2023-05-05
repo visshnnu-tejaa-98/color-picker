@@ -18,6 +18,8 @@ import ForgotPassword from "./components/ForgotPassword";
 import Dashboard from "./components/Dashboard";
 import UserGradients from "./components/UserGradients";
 import GradientDetails from "./components/GradientDetails";
+import GeneratePalette from "./components/GeneratePalette";
+import UserPalette from "./components/UserPalette";
 
 const appRouter = createBrowserRouter([
   {
@@ -49,29 +51,45 @@ const appRouter = createBrowserRouter([
         element: <UserGradients />,
       },
       {
+        path: "/dashboard/palette",
+        element: <UserPalette />,
+      },
+      {
         path: "/solid",
         element: <SolidColorsPage />,
       },
       {
         path: "/gradient",
         element: <GradientColorsPage />,
-        children: [
-          {
-            path: "",
-            element: <GradientTwoTone />,
-            msg: "twotone",
-          },
-          {
-            path: "threetone",
-            element: <GradientThreeTone />,
-            msg: "threetone",
-          },
-          {
-            path: "generate",
-            element: <GenerateGradient />,
-          },
-        ],
       },
+      {
+        path: "/generateGradient",
+        element: <GenerateGradient />,
+      },
+      {
+        path: "/generatePalette",
+        element: <GeneratePalette />,
+      },
+      // {
+      //   path: "/generateGradient",
+      //   element: <GradientColorsPage />,
+      //   children: [
+      //     {
+      //       path: "",
+      //       element: <GradientTwoTone />,
+      //       msg: "twotone",
+      //     },
+      //     {
+      //       path: "threetone",
+      //       element: <GradientThreeTone />,
+      //       msg: "threetone",
+      //     },
+      //     {
+      //       path: "generate",
+      //       element: <GenerateGradient />,
+      //     },
+      //   ],
+      // },
       {
         path: "/gradient/gradientDetails/:id",
         element: <GradientDetails />,

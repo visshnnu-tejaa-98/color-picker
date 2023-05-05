@@ -98,7 +98,7 @@ const GenerateGradient = () => {
 
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
-      <h2 className="text-center text-3xl mt-12 mb-10">Generate Gradient</h2>
+      <h1 className="text-center text-7xl my-10">Create Gradient</h1>
       <div className="flex flex-col items-center gap-5 md:flex md:justify-between md:flex-row">
         <table>
           <tbody>

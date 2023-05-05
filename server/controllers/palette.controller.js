@@ -24,7 +24,7 @@ export const getPaletteById = asyncHandler(async (req, res) => {
  ******************************************************/
 
 export const getAllPalette = asyncHandler(async (req, res) => {
-  const palette = await Palette.find({});
+  const palette = await Palette.find({}).sort({ updatedAt: "desc" });
   res.status(200).json({ sucess: true, palette });
 });
 
@@ -37,6 +37,7 @@ export const getAllPalette = asyncHandler(async (req, res) => {
 
 export const addPalette = asyncHandler(async (req, res) => {
   const { colors, userId } = req.body;
+  console.log(req.body);
   let colorsArray = colors.split(";");
   if (colorsArray.length !== 4)
     throw new CustomError("Please provide exact 4 colors", 400);

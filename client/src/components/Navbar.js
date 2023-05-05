@@ -339,14 +339,44 @@ const Navbar = () => {
                   <span className="ml-3">Solid Colors</span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/gradient"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
+                      : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
+                  }
+                >
+                  <span className="material-symbols-outlined">
+                    invert_colors
+                  </span>
+                  <span className="ml-3">Gradient Colors</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/palette"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
+                      : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
+                  }
+                >
+                  <span className="material-symbols-outlined">palette</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap">
+                    Color Palette
+                  </span>
+                </NavLink>
+              </li>
               <button
                 type="button"
                 className="flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff]"
                 onClick={() => setIsOpenSide((prev) => !prev)}
               >
-                <span className="material-symbols-outlined">invert_colors</span>
+                <span class="material-symbols-outlined">add_circle</span>
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                  Gradient
+                  Create
                 </span>
                 <span>{isOpenSide}</span>
                 <svg
@@ -364,7 +394,7 @@ const Navbar = () => {
               </button>
               {isOpenSide && (
                 <ul>
-                  <li>
+                  {/* <li>
                     <NavLink
                       to="/gradient"
                       className={() =>
@@ -387,37 +417,33 @@ const Navbar = () => {
                     >
                       Three Tone Colors
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li>
                     <NavLink
-                      to="/gradient/generate"
+                      to="generateGradient"
                       className={() => {
-                        return location.pathname === "/gradient/generate"
+                        return location.pathname === "/generateGradient"
                           ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
                           : "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff]";
                       }}
                     >
-                      Generate Gradient
+                      Create Gradient
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="generatePalette"
+                      className={() => {
+                        return location.pathname === "/generatePalette"
+                          ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
+                          : "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff]";
+                      }}
+                    >
+                      Create Palette
                     </NavLink>
                   </li>
                 </ul>
               )}
-              <li></li>
-              <li>
-                <NavLink
-                  to="/palette"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
-                      : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
-                  }
-                >
-                  <span className="material-symbols-outlined">palette</span>
-                  <span className="flex-1 ml-3 whitespace-nowrap">
-                    Color Palette
-                  </span>
-                </NavLink>
-              </li>
             </ul>
           </div>
         </div>
