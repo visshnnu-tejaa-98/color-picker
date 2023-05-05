@@ -30,9 +30,10 @@ const UserGradients = () => {
             {ApiColorsCtx?.gradientsByUser &&
               ApiColorsCtx?.gradientsByUser.map((color, idx) => (
                 <GradientColorBlock
-                  color={color}
+                  color={color.colors}
                   varient={twoTone}
-                  key={color}
+                  key={color._id}
+                  info={color}
                 />
               ))}
           </div>

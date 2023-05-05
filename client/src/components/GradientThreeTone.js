@@ -20,7 +20,12 @@ const GradientThreeTone = () => {
                 ...ApiColorsCtx.threeToneColors,
                 ...gradientColorMapping.threeTone,
               ].map((color) => (
-                <GradientColorBlock color={color} varient={threeTone} />
+                <GradientColorBlock
+                  color={color.colors || color}
+                  varient={threeTone}
+                  key={color._id}
+                  info={color}
+                />
               ))}
           </div>
         </div>

@@ -21,9 +21,10 @@ const GradientTwoTone = ({ msg }) => {
                 ...gradientColorMapping.twoTone,
               ].map((color) => (
                 <GradientColorBlock
-                  color={color}
+                  color={color.colors || color}
                   varient={twoTone}
-                  key={color}
+                  key={color._id}
+                  info={color}
                 />
               ))}
           </div>

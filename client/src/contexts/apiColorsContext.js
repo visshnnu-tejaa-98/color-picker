@@ -9,6 +9,7 @@ const ApiColorsContext = createContext({
   palette: null,
   authToken: null,
   loggedInUser: null,
+  gradientById: null,
   getAllGradients: () => {},
   getAllGradientsByUser: () => {},
   getAllPalette: () => {},
@@ -45,6 +46,8 @@ export const ApiColorsContextProvider = (props) => {
   const [authToken, setAuthToken] = useState(null);
   const [user, setUser] = useState(null);
 
+  const [gradientById, setGradientById] = useState(null);
+
   const getGradients = () => {
     let queryParams = {};
     let data = {};
@@ -77,9 +80,9 @@ export const ApiColorsContextProvider = (props) => {
         let threeTone = [];
         for (let i = 0; i < data.length; i++) {
           if (data[i].colors.length === 2) {
-            twoTone.push(data[i].colors);
+            twoTone.push(data[i]);
           } else if (data[i].colors.length === 3) {
-            threeTone.push(data[i].colors);
+            threeTone.push(data[i]);
           }
         }
         setTwoToneColors(twoTone);
@@ -138,7 +141,7 @@ export const ApiColorsContextProvider = (props) => {
         let twoTone = [];
         for (let i = 0; i < data.length; i++) {
           if (data[i].colors.length === 2) {
-            twoTone.push(data[i].colors);
+            twoTone.push(data[i]);
           }
         }
         setGradientsByUser(twoTone);

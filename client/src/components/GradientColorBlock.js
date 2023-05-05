@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   twoTone,
   threeTone,
@@ -8,17 +9,25 @@ import {
 import GradientColorCodeCopy from "./GradientColorCodeCopy";
 
 // props, color comes in the form of array : ["#1c1c1c","#cca1c3"]
-const GradientColorBlock = ({ color, varient }) => {
+const GradientColorBlock = ({ color, varient, ...props }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const navigate = useNavigate();
+  const handleOnClick = (e) => {
+    console.log(props.info);
+    if (props.info && props.info._id && e.target.tagName === "DIV") {
+      navigate(`/gradient/gradientDetails/${props.info._id}`);
+    }
+  };
   return (
     <span className="relative inline-block box color-tile">
       {varient === twoTone && (
         <div>
           <div
-            className={`w-[100%] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
+            className={`w-[100%] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center cursor-pointer gradient-tile`}
             style={{
               background: `linear-gradient(to right, ${color[0]} , ${color[1]})`,
             }}
+            onClick={(e) => handleOnClick(e)}
           >
             <span
               className="bg-[#333333] rounded px-2 py-1 cursor-pointer"

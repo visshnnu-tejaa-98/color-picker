@@ -49,7 +49,7 @@ export const getAllGradientsByUser = asyncHandler(async (req, res) => {
  ******************************************************/
 
 export const addGradient = asyncHandler(async (req, res) => {
-  const { colors, userId, user } = req.body;
+  const { colors, userId, direction, angle, user } = req.body;
   let colorsArray = colors.split(";");
   if (colorsArray.length > 3 || colorsArray.length < 2)
     throw new CustomError(
@@ -57,7 +57,12 @@ export const addGradient = asyncHandler(async (req, res) => {
       400
     );
 
-  let gradient = await Gradient.create({ userId, colors: colorsArray });
+  let gradient = await Gradient.create({
+    userId,
+    colors: colorsArray,
+    direction,
+    angle,
+  });
   res.status(201).json({
     sucess: true,
     gradient,

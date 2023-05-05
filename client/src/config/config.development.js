@@ -19,6 +19,13 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  getGradientById: {
+    method: "get",
+    url: `${origin}` + "/api/v1/gradient",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
   getAllPalette: {
     method: "get",
     url: `${origin}` + "/api/v1/palette",

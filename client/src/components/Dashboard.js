@@ -36,9 +36,10 @@ const Dashboard = () => {
                 if (idx <= 1) {
                   return (
                     <GradientColorBlock
-                      color={color}
+                      color={color.colors}
                       varient={twoTone}
-                      key={color}
+                      key={color._id}
+                      info={color}
                     />
                   );
                 }

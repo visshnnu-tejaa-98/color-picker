@@ -17,6 +17,7 @@ import SignIn from "./components/SignIn";
 import ForgotPassword from "./components/ForgotPassword";
 import Dashboard from "./components/Dashboard";
 import UserGradients from "./components/UserGradients";
+import GradientDetails from "./components/GradientDetails";
 
 const appRouter = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const appRouter = createBrowserRouter([
             element: <GenerateGradient />,
           },
         ],
+      },
+      {
+        path: "/gradient/gradientDetails/:id",
+        element: <GradientDetails />,
       },
       {
         path: "/palette",
