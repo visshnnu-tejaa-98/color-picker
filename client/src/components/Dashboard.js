@@ -4,14 +4,21 @@ import GradientColorBlock from "./GradientColorBlock";
 import { threeTone, twoTone } from "../utils/variables";
 import { AddGradientTemplate, AddPaletteTemplate } from "./AddTemplate";
 import PalleteColorCopy from "./PalleteColorCopy";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const ApiColorsCtx = useContext(ApiColorsContext);
+  const navigate = useNavigate();
   useEffect(() => {
     ApiColorsCtx.getAllGradientsByUser();
     ApiColorsCtx.getPaletteByUser();
   }, []);
+
+  const handleOnClick = (e, color) => {
+    if (color._id && e.target.tagName === "DIV") {
+      navigate(`/palette/paletteDetails/${color._id}`);
+    }
+  };
   return (
     <div className="px-[7%] text-[#cccccc]">
       <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center mt-5">
@@ -68,6 +75,7 @@ const Dashboard = () => {
                     <div
                       key={idx}
                       className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow"
+                      onClick={(e) => handleOnClick(e, color)}
                     >
                       <div
                         className="w-[100%] h-[75px] bg-teal-500 relative pallete-color"

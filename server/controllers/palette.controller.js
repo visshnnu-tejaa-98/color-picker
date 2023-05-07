@@ -10,9 +10,17 @@ import CustomError from "../utils/CustomError.js";
  ******************************************************/
 
 export const getPaletteById = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { id, populateUser } = req.body;
+  let palette;
   if (!id) throw new CustomError("Please Provide appropriate ids", 400);
-  const palette = await Palette.find({ _id: id });
+  if (populateUser !== true) {
+    palette = await Palette.find({ _id: id });
+  } else {
+    palette = await Palette.find({ _id: id }).populate(
+      "userId",
+      "name email role"
+    );
+  }
   res.status(200).json({ sucess: true, palette });
 });
 

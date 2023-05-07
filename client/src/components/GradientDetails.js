@@ -81,7 +81,7 @@ const GradientDetails = () => {
         >
           arrow_back
         </span>
-        <h2 className="text-center text-3xl mt-10 mb-10">Your Gradients</h2>
+        <h2 className="text-center text-3xl mt-10 mb-10">Gradient Details</h2>
         <span className="material-symbols-outlined invisible">arrow_back</span>
       </div>
       {getGradientByIdResponse.apiStatus === 1 && (

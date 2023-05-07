@@ -33,6 +33,13 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  getPaletteById: {
+    method: "post",
+    url: `${origin}` + "/api/v1/palette/details",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
   getAllPalette: {
     method: "get",
     url: `${origin}` + "/api/v1/palette",

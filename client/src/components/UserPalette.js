@@ -12,7 +12,7 @@ const UserPalette = () => {
   const handleOnClick = (e, color) => {
     console.log(color);
     if (color._id && e.target.tagName === "DIV") {
-      navigate(`/gradient/gradientDetails/${color._id}`);
+      navigate(`/palette/paletteDetails/${color._id}`);
     }
   };
   return (

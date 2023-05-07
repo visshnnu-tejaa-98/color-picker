@@ -20,6 +20,7 @@ import UserGradients from "./components/UserGradients";
 import GradientDetails from "./components/GradientDetails";
 import GeneratePalette from "./components/GeneratePalette";
 import UserPalette from "./components/UserPalette";
+import PaletteDetails from "./components/PaletteDetails";
 
 const appRouter = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/gradient/gradientDetails/:id",
         element: <GradientDetails />,
+      },
+      {
+        path: "/palette/paletteDetails/:id",
+        element: <PaletteDetails />,
       },
       {
         path: "/palette",

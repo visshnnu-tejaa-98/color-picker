@@ -15,7 +15,7 @@ router.post("/addPalette", isLoggedIn, addPalette);
 router.delete("/deletePalette/:id", isLoggedIn, deletePalette);
 router.put("/updatePalette/:id", isLoggedIn, updatePalette);
 router.get("/byuser", isLoggedIn, getPaletteByUser);
-router.get("/:id", isLoggedIn, getPaletteById);
+router.post("/details", isLoggedIn, getPaletteById);
 router.get("/", getAllPalette);
 
 export default router;
