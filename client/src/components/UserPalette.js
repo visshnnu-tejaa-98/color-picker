@@ -1,28 +1,42 @@
 import React, { useContext, useEffect } from "react";
-import { palletColors } from "../utils/palleteColors";
+import { useNavigate } from "react-router-dom";
 import PalleteColorCopy from "./PalleteColorCopy";
 import ApiColorsContext from "../contexts/apiColorsContext";
 
-const PalettePage = () => {
+const UserPalette = () => {
   const ApiColorsCtx = useContext(ApiColorsContext);
+  const navigate = useNavigate();
   useEffect(() => {
-    ApiColorsCtx.getAllPalette();
+    ApiColorsCtx.getPaletteByUser();
   }, []);
+  const handleOnClick = (e, color) => {
+    console.log(color);
+    if (color._id && e.target.tagName === "DIV") {
+      navigate(`/gradient/gradientDetails/${color._id}`);
+    }
+  };
   return (
     <div className="px-[7%] text-[#cccccc]">
-      <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center mt-5">
-        Color Palette
-      </h1>
-      <h2 className="text-center text-3xl mt-12 mb-10">Click to Copy!</h2>
-      <div className="my-12">
+      <div className="flex justify-between items-center">
+        <span
+          className="material-symbols-outlined cursor-pointer hover:text-[#FCD34D]"
+          title="Back"
+          onClick={() => navigate(-1)}
+        >
+          arrow_back
+        </span>
+        <h2 className="text-center text-3xl mt-10 mb-10">Your Palette</h2>
+        <span className="material-symbols-outlined invisible">arrow_back</span>
+      </div>
+      <div>
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {palletColors &&
-              ApiColorsCtx?.palette &&
-              [...ApiColorsCtx.palette].map((color, idx) => (
+            {ApiColorsCtx?.paletteByUser &&
+              [...ApiColorsCtx.paletteByUser].map((color, idx) => (
                 <div
                   key={idx}
-                  className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow"
+                  className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow cursor-pointer"
+                  onClick={(e) => handleOnClick(e, color)}
                 >
                   <div
                     className="w-[100%] h-[75px] bg-teal-500 relative pallete-color"
@@ -77,4 +91,4 @@ const PalettePage = () => {
   );
 };
 
-export default PalettePage;
+export default UserPalette;

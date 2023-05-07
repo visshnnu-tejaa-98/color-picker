@@ -75,14 +75,14 @@ const GradientDetails = () => {
     <div className="px-[7%] text-[#cccccc]">
       <div className="flex justify-between items-center">
         <span
-          class="material-symbols-outlined cursor-pointer hover:text-[#FCD34D]"
+          className="material-symbols-outlined cursor-pointer hover:text-[#FCD34D]"
           title="Back"
           onClick={() => navigate(-1)}
         >
           arrow_back
         </span>
         <h2 className="text-center text-3xl mt-10 mb-10">Your Gradients</h2>
-        <span class="material-symbols-outlined invisible">arrow_back</span>
+        <span className="material-symbols-outlined invisible">arrow_back</span>
       </div>
       {getGradientByIdResponse.apiStatus === 1 && (
         <div className="">

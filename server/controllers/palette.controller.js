@@ -29,6 +29,20 @@ export const getAllPalette = asyncHandler(async (req, res) => {
 });
 
 /******************************************************
+ * @Get All palette by userId
+ * @route http://localhost:9000/api/v1/palette/byuser
+ * @description Get the details of palette by user
+ * @returns List of all palette by user
+ ******************************************************/
+export const getPaletteByUser = asyncHandler(async (req, res) => {
+  // console.log(req.user);
+  const palette = await Palette.find({ userId: req.user._id }).sort({
+    updatedAt: "desc",
+  });
+  res.status(200).json({ sucess: true, palette });
+});
+
+/******************************************************
  * @Get Add Palette
  * @route http://localhost:9000/api/v1/palette/addpalette
  * @description Add Palette to database

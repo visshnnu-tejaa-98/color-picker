@@ -19,6 +19,13 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  getPaletteByUser: {
+    method: "get",
+    url: `${origin}` + "/api/v1/palette/byuser",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
   getGradientById: {
     method: "post",
     url: `${origin}` + "/api/v1/gradient/details",

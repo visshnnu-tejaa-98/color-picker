@@ -43,7 +43,7 @@ export const getAllGradients = asyncHandler(async (req, res) => {
  * @returns List of all Gradients by user
  ******************************************************/
 export const getAllGradientsByUser = asyncHandler(async (req, res) => {
-  const gradients = await Gradient.find({ userId: req.body.userId }).sort({
+  const gradients = await Gradient.find({ userId: req.user._id }).sort({
     updatedAt: "desc",
   });
   res.status(200).json({ sucess: true, gradients });

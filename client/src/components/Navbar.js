@@ -374,7 +374,7 @@ const Navbar = () => {
                 className="flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff]"
                 onClick={() => setIsOpenSide((prev) => !prev)}
               >
-                <span class="material-symbols-outlined">add_circle</span>
+                <span className="material-symbols-outlined">add_circle</span>
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
                   Create
                 </span>
