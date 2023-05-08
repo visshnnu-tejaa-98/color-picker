@@ -111,9 +111,18 @@ export const updateGradient = asyncHandler(async (req, res) => {
  ******************************************************/
 
 export const deleteGradient = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  await Gradient.findByIdAndDelete({ _id: id });
-  res
-    .status(200)
-    .json({ sucess: true, message: "Gradient Deleted Sucessfully" });
+  const { id, email } = req.body;
+  const gradient = await Gradient.findById(id).populate("userId", "email");
+  if (gradient) {
+    if (gradient.userId.email === email) {
+      await Gradient.findByIdAndDelete({ _id: id });
+      res
+        .status(200)
+        .json({ sucess: true, message: "Gradient Deleted Sucessfully" });
+    } else {
+      throw new CustomError("Gradient Not found", 404);
+    }
+  } else {
+    throw new CustomError("Gradient Not found", 404);
+  }
 });

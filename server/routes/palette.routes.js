@@ -12,7 +12,7 @@ import {
 const router = express.Router();
 
 router.post("/addPalette", isLoggedIn, addPalette);
-router.delete("/deletePalette/:id", isLoggedIn, deletePalette);
+router.delete("/deletePalette", isLoggedIn, deletePalette);
 router.put("/updatePalette/:id", isLoggedIn, updatePalette);
 router.get("/byuser", isLoggedIn, getPaletteByUser);
 router.post("/details", isLoggedIn, getPaletteById);

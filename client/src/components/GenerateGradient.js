@@ -39,7 +39,7 @@ const GenerateGradient = () => {
       userId: ApiColorsCtx?.getUser()?._id,
       colors: `${color1};${color2}`,
       direction: gradient.direction,
-      angle: Number(gradient.angle),
+      angle: gradient.angle,
     };
     let api = DEV_API.addGradient;
     let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };

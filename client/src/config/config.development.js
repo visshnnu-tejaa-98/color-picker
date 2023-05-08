@@ -75,9 +75,23 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  deleteGradient: {
+    method: "delete",
+    url: `${origin}` + "/api/v1/gradient/deleteGradient",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
   addPalette: {
     method: "post",
     url: `${origin}` + "/api/v1/palette/addPalette",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  deletePalette: {
+    method: "delete",
+    url: `${origin}` + "/api/v1/palette/deletePalette",
     headers: {
       "Content-Type": "application/json",
     },

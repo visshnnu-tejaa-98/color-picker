@@ -27,7 +27,7 @@ const colorGradientSchema = new Schema(
       enum: [LEFT, RIGHT, TOP, BOTTOM, null],
     },
     angle: {
-      type: Number,
+      type: Number || null,
     },
   },
   { timestamps: true }

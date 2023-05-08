@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import DEV_API from "../config/config.development";
 import axios from "axios";
@@ -11,6 +11,12 @@ const GradientDetails = () => {
     data: null,
     errorMessage: null,
   });
+  const [deleteGradientResponse, setDeleteGradientResponse] = useState({
+    apiStatus: 0,
+    data: null,
+    errorMessage: null,
+  });
+
   const [isCopied, setIsCopied] = useState(false);
   const ApiColorsCtx = useContext(ApiColorsContext);
   const navigate = useNavigate();
@@ -67,6 +73,65 @@ const GradientDetails = () => {
           apiStatus: -1,
           data: null,
           errorMessage: error.message,
+        });
+      });
+  };
+
+  const handleDelete = (id, email) => {
+    console.log(id, email);
+    deleteGradient(id, email);
+  };
+
+  const deleteGradient = async (id, email) => {
+    let data = { id, email };
+    let api = DEV_API.deleteGradient;
+    let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };
+    let config = {
+      ...api,
+      data,
+      headers,
+    };
+    setDeleteGradientResponse({
+      apiStatus: 0,
+      data: null,
+      errorMessage: null,
+    });
+    console.log(config);
+    return await axios(config)
+      .then((response) => {
+        console.log(response);
+        try {
+          if (response === null) throw new Error("API Error");
+          console.log(response);
+          return response;
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .then((data) => {
+        setDeleteGradientResponse({
+          apiStatus: 1,
+          data: data,
+          errorMessage: null,
+        });
+        return data;
+      })
+      .then((data) => navigate(-1))
+      .catch((error) => {
+        console.log(error);
+        let message = "";
+        switch (error?.response?.data?.message || error?.message) {
+          case "apiError":
+            message = "Sonething went wrong while fetching the data";
+            break;
+          default:
+            message = "Something went wrong";
+            break;
+        }
+        setDeleteGradientResponse({
+          apiStatus: -1,
+          data: null,
+          errorMessage: error?.response?.data?.message || error?.message,
         });
       });
   };
@@ -167,6 +232,28 @@ const GradientDetails = () => {
           </div>
         </div>
       )}
+      {getGradientByIdResponse.apiStatus === 1 &&
+        ApiColorsCtx?.getUser()?.email ===
+          getGradientByIdResponse.data[0].userId.email && (
+          <div className="my-8">
+            <Link to="/solid" className="">
+              <span className="py-1.5 px-3 bg-[#7E22CE] text-xl font-semibold rounded hover:text-[#cccccc] border border-[#7E22CE] hover:bg-transparent hover:border-[#cccccc] hover:ease-in-out hover:duration-300 cursor-pointer">
+                <span>Edit</span>
+              </span>
+            </Link>
+            <span
+              className="py-1.5 ml-4 px-3 bg-[#7E22CE] text-xl font-semibold rounded hover:text-[#cccccc] border border-[#7E22CE] hover:bg-transparent hover:border-[#cccccc] hover:ease-in-out hover:duration-300 cursor-pointer"
+              onClick={() =>
+                handleDelete(
+                  getGradientByIdResponse.data[0]._id,
+                  ApiColorsCtx?.getUser()?.email
+                )
+              }
+            >
+              <span>Delete</span>
+            </span>
+          </div>
+        )}
     </div>
   );
 };

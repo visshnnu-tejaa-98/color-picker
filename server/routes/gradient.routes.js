@@ -12,7 +12,7 @@ import {
 const router = express.Router();
 
 router.post("/addGradient", isLoggedIn, addGradient);
-router.delete("/deleteGradient/:id", isLoggedIn, deleteGradient);
+router.delete("/deleteGradient", isLoggedIn, deleteGradient);
 router.put("/updateGradient/:id", isLoggedIn, updateGradient);
 router.get("/byuser", isLoggedIn, getAllGradientsByUser);
 router.post("/details", isLoggedIn, getGradientById);

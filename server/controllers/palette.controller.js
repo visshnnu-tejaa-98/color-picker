@@ -59,7 +59,6 @@ export const getPaletteByUser = asyncHandler(async (req, res) => {
 
 export const addPalette = asyncHandler(async (req, res) => {
   const { colors, userId } = req.body;
-  console.log(req.body);
   let colorsArray = colors.split(";");
   if (colorsArray.length !== 4)
     throw new CustomError("Please provide exact 4 colors", 400);
@@ -101,9 +100,18 @@ export const updatePalette = asyncHandler(async (req, res) => {
  ******************************************************/
 
 export const deletePalette = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  await Palette.findByIdAndDelete({ _id: id });
-  res
-    .status(200)
-    .json({ sucess: true, message: "Palette Deleted Sucessfully" });
+  const { id, email } = req.body;
+  const palette = await Palette.findById(id).populate("userId", "email");
+  if (palette) {
+    if (palette.userId.email === email) {
+      await Palette.findByIdAndDelete({ _id: id });
+      res
+        .status(200)
+        .json({ sucess: true, message: "Palette Deleted Sucessfully" });
+    } else {
+      throw new CustomError("Palette Not found", 404);
+    }
+  } else {
+    throw new CustomError("Palette Not found", 404);
+  }
 });
