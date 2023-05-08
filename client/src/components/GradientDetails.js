@@ -201,7 +201,7 @@ const GradientDetails = () => {
               <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
                 <span className=""> Color Two:</span>
                 <span className="pl-2 font-semibold tracking-wider">
-                  {getGradientByIdResponse.data[0].colors[0].toUpperCase()}
+                  {getGradientByIdResponse.data[0].colors[1].toUpperCase()}
                 </span>
               </p>
               {getGradientByIdResponse.data[0].direction && (
@@ -236,7 +236,10 @@ const GradientDetails = () => {
         ApiColorsCtx?.getUser()?.email ===
           getGradientByIdResponse.data[0].userId.email && (
           <div className="my-8">
-            <Link to="/solid" className="">
+            <Link
+              to={`/editGradient/${getGradientByIdResponse.data[0]._id}`}
+              className=""
+            >
               <span className="py-1.5 px-3 bg-[#7E22CE] text-xl font-semibold rounded hover:text-[#cccccc] border border-[#7E22CE] hover:bg-transparent hover:border-[#cccccc] hover:ease-in-out hover:duration-300 cursor-pointer">
                 <span>Edit</span>
               </span>

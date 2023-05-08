@@ -75,6 +75,13 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  editGradient: {
+    method: "put",
+    url: `${origin}` + "/api/v1/gradient/updateGradient",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
   deleteGradient: {
     method: "delete",
     url: `${origin}` + "/api/v1/gradient/deleteGradient",

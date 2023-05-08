@@ -85,9 +85,8 @@ export const addGradient = asyncHandler(async (req, res) => {
  ******************************************************/
 
 export const updateGradient = asyncHandler(async (req, res) => {
-  const { colors, userId } = req.body;
+  const { colors, userId, direction, angle } = req.body;
   const { id } = req.params;
-
   let colorsArray = colors.split(";");
   if (colorsArray.length > 3 || colorsArray.length < 2)
     throw new CustomError(
@@ -95,8 +94,8 @@ export const updateGradient = asyncHandler(async (req, res) => {
       400
     );
   const gradient = await Gradient.findOneAndUpdate(
-    { _id: id, userId },
-    { colors: colorsArray },
+    { _id: id },
+    { colors: colorsArray, direction, angle },
     { new: true, runValidators: true }
   );
 
