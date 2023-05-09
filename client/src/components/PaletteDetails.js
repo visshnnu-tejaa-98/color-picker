@@ -240,7 +240,10 @@ const PaletteDetails = () => {
         ApiColorsCtx?.getUser()?.email ===
           getPaletteByIdResponse.data[0].userId.email && (
           <div className="my-8">
-            <Link to="/solid" className="">
+            <Link
+              to={`/editPalette/${getPaletteByIdResponse.data[0]._id}`}
+              className=""
+            >
               <span className="py-1.5 px-3 bg-[#7E22CE] text-xl font-semibold rounded hover:text-[#cccccc] border border-[#7E22CE] hover:bg-transparent hover:border-[#cccccc] hover:ease-in-out hover:duration-300 cursor-pointer">
                 <span>Edit</span>
               </span>

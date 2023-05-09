@@ -79,12 +79,11 @@ export const addPalette = asyncHandler(async (req, res) => {
 export const updatePalette = asyncHandler(async (req, res) => {
   const { colors, userId } = req.body;
   const { id } = req.params;
-
   let colorsArray = colors.split(";");
   if (colorsArray.length !== 4)
     throw new CustomError("Please provide exact 4 colors", 400);
   const palette = await Palette.findOneAndUpdate(
-    { _id: id, userId },
+    { _id: id, userId: req.user._id },
     { palette: colorsArray },
     { new: true, runValidators: true }
   );

@@ -94,7 +94,7 @@ export const updateGradient = asyncHandler(async (req, res) => {
       400
     );
   const gradient = await Gradient.findOneAndUpdate(
-    { _id: id },
+    { _id: id, userId: req.user._id },
     { colors: colorsArray, direction, angle },
     { new: true, runValidators: true }
   );

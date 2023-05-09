@@ -292,7 +292,7 @@ const EditGradient = () => {
         >
           {getPaletteByIdResponse.apiStatus === 1 &&
             console.log(getPaletteByIdResponse)}
-          Edit Gradient
+          Update Gradient
         </button>
       </div>
     </div>

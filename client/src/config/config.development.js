@@ -96,6 +96,13 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  editPalette: {
+    method: "put",
+    url: `${origin}` + "/api/v1/palette/updatePalette",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
   deletePalette: {
     method: "delete",
     url: `${origin}` + "/api/v1/palette/deletePalette",

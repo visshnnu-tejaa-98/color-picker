@@ -22,6 +22,7 @@ import GeneratePalette from "./components/GeneratePalette";
 import UserPalette from "./components/UserPalette";
 import PaletteDetails from "./components/PaletteDetails";
 import EditGradient from "./components/EditGradient";
+import EditPalette from "./components/EditPalette";
 
 const appRouter = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/palette/paletteDetails/:id",
         element: <PaletteDetails />,
+      },
+      {
+        path: "/editPalette/:id",
+        element: <EditPalette />,
       },
       {
         path: "/palette",
