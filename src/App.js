@@ -1,11 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { ColorsContextProvider } from "./contexts/colorsContext";
+import LandingPage from "./components/LandingPage";
+import { ApiColorsContextProvider } from "./contexts/apiColorsContext";
+import "flowbite";
 
 function App() {
   return (
-    <div className="flex justify-center items-center h-[100vh]">
-      <h1 className="font-semibold text-4xl">Hello UI Color Picker😀</h1>
-    </div>
+    <>
+      <ColorsContextProvider>
+        <ApiColorsContextProvider>
+          <LandingPage />
+        </ApiColorsContextProvider>
+      </ColorsContextProvider>
+    </>
   );
 }
 
