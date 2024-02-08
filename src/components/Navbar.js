@@ -15,7 +15,10 @@ import DEV_API from "../config/config.development";
 
 const Navbar = () => {
   const location = useLocation();
-  const [isOpenSide, setIsOpenSide] = useState(true);
+  const [isAccordianOpenData, setIsAccordianOpenData] = useState({
+    isGradientOpen: false,
+    isCreateOpen: false,
+  });
   const [isOpenTop, setIsOpenTop] = useState(false);
   const [isOpenSideNavbar, setIsOpenSideBar] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,6 +29,8 @@ const Navbar = () => {
   });
   const ApiColorsCtx = useContext(ApiColorsContext);
   const navigate = useNavigate();
+
+  const { isGradientOpen, isCreateOpen } = isAccordianOpenData;
 
   useEffect(() => {
     let paths = ["/", "/signup", "/signin", "/forgotPassword"];
@@ -111,6 +116,14 @@ const Navbar = () => {
           errorMessage: error?.response?.data?.message || error?.message,
         });
       });
+  };
+
+  const makeActiveSideBar = (route, type) => {
+    if (location.pathname.includes(route) && !isAccordianOpenData[type]) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -339,7 +352,7 @@ const Navbar = () => {
                   <span className="ml-3">Solid Colors</span>
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/gradient"
                   className={({ isActive }) =>
@@ -353,48 +366,42 @@ const Navbar = () => {
                   </span>
                   <span className="ml-3">Gradient Colors</span>
                 </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/palette"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
-                      : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
-                  }
-                >
-                  <span className="material-symbols-outlined">palette</span>
-                  <span className="flex-1 ml-3 whitespace-nowrap">
-                    Color Palette
-                  </span>
-                </NavLink>
-              </li>
+              </li> */}
               <button
                 type="button"
-                className="flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff]"
-                onClick={() => setIsOpenSide((prev) => !prev)}
+                className={`flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff] ${
+                  makeActiveSideBar("gradient", "isGradientOpen")
+                    ? "active-sidebar font-semibold"
+                    : ""
+                }`}
+                onClick={() =>
+                  setIsAccordianOpenData((prev) => {
+                    return {
+                      ...prev,
+                      isCreateOpen: false,
+                      isGradientOpen: !isAccordianOpenData.isGradientOpen,
+                    };
+                  })
+                }
               >
-                <span className="material-symbols-outlined">add_circle</span>
+                <span className="material-symbols-outlined">invert_colors</span>{" "}
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                  Create
+                  Gradient Colors
                 </span>
-                <span>{isOpenSide}</span>
-                <svg
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
+                <span>{isGradientOpen}</span>
+                {isGradientOpen ? (
+                  <span className="material-symbols-outlined transition duration-150 ease-in-out">
+                    expand_more
+                  </span>
+                ) : (
+                  <span className="material-symbols-outlined -rotate-90 transition duration-200 ease-in-out">
+                    expand_more
+                  </span>
+                )}
               </button>
-              {isOpenSide && (
-                <ul>
-                  {/* <li>
+              {isGradientOpen && (
+                <ul className="px-2">
+                  <li>
                     <NavLink
                       to="/gradient"
                       className={() =>
@@ -417,7 +424,58 @@ const Navbar = () => {
                     >
                       Three Tone Colors
                     </NavLink>
-                  </li> */}
+                  </li>
+                </ul>
+              )}
+              <li>
+                <NavLink
+                  to="/palette"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
+                      : "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff]"
+                  }
+                >
+                  <span className="material-symbols-outlined">palette</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap">
+                    Color Palette
+                  </span>
+                </NavLink>
+              </li>
+              <button
+                type="button"
+                className={`flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff] ${
+                  makeActiveSideBar("generate", "isCreateOpen")
+                    ? "active-sidebar font-semibold"
+                    : ""
+                }`}
+                onClick={() =>
+                  setIsAccordianOpenData((prev) => {
+                    return {
+                      ...prev,
+                      isGradientOpen: false,
+                      isCreateOpen: !isAccordianOpenData.isCreateOpen,
+                    };
+                  })
+                }
+              >
+                <span className="material-symbols-outlined">add_circle</span>
+                <span className="flex-1 ml-3 text-left whitespace-nowrap">
+                  Create
+                </span>
+                <span>{isCreateOpen}</span>
+                {isCreateOpen ? (
+                  <span className="material-symbols-outlined transition duration-150 ease-in-out">
+                    expand_more
+                  </span>
+                ) : (
+                  <span className="material-symbols-outlined -rotate-90 transition duration-200 ease-in-out">
+                    expand_more
+                  </span>
+                )}
+              </button>
+              {isCreateOpen && (
+                <ul className="px-2">
                   <li>
                     <NavLink
                       to="generateGradient"
