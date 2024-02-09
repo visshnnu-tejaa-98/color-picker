@@ -75,12 +75,14 @@ const GradientTwoTone = ({ msg }) => {
           </div>
         </div>
       </div>
-      <div>
-        <Pagination
-          paginationData={paginationData}
-          setPaginationData={setPaginationData}
-        />
-      </div>
+      {twoToneColorsResponse.apiStatus === 1 && (
+        <div>
+          <Pagination
+            paginationData={paginationData}
+            setPaginationData={setPaginationData}
+          />
+        </div>
+      )}
     </div>
   );
 };
