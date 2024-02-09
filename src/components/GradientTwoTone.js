@@ -1,12 +1,9 @@
-import React, { useEffect, useContext, useState } from "react";
-import { gradientColorMapping } from "../utils/gradientColors";
+import React, { useEffect, useState } from "react";
 import { twoTone } from "../utils/variables";
 import GradientColorBlock from "./GradientColorBlock";
-import ApiColorsContext from "../contexts/apiColorsContext";
 import Pagination from "./Pagination";
 import { useLocation } from "react-router-dom";
 import DEV_API from "../config/config.development";
-import PaginationButton from "flowbite-react/lib/esm/components/Pagination/PaginationButton";
 
 const GradientTwoTone = ({ msg }) => {
   const [paginationData, setPaginationData] = useState({
@@ -79,7 +76,7 @@ const GradientTwoTone = ({ msg }) => {
         </div>
       </div>
       <div>
-        <PaginationButton
+        <Pagination
           paginationData={paginationData}
           setPaginationData={setPaginationData}
         />
