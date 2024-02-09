@@ -2,13 +2,16 @@
 // const host = window.location.host;
 const protocol = "http:";
 const host = "//localhost:8000";
-// const origin = "http://localhost:8000";
-const origin = "https://color-picker-server-production.up.railway.app";
+const origin = "http://localhost:8000";
+// const origin = "https://color-picker-server-production.up.railway.app";
 
 const DEV_API = {
+  getAllTwoToneGradients: {
+    url: `${origin}` + `/api/v1/gradient`,
+  },
   getAllGradients: {
     method: "get",
-    url: `${origin}` + "/api/v1/gradient",
+    url: `${origin}` + `/api/v1/gradient`,
     headers: {
       "Content-Type": "application/json",
     },
