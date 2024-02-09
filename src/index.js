@@ -78,6 +78,22 @@ const appRouter = createBrowserRouter([
         ],
       },
       {
+        path: "/gradient/:id",
+        element: <GradientColorsPage />,
+        // children: [
+        //   {
+        //     path: "",
+        //     element: <GradientTwoTone />,
+        //     msg: "twotone",
+        //   },
+        //   {
+        //     path: "threetone",
+        //     element: <GradientThreeTone />,
+        //     msg: "threetone",
+        //   },
+        // ],
+      },
+      {
         path: "/generateGradient",
         element: <GenerateGradient />,
       },

@@ -240,14 +240,14 @@ const Navbar = () => {
                       <ul className="py-2 text-sm text-gray-700">
                         <li>
                           <Link
-                            to="/gradient"
+                            to="/gradient?page=1"
                             className="block px-4 py-2 hover:bg-gray-100"
                             onClick={() => setIsOpenTop(false)}
                           >
                             Two Tone Gradient
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link
                             to="/gradient/threetone"
                             className="block px-4 py-2 hover:bg-gray-100"
@@ -255,7 +255,7 @@ const Navbar = () => {
                           >
                             Three Tone Gradient
                           </Link>
-                        </li>
+                        </li> */}
                         <li>
                           <Link
                             to="/gradient/generate"
@@ -274,20 +274,20 @@ const Navbar = () => {
                       <ul className="py-2 text-sm text-gray-700">
                         <li>
                           <Link
-                            to="/gradient"
+                            to="/gradient?page=1"
                             className="block px-4 py-2 hover:bg-gray-100"
                           >
                             Two Tone Gradient
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link
                             to="/gradient/threetone"
                             className="block px-4 py-2 hover:bg-gray-100"
                           >
                             Three Tone Gradient
                           </Link>
-                        </li>
+                        </li> */}
                         <li>
                           <Link
                             to="/gradient/generate"
@@ -403,7 +403,7 @@ const Navbar = () => {
                 <ul className="px-2">
                   <li>
                     <NavLink
-                      to="/gradient"
+                      to="/gradient?page=1"
                       className={() =>
                         location.pathname === "/gradient"
                           ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
@@ -413,7 +413,7 @@ const Navbar = () => {
                       Two Tone Colors
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink
                       to="/gradient/threetone"
                       className={() => {
@@ -424,7 +424,7 @@ const Navbar = () => {
                     >
                       Three Tone Colors
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               )}
               <li>
