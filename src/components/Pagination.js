@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Pagination = ({ paginationData, setPaginationData }) => {
   let { previous, next, pagestoshow, currentPage, pageCount } = paginationData;
+  console.log(currentPage);
   return (
     <div className="flex justify-center mt-8">
       <div className="flex items-center">
@@ -17,7 +18,11 @@ const Pagination = ({ paginationData, setPaginationData }) => {
         {pagestoshow.map((page) => (
           <Link
             to={`?page=${page}`}
-            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-white-900 hover:scale-105"
+            className={` ${
+              page === currentPage
+                ? "mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 font-bold text-white-900 bg-[#6F2193] hover:scale-105"
+                : "mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-white-900 hover:scale-105"
+            }`}
           >
             {page}
           </Link>
