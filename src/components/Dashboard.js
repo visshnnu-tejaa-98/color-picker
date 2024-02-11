@@ -27,7 +27,7 @@ const Dashboard = () => {
       <div>
         <div className="flex justify-between items-center mt-5">
           <h3 className="text-3xl">Gradients</h3>
-          <Link to="/dashboard/gradients">
+          <Link to="/dashboard/gradients?page=1">
             <div className="flex items-center text-[#FCD34D]">
               <h3 className="text-lg cursor-pointer">See All</h3>
               <span className="material-symbols-outlined">navigate_next</span>
