@@ -370,7 +370,10 @@ const Navbar = () => {
               <button
                 type="button"
                 className={`flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff] ${
-                  makeActiveSideBar("gradient", "isGradientOpen")
+                  makeActiveSideBar(
+                    "https://dev-color-picker.netlify.app/gradient",
+                    "isGradientOpen"
+                  )
                     ? "active-sidebar font-semibold"
                     : ""
                 }`}
