@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 
 const Pagination = ({ paginationData, setPaginationData }) => {
   let { previous, next, pagestoshow, currentPage, pageCount } = paginationData;
-  console.log(currentPage);
+  if (pagestoshow.length === 1) {
+    return <div className="h-5"></div>;
+  }
   return (
-    <div className="flex justify-center mt-8">
+    <div className="flex justify-center mt-8 p-2">
       <div className="flex items-center">
         <Link
           to={`?page=${previous}`}
