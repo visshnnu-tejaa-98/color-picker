@@ -11,7 +11,7 @@ import Logo from "../assets/logo.png";
 import "flowbite";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import axios from "axios";
-import DEV_API from "../config/config.development";
+import DEV_API, { feOrigin } from "../config/config.development";
 
 const Navbar = () => {
   const location = useLocation();
@@ -370,10 +370,7 @@ const Navbar = () => {
               <button
                 type="button"
                 className={`flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff] ${
-                  makeActiveSideBar(
-                    "https://dev-color-picker.netlify.app/gradient",
-                    "isGradientOpen"
-                  )
+                  makeActiveSideBar(feOrigin + "/gradient", "isGradientOpen")
                     ? "active-sidebar font-semibold"
                     : ""
                 }`}
@@ -448,7 +445,7 @@ const Navbar = () => {
               <button
                 type="button"
                 className={`flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff] ${
-                  makeActiveSideBar("generate", "isCreateOpen")
+                  makeActiveSideBar(feOrigin + "/gradient", "isCreateOpen")
                     ? "active-sidebar font-semibold"
                     : ""
                 }`}
