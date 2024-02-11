@@ -203,7 +203,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/palette"
+                    to="/palette?page=1"
                     className={({ isActive }) =>
                       isActive
                         ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
@@ -429,7 +429,7 @@ const Navbar = () => {
               )}
               <li>
                 <NavLink
-                  to="/palette"
+                  to="/palette?page=1"
                   className={({ isActive }) =>
                     isActive
                       ? "flex items-center p-2 text-[#cccccc] rounded-lg hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
