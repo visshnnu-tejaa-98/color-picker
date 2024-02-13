@@ -143,7 +143,7 @@ const UserPalette = () => {
         </div>
       </div>
       {palletResponse.apiStatus === 1 && (
-        <div>
+        <div className="my-5">
           <Pagination
             paginationData={paginationData}
             setPaginationData={setPaginationData}
