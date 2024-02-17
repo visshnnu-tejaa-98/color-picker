@@ -247,15 +247,15 @@ const Navbar = () => {
                             Two Tone Gradient
                           </Link>
                         </li>
-                        {/* <li>
+                        <li>
                           <Link
-                            to="/gradient/threetone"
+                            to="/gradient/threetone?page=1"
                             className="block px-4 py-2 hover:bg-gray-100"
                             onClick={() => setIsOpenTop(false)}
                           >
                             Three Tone Gradient
                           </Link>
-                        </li> */}
+                        </li>
                         <li>
                           <Link
                             to="/gradient/generate"
@@ -280,14 +280,14 @@ const Navbar = () => {
                             Two Tone Gradient
                           </Link>
                         </li>
-                        {/* <li>
+                        <li>
                           <Link
-                            to="/gradient/threetone"
+                            to="/gradient/threetone?page=1"
                             className="block px-4 py-2 hover:bg-gray-100"
                           >
                             Three Tone Gradient
                           </Link>
-                        </li> */}
+                        </li>
                         <li>
                           <Link
                             to="/gradient/generate"
@@ -413,9 +413,9 @@ const Navbar = () => {
                       Two Tone Colors
                     </NavLink>
                   </li>
-                  {/* <li>
+                  <li>
                     <NavLink
-                      to="/gradient/threetone"
+                      to="/gradient/threetone?page=1"
                       className={() => {
                         return location.pathname === "/gradient/threetone"
                           ? "flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg pl-11 group hover:bg-[#8425af] hover:text-[#ffffff] active-sidebar font-semibold"
@@ -424,7 +424,7 @@ const Navbar = () => {
                     >
                       Three Tone Colors
                     </NavLink>
-                  </li> */}
+                  </li>
                 </ul>
               )}
               <li>

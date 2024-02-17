@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import GradientColorBlock from "./GradientColorBlock";
-import { twoTone } from "../utils/variables";
+import { twoTone, twoToneGradientType } from "../utils/variables";
 import DEV_API from "../config/config.development";
 import Pagination from "./Pagination";
 
@@ -24,11 +24,12 @@ const UserGradients = () => {
   const navigate = useNavigate();
   const authToken = ApiColorsCtx.getAuthToken();
   useEffect(() => {
-    getAllTwoToneGradientsByUserId(page);
+    getAllTwoToneGradientsByUserId(page, twoToneGradientType);
   }, [page]);
 
-  async function getAllTwoToneGradientsByUserId() {
-    const url = DEV_API.getAllGradientsByUser?.url + `?page=${page}`;
+  async function getAllTwoToneGradientsByUserId(page, type) {
+    const url =
+      DEV_API.getAllGradientsByUser?.url + `?page=${page}&type=${type}`;
     let headers = {
       ...DEV_API.getAllGradientsByUser.headers,
       Authorization: `Bearer ${authToken}`,
