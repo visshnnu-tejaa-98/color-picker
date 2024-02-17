@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { twoTone } from "../utils/variables";
+import { twoTone, twoToneGradientType } from "../utils/variables";
 import GradientColorBlock from "./GradientColorBlock";
 import Pagination from "./Pagination";
 import { useLocation } from "react-router-dom";
@@ -22,11 +22,13 @@ const GradientTwoTone = ({ msg }) => {
   const page = Number(location.search.split("=")[1]);
 
   useEffect(() => {
-    getAllTwoToneGradients(page);
+    // 2 for 2 tone gradients (only 2 options available)
+    // 3 for 3 tone gradients
+    getAllTwoToneGradients(page, twoToneGradientType);
   }, [page]);
 
-  async function getAllTwoToneGradients() {
-    const url = DEV_API.getAllTwoToneGradients.url + `?page=${page}`;
+  async function getAllTwoToneGradients(page, type) {
+    const url = DEV_API.getAllGradients.url + `?page=${page}&type=${type}`;
     setTwoToneColorsResponse({ apiStatus: 0, error: null, data: null });
     try {
       const req = await fetch(url);
