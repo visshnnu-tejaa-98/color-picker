@@ -93,7 +93,7 @@ const UserGradients = () => {
         </div>
       </div>
       {twoToneColorsResponse.apiStatus === 1 && (
-        <div>
+        <div className="my-5">
           <Pagination
             paginationData={paginationData}
             setPaginationData={setPaginationData}
