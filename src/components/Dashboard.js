@@ -1,18 +1,92 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import GradientColorBlock from "./GradientColorBlock";
-import { threeTone, twoTone } from "../utils/variables";
+import { threeTone, twoTone, twoToneGradientType } from "../utils/variables";
 import { AddGradientTemplate, AddPaletteTemplate } from "./AddTemplate";
 import PalleteColorCopy from "./PalleteColorCopy";
 import { Link, useNavigate } from "react-router-dom";
+import DEV_API from "../config/config.development";
 
 const Dashboard = () => {
+  const [twoToneColorsResponse, setTwoToneColorsResponse] = useState({
+    data: null,
+    error: null,
+    apiStatus: 0,
+  });
+  const [palletResponse, setPalletResponse] = useState({
+    data: null,
+    error: null,
+    apiStatus: 0,
+  });
+  const page = 1;
   const ApiColorsCtx = useContext(ApiColorsContext);
   const navigate = useNavigate();
+  const authToken = ApiColorsCtx.getAuthToken();
   useEffect(() => {
-    ApiColorsCtx.getAllGradientsByUser();
-    ApiColorsCtx.getPaletteByUser();
+    getAllTwoToneGradientsByUserId(page, twoToneGradientType);
+    getAllPaletteByUser(page);
+    // ApiColorsCtx.getAllGradientsByUser();
+    // ApiColorsCtx.getPaletteByUser();
   }, []);
+
+  async function getAllTwoToneGradientsByUserId(page, type) {
+    const url =
+      DEV_API.getAllGradientsByUser?.url + `?page=${page}&type=${type}`;
+    let headers = {
+      ...DEV_API.getAllGradientsByUser.headers,
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    setTwoToneColorsResponse({ apiStatus: 0, error: null, data: null });
+    try {
+      const req = await fetch(url, { headers });
+      const res = await req.json();
+      const { page: currentPage, pageCount } = res;
+      let pagestoshow = [];
+      for (let i = 1; i <= pageCount; i++) {
+        if (i > currentPage - 3 && i < currentPage + 3) {
+          pagestoshow.push(i);
+        }
+      }
+      setTwoToneColorsResponse({ apiStatus: 1, error: null, data: res });
+    } catch (error) {
+      console.log(error);
+      setTwoToneColorsResponse({
+        apiStatus: -1,
+        error: error?.message,
+        data: null,
+      });
+    }
+  }
+
+  async function getAllPaletteByUser(page) {
+    const url = DEV_API.getPaletteByUser.url + `?page=${page}`;
+    let headers = {
+      ...DEV_API.getAllGradientsByUser.headers,
+      Authorization: `Bearer ${authToken}`,
+    };
+    setPalletResponse({ apiStatus: 0, error: null, data: null });
+    try {
+      const req = await fetch(url, { headers });
+      const res = await req.json();
+      console.log(res);
+      const { page: currentPage, pageCount } = res;
+      let pagestoshow = [];
+      for (let i = 1; i <= pageCount; i++) {
+        if (i > currentPage - 3 && i < currentPage + 3) {
+          pagestoshow.push(i);
+        }
+      }
+      setPalletResponse({ apiStatus: 1, error: null, data: res });
+    } catch (error) {
+      console.log(error);
+      setPalletResponse({
+        apiStatus: -1,
+        error: error?.message,
+        data: null,
+      });
+    }
+  }
 
   const handleOnClick = (e, color) => {
     if (color._id && e.target.tagName === "DIV") {
@@ -38,8 +112,8 @@ const Dashboard = () => {
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
             <AddGradientTemplate />
-            {ApiColorsCtx?.gradientsByUser &&
-              ApiColorsCtx?.gradientsByUser.map((color, idx) => {
+            {twoToneColorsResponse.apiStatus === 1 &&
+              twoToneColorsResponse?.data?.gradients?.map((color, idx) => {
                 if (idx <= 1) {
                   return (
                     <GradientColorBlock
@@ -68,8 +142,8 @@ const Dashboard = () => {
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 my-8">
             <AddPaletteTemplate />
-            {ApiColorsCtx?.paletteByUser &&
-              [...ApiColorsCtx.paletteByUser].map((color, idx) => {
+            {palletResponse.apiStatus === 1 &&
+              palletResponse?.data?.palette?.map((color, idx) => {
                 if (idx <= 2) {
                   return (
                     <div
