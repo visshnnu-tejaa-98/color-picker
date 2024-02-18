@@ -119,11 +119,22 @@ const Navbar = () => {
   };
 
   const makeActiveSideBar = (route, type) => {
-    if (location.pathname.includes(route) && !isAccordianOpenData[type]) {
-      return true;
-    } else {
-      return false;
+    let result = false;
+    if (
+      location.pathname.includes(route) ||
+      route.includes(location.pathname)
+    ) {
+      if (!isAccordianOpenData[type]) {
+        result = true;
+      }
+    } else if (
+      location.pathname === "/gradient/threetone" &&
+      route.includes("gradient") &&
+      !isAccordianOpenData[type]
+    ) {
+      result = true;
     }
+    return result;
   };
 
   return (
@@ -445,7 +456,7 @@ const Navbar = () => {
               <button
                 type="button"
                 className={`flex items-center w-full p-2 text-[#cccccc] transition duration-75 rounded-lg group hover:bg-[#8425af] hover:text-[#ffffff] ${
-                  makeActiveSideBar(feOrigin + "/gradient", "isCreateOpen")
+                  makeActiveSideBar("generate", "isCreateOpen")
                     ? "active-sidebar font-semibold"
                     : ""
                 }`}
