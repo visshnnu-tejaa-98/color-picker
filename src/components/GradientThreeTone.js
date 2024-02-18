@@ -4,6 +4,7 @@ import GradientColorBlock from "./GradientColorBlock";
 import { useLocation } from "react-router-dom";
 import DEV_API from "../config/config.development";
 import Pagination from "./Pagination";
+import Loader from "./Loader";
 
 const GradientThreeTone = () => {
   const [paginationData, setPaginationData] = useState({
@@ -62,6 +63,9 @@ const GradientThreeTone = () => {
       <h2 className="text-center text-3xl mt-12 mb-10">Feeling Three Tone</h2>
       <div>
         <div>
+          {threeToneColorsResponse.apiStatus === 0 && (
+            <Loader height={"300px"} />
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {threeToneColorsResponse.apiStatus === 1 &&
               threeToneColorsResponse?.data?.gradients?.map((color) => (

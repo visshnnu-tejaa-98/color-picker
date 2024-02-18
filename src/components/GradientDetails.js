@@ -4,6 +4,7 @@ import ApiColorsContext from "../contexts/apiColorsContext";
 import DEV_API from "../config/config.development";
 import axios from "axios";
 import { twoToneGradientCopyCode } from "../utils/variables";
+import Loader from "./Loader";
 
 const GradientDetails = () => {
   const [getGradientByIdResponse, setGradientByIdResponse] = useState({
@@ -149,6 +150,7 @@ const GradientDetails = () => {
         <h2 className="text-center text-3xl mt-10 mb-10">Gradient Details</h2>
         <span className="material-symbols-outlined invisible">arrow_back</span>
       </div>
+      {getGradientByIdResponse.apiStatus === 0 && <Loader height={"300px"} />}
       {getGradientByIdResponse.apiStatus === 1 && (
         <div className="">
           <div

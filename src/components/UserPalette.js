@@ -4,6 +4,7 @@ import PalleteColorCopy from "./PalleteColorCopy";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import DEV_API from "../config/config.development";
 import Pagination from "./Pagination";
+import Loader from "./Loader";
 
 const UserPalette = () => {
   const [paginationData, setPaginationData] = useState({
@@ -85,6 +86,7 @@ const UserPalette = () => {
       </div>
       <div>
         <div>
+          {palletResponse.apiStatus === 0 && <Loader height={"300px"} />}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {palletResponse.apiStatus === 1 &&
               palletResponse?.data?.palette?.map((color, idx) => (

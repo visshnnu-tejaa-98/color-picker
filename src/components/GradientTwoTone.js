@@ -4,6 +4,7 @@ import GradientColorBlock from "./GradientColorBlock";
 import Pagination from "./Pagination";
 import { useLocation } from "react-router-dom";
 import DEV_API from "../config/config.development";
+import Loader from "./Loader";
 
 const GradientTwoTone = ({ msg }) => {
   const [paginationData, setPaginationData] = useState({
@@ -64,6 +65,7 @@ const GradientTwoTone = ({ msg }) => {
       <h2 className="text-center text-3xl mt-12 mb-10">Feeling Two Tone</h2>
       <div>
         <div>
+          {twoToneColorsResponse.apiStatus === 0 && <Loader height={"300px"} />}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {twoToneColorsResponse.apiStatus === 1 &&
               twoToneColorsResponse?.data?.gradients?.map((color) => (
@@ -77,6 +79,7 @@ const GradientTwoTone = ({ msg }) => {
           </div>
         </div>
       </div>
+
       {twoToneColorsResponse.apiStatus === 1 && (
         <div>
           <Pagination
