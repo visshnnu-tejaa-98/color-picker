@@ -5,6 +5,7 @@ import ApiColorsContext from "../contexts/apiColorsContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import DEV_API from "../config/config.development";
 import Pagination from "./Pagination";
+import Loader from "./Loader";
 
 const PalettePage = () => {
   const [paginationData, setPaginationData] = useState({
@@ -73,6 +74,7 @@ const PalettePage = () => {
       <h2 className="text-center text-3xl mt-12 mb-10">Click to Copy!</h2>
       <div className="my-12">
         <div>
+          {palletResponse.apiStatus === 0 && <Loader height={"300px"} />}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {palletResponse.apiStatus === 1 &&
               palletResponse?.data?.palette?.map((color, idx) => (

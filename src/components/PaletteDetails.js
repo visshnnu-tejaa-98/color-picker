@@ -4,6 +4,7 @@ import ApiColorsContext from "../contexts/apiColorsContext";
 import DEV_API from "../config/config.development";
 import axios from "axios";
 import PalleteColorCopy from "./PalleteColorCopy";
+import Loader from "./Loader";
 
 const PaletteDetails = () => {
   const [getPaletteByIdResponse, setPaletteByIdResponse] = useState({
@@ -146,6 +147,7 @@ const PaletteDetails = () => {
         <h2 className="text-center text-3xl mt-10 mb-10">Palette Details</h2>
         <span className="material-symbols-outlined invisible">arrow_back</span>
       </div>
+      {getPaletteByIdResponse.apiStatus === 0 && <Loader height={"300px"} />}
       {getPaletteByIdResponse.apiStatus === 1 && (
         <div className="">
           <div

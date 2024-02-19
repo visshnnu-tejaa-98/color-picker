@@ -5,6 +5,7 @@ import GradientColorBlock from "./GradientColorBlock";
 import { twoTone, twoToneGradientType } from "../utils/variables";
 import DEV_API from "../config/config.development";
 import Pagination from "./Pagination";
+import Loader from "./Loader";
 
 const UserGradients = () => {
   const [paginationData, setPaginationData] = useState({
@@ -79,6 +80,7 @@ const UserGradients = () => {
       </div>
       <div>
         <div>
+          {twoToneColorsResponse.apiStatus === 0 && <Loader height={"300px"} />}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
             {/* <AddGradientTemplate /> */}
             {twoToneColorsResponse.apiStatus === 1 &&
