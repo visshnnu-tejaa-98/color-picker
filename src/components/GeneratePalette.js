@@ -186,13 +186,13 @@ const GeneratePalette = () => {
       </div>
       <div className="flex justify-center">
         <button
-          className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097] ${
-            !(
-              ApiColorsCtx.getAuthToken() &&
-              ApiColorsCtx.getAuthToken() !== "undefined"
-            ) && "hidden"
-          }`}
-          onClick={() => handleAddPalette(colors)}
+          className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097]`}
+          onClick={
+            ApiColorsCtx.getAuthToken() &&
+            ApiColorsCtx.getAuthToken() !== "undefined"
+              ? () => handleAddPalette(colors)
+              : () => navigate("/signin")
+          }
         >
           Generate Palette
         </button>
