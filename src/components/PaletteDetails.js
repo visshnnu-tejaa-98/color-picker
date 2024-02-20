@@ -5,6 +5,7 @@ import DEV_API from "../config/config.development";
 import axios from "axios";
 import PalleteColorCopy from "./PalleteColorCopy";
 import Loader from "./Loader";
+import ReactTimeAgo from "react-time-ago";
 
 const PaletteDetails = () => {
   const [getPaletteByIdResponse, setPaletteByIdResponse] = useState({
@@ -149,7 +150,7 @@ const PaletteDetails = () => {
       </div>
       {getPaletteByIdResponse.apiStatus === 0 && <Loader height={"300px"} />}
       {getPaletteByIdResponse.apiStatus === 1 && (
-        <div className="">
+        <div className="mb-5">
           <div
             className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow"
             // onClick={(e) => handleOnClick(e, color)}
@@ -231,6 +232,17 @@ const PaletteDetails = () => {
                   <span className=""> User:</span>
                   <span className="pl-2 font-semibold tracking-wider">
                     {getPaletteByIdResponse.data[0].userId.name}
+                  </span>
+                </p>
+              )}
+              {getPaletteByIdResponse.data[0].userId.name && (
+                <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
+                  <span className=""> User:</span>
+                  <span className="pl-2 font-semibold tracking-wider">
+                    <ReactTimeAgo
+                      date={getPaletteByIdResponse.data[0].createdAt}
+                      locale="en-US"
+                    />
                   </span>
                 </p>
               )}
