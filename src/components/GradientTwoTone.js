@@ -71,6 +71,8 @@ const GradientTwoTone = ({ msg }) => {
               twoToneColorsResponse?.data?.gradients?.map((color) => (
                 <GradientColorBlock
                   color={color.colors || color}
+                  direction={color?.direction && color.direction}
+                  angle={color?.angle && color.angle}
                   varient={twoTone}
                   key={color._id}
                   info={color}

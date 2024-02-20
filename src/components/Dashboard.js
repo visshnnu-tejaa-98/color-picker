@@ -70,7 +70,6 @@ const Dashboard = () => {
     try {
       const req = await fetch(url, { headers });
       const res = await req.json();
-      console.log(res);
       const { page: currentPage, pageCount } = res;
       let pagestoshow = [];
       for (let i = 1; i <= pageCount; i++) {
@@ -151,6 +150,8 @@ const Dashboard = () => {
                           return (
                             <GradientColorBlock
                               color={color.colors}
+                              direction={color.direction}
+                              angle={color.angle}
                               varient={twoTone}
                               key={color._id}
                               info={color}

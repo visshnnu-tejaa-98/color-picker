@@ -87,6 +87,8 @@ const UserGradients = () => {
               twoToneColorsResponse?.data?.gradients?.map((color, idx) => (
                 <GradientColorBlock
                   color={color.colors}
+                  direction={color?.direction && color.direction}
+                  angle={color?.angle && color.angle}
                   varient={twoTone}
                   key={color._id}
                   info={color}

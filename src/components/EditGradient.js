@@ -21,13 +21,18 @@ const EditGradient = () => {
   const [color1, setColor1] = useState(null);
   const [color2, setColor2] = useState(null);
   const [direction, setDirection] = useState("bottom");
-  const [angle, setAngle] = useState(180);
+  const [angle, setAngle] = useState(0);
   const ApiColorsCtx = useContext(ApiColorsContext);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
     getGradientById(location.pathname.split("/")[2]);
   }, []);
+
+  // useEffect(() => {
+  //   setAngle(0);
+  //   setDirection("right");
+  // }, []);
 
   const getGradientById = async (id) => {
     let queryParams = { id };
@@ -55,7 +60,6 @@ const EditGradient = () => {
         }
       })
       .then((data) => {
-        console.log(data);
         setColor1(data[0]?.colors[0]);
         setColor2(data[0]?.colors[1]);
         setDirection(data[0]?.direction);
@@ -94,7 +98,6 @@ const EditGradient = () => {
   };
 
   const handleEditGradient = (id, email) => {
-    console.log(id, email);
     editGradient(id, email);
   };
 
@@ -115,10 +118,8 @@ const EditGradient = () => {
     });
     return await axios(config)
       .then((response) => {
-        console.log(response);
         try {
           if (response === null) throw new Error("API Error");
-          console.log(response);
           return response;
         } catch (error) {
           console.log(error);
@@ -195,6 +196,7 @@ const EditGradient = () => {
                         name="direction"
                         id="direction"
                         onChange={(e) => handleDirection(e)}
+                        value={direction}
                         className="bg-[#cccccc] text-[#1c1c1c] rounded border-transparent focus:border-transparent focus:ring-0 py-2"
                       >
                         <option
@@ -240,7 +242,9 @@ const EditGradient = () => {
                         value={angle}
                         onChange={(e) => handleAngle(e)}
                       />
-                      <span className="ml-2">{angle && angle + "°"}</span>
+                      <span className="ml-2">
+                        {angle != null && angle && angle + "°"}
+                      </span>
                     </div>
                   </td>
                 </tr>
