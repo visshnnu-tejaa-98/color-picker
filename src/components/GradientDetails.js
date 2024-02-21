@@ -79,7 +79,6 @@ const GradientDetails = () => {
   };
 
   const handleDelete = (id, email) => {
-    console.log(id, email);
     deleteGradient(id, email);
   };
 
@@ -97,13 +96,10 @@ const GradientDetails = () => {
       data: null,
       errorMessage: null,
     });
-    console.log(config);
     return await axios(config)
       .then((response) => {
-        console.log(response);
         try {
           if (response === null) throw new Error("API Error");
-          console.log(response);
           return response;
         } catch (error) {
           console.log(error);
@@ -156,6 +152,9 @@ const GradientDetails = () => {
           <div
             className={`w-[100%] h-[250px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
             style={{
+              width: "100%",
+              height: "250px",
+              borderRadius: "7px",
               background: getGradientByIdResponse.data[0].angle
                 ? `linear-gradient(${getGradientByIdResponse.data[0].angle}deg, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`
                 : `linear-gradient(to ${getGradientByIdResponse.data[0].direction}, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`,
@@ -216,7 +215,7 @@ const GradientDetails = () => {
               )}
               {getGradientByIdResponse.data[0]?.angle && (
                 <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
-                  <span className=""> Angle:</span>
+                  <span className="">Angle:</span>
                   <span className="pl-2 font-semibold tracking-wider">
                     {getGradientByIdResponse.data[0].angle + "deg"}
                   </span>

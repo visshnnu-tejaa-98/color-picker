@@ -1,5 +1,5 @@
 import { Label } from "flowbite-react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { twoToneGradientCopyCode } from "../utils/variables";
 import DEV_API from "../config/config.development";
 import ApiColorsContext from "../contexts/apiColorsContext";
@@ -10,7 +10,7 @@ const GenerateGradient = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [color1, setColor1] = useState("#ff0000");
   const [color2, setColor2] = useState("#00ff00");
-  const [direction, setDirection] = useState("bottom");
+  const [direction, setDirection] = useState("right");
   const [angle, setAngle] = useState(180);
   const [addGradientResponse, setAddGradientResponse] = useState({
     apiStatus: 0,
@@ -30,7 +30,6 @@ const GenerateGradient = () => {
   };
 
   const handleAddGradient = (gradient) => {
-    console.log(gradient);
     addGradient(gradient);
   };
 
@@ -48,7 +47,6 @@ const GenerateGradient = () => {
       data,
       headers,
     };
-    console.log(config);
     setAddGradientResponse({
       apiStatus: 0,
       data: null,
@@ -59,7 +57,6 @@ const GenerateGradient = () => {
       .then((response) => {
         try {
           if (response === null) throw new Error("API Error");
-          console.log(response);
           return response;
         } catch (error) {
           console.log(error);
@@ -95,6 +92,11 @@ const GenerateGradient = () => {
         });
       });
   };
+
+  useEffect(() => {
+    setAngle(null);
+    setDirection("right");
+  }, []);
 
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
@@ -137,6 +139,7 @@ const GenerateGradient = () => {
                     id="direction"
                     onChange={(e) => handleDirection(e)}
                     className="bg-[#cccccc] text-[#1c1c1c] rounded border-transparent focus:border-transparent focus:ring-0 py-2"
+                    value={direction}
                   >
                     <option
                       className="text-[#cccccc] bg-[#1c1c1c]"
@@ -171,14 +174,14 @@ const GenerateGradient = () => {
                     type="range"
                     name="angle"
                     id="angle"
-                    min="0"
+                    min="1"
                     max="360"
                     step="1"
                     className="slider"
                     value={angle}
                     onChange={(e) => handleAngle(e)}
                   />
-                  <span className="ml-2">{angle && angle + "°"}</span>
+                  <span className="ml-2">{angle != null && angle + "°"}</span>
                 </div>
               </td>
             </tr>
