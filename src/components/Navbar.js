@@ -258,7 +258,7 @@ const Navbar = () => {
                             Two Tone Gradient
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link
                             to="/gradient/threetone?page=1"
                             className="block px-4 py-2 hover:bg-gray-100"
@@ -266,7 +266,7 @@ const Navbar = () => {
                           >
                             Three Tone Gradient
                           </Link>
-                        </li>
+                        </li> */}
                         <li>
                           <Link
                             to="/gradient/generate"
@@ -291,14 +291,14 @@ const Navbar = () => {
                             Two Tone Gradient
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link
                             to="/gradient/threetone?page=1"
                             className="block px-4 py-2 hover:bg-gray-100"
                           >
                             Three Tone Gradient
                           </Link>
-                        </li>
+                        </li> */}
                         <li>
                           <Link
                             to="/gradient/generate"
@@ -425,7 +425,7 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
+                    {/* <NavLink
                       to="/gradient/threetone?page=1"
                       className={() => {
                         return location.pathname === "/gradient/threetone"
@@ -434,7 +434,7 @@ const Navbar = () => {
                       }}
                     >
                       Three Tone Colors
-                    </NavLink>
+                    </NavLink> */}
                   </li>
                 </ul>
               )}

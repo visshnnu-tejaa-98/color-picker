@@ -1,5 +1,5 @@
 import { Label } from "flowbite-react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { twoToneGradientCopyCode } from "../utils/variables";
 import DEV_API from "../config/config.development";
 import ApiColorsContext from "../contexts/apiColorsContext";
@@ -10,7 +10,7 @@ const GenerateGradient = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [color1, setColor1] = useState("#ff0000");
   const [color2, setColor2] = useState("#00ff00");
-  const [direction, setDirection] = useState("bottom");
+  const [direction, setDirection] = useState("right");
   const [angle, setAngle] = useState(180);
   const [addGradientResponse, setAddGradientResponse] = useState({
     apiStatus: 0,
@@ -30,7 +30,6 @@ const GenerateGradient = () => {
   };
 
   const handleAddGradient = (gradient) => {
-    console.log(gradient);
     addGradient(gradient);
   };
 
@@ -48,7 +47,6 @@ const GenerateGradient = () => {
       data,
       headers,
     };
-    console.log(config);
     setAddGradientResponse({
       apiStatus: 0,
       data: null,
@@ -59,7 +57,6 @@ const GenerateGradient = () => {
       .then((response) => {
         try {
           if (response === null) throw new Error("API Error");
-          console.log(response);
           return response;
         } catch (error) {
           console.log(error);
@@ -96,9 +93,14 @@ const GenerateGradient = () => {
       });
   };
 
+  useEffect(() => {
+    setAngle(null);
+    setDirection("right");
+  }, []);
+
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
-      <h1 className="text-center text-7xl my-10">Create Gradient</h1>
+      <h1 className="text-center text-4xl my-7 mb-10">Create Gradient</h1>
       <div className="flex flex-col items-center gap-5 md:flex md:justify-between md:flex-row">
         <table>
           <tbody>
@@ -137,6 +139,7 @@ const GenerateGradient = () => {
                     id="direction"
                     onChange={(e) => handleDirection(e)}
                     className="bg-[#cccccc] text-[#1c1c1c] rounded border-transparent focus:border-transparent focus:ring-0 py-2"
+                    value={direction}
                   >
                     <option
                       className="text-[#cccccc] bg-[#1c1c1c]"
@@ -171,14 +174,14 @@ const GenerateGradient = () => {
                     type="range"
                     name="angle"
                     id="angle"
-                    min="0"
+                    min="1"
                     max="360"
                     step="1"
                     className="slider"
                     value={angle}
                     onChange={(e) => handleAngle(e)}
                   />
-                  <span className="ml-2">{angle && angle + "°"}</span>
+                  <span className="ml-2">{angle != null && angle + "°"}</span>
                 </div>
               </td>
             </tr>
@@ -222,14 +225,12 @@ const GenerateGradient = () => {
       </div>
       <div className="flex justify-center">
         <button
-          className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097] ${
-            !(
-              ApiColorsCtx.getAuthToken() &&
-              ApiColorsCtx.getAuthToken() !== "undefined"
-            ) && "hidden"
-          }`}
-          onClick={() =>
-            handleAddGradient({ color1, color2, direction, angle })
+          className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097]`}
+          onClick={
+            ApiColorsCtx.getAuthToken() &&
+            ApiColorsCtx.getAuthToken() !== "undefined"
+              ? () => handleAddGradient({ color1, color2, direction, angle })
+              : () => navigate("/signin")
           }
         >
           Generate Gradient

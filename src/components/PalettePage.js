@@ -68,10 +68,9 @@ const PalettePage = () => {
   };
   return (
     <div className="px-[7%] text-[#cccccc]">
-      <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center mt-5">
+      <h1 className="text-lg md:text-2xl lg:text-4xl px-[7%] text-center mt-5">
         Color Palette
       </h1>
-      <h2 className="text-center text-3xl mt-12 mb-10">Click to Copy!</h2>
       <div className="my-12">
         <div>
           {palletResponse.apiStatus === 0 && <Loader height={"300px"} />}

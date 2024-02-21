@@ -297,7 +297,11 @@ export const ApiColorsContextProvider = (props) => {
 
   const getAuthToken = () => {
     let token = authToken || localStorage.getItem("colorPicker");
-    return token;
+    if (token) {
+      return token;
+    } else {
+      return "undefined";
+    }
   };
 
   const removeAuthToken = () => {

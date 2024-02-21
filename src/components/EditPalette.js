@@ -153,7 +153,7 @@ const EditPalette = () => {
 
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
-      <h1 className="text-center text-7xl my-10">Create Palette</h1>
+      <h1 className="text-center text-4xl my-10">Edit Palette</h1>
       {getPaletteByIdResponse.apiStatus === 0 && <Loader height={"300px"} />}
       {getPaletteByIdResponse.apiStatus === 1 && (
         <div>

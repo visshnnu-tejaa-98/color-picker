@@ -9,11 +9,10 @@ import {
 import GradientColorCodeCopy from "./GradientColorCodeCopy";
 
 // props, color comes in the form of array : ["#1c1c1c","#cca1c3"]
-const GradientColorBlock = ({ color, varient, ...props }) => {
+const GradientColorBlock = ({ color, varient, direction, angle, ...props }) => {
   const [isCopied, setIsCopied] = useState(false);
   const navigate = useNavigate();
   const handleOnClick = (e) => {
-    console.log(props.info);
     if (props.info && props.info._id && e.target.tagName === "DIV") {
       navigate(`/gradient/gradientDetails/${props.info._id}`);
     }
@@ -25,7 +24,11 @@ const GradientColorBlock = ({ color, varient, ...props }) => {
           <div
             className={`w-[100%] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center cursor-pointer gradient-tile`}
             style={{
-              background: `linear-gradient(to right, ${color[0]} , ${color[1]})`,
+              background: angle
+                ? `linear-gradient(${angle}deg, ${color[0]}, ${color[1]})`
+                : direction
+                ? `linear-gradient(to ${direction}, ${color[0]}, ${color[1]})`
+                : `linear-gradient(to right, ${color[0]}, ${color[1]})`,
             }}
             onClick={(e) => handleOnClick(e)}
           >
@@ -66,7 +69,7 @@ const GradientColorBlock = ({ color, varient, ...props }) => {
           <div
             className={`w-[100%] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
             style={{
-              background: `linear-gradient(to right, ${color[0]} , ${color[1]}, ${color[2]})`,
+              background: `linear-gradient(to ${direction}, ${color[0]} , ${color[1]}, ${color[2]})`,
             }}
           >
             <span
