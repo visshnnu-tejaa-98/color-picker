@@ -23,6 +23,12 @@ import UserPalette from "./components/UserPalette";
 import PaletteDetails from "./components/PaletteDetails";
 import EditGradient from "./components/EditGradient";
 import EditPalette from "./components/EditPalette";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
+import ru from "javascript-time-ago/locale/ru.json";
+
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(ru);
 
 const appRouter = createBrowserRouter([
   {

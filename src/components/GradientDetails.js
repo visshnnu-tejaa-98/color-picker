@@ -5,6 +5,7 @@ import DEV_API from "../config/config.development";
 import axios from "axios";
 import { twoToneGradientCopyCode } from "../utils/variables";
 import Loader from "./Loader";
+import ReactTimeAgo from "react-time-ago";
 
 const GradientDetails = () => {
   const [getGradientByIdResponse, setGradientByIdResponse] = useState({
@@ -148,7 +149,7 @@ const GradientDetails = () => {
       </div>
       {getGradientByIdResponse.apiStatus === 0 && <Loader height={"300px"} />}
       {getGradientByIdResponse.apiStatus === 1 && (
-        <div className="">
+        <div className="mb-5">
           <div
             className={`w-[100%] h-[250px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
             style={{
@@ -226,6 +227,17 @@ const GradientDetails = () => {
                   <span className=""> User:</span>
                   <span className="pl-2 font-semibold tracking-wider">
                     {getGradientByIdResponse.data[0].userId.name}
+                  </span>
+                </p>
+              )}
+              {getGradientByIdResponse.data[0].userId.name && (
+                <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
+                  <span className="">Created At:</span>
+                  <span className="pl-2 font-semibold tracking-wider">
+                    <ReactTimeAgo
+                      date={getGradientByIdResponse.data[0].createdAt}
+                      locale="en-US"
+                    />
                   </span>
                 </p>
               )}
