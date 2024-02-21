@@ -85,7 +85,7 @@ const GeneratePalette = () => {
   };
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
-      <h1 className="text-center text-7xl my-10">Create Palette</h1>
+      <h1 className="text-center text-4xl my-7 mb-10">Create Palette</h1>
       <div className="flex flex-col items-center gap-5 md:flex md:justify-between md:flex-row md:w-[100%]">
         <div className="flex justify-center md:w-[50%]">
           <table>
@@ -186,13 +186,13 @@ const GeneratePalette = () => {
       </div>
       <div className="flex justify-center">
         <button
-          className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097] ${
-            !(
-              ApiColorsCtx.getAuthToken() &&
-              ApiColorsCtx.getAuthToken() !== "undefined"
-            ) && "hidden"
-          }`}
-          onClick={() => handleAddPalette(colors)}
+          className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097]`}
+          onClick={
+            ApiColorsCtx.getAuthToken() &&
+            ApiColorsCtx.getAuthToken() !== "undefined"
+              ? () => handleAddPalette(colors)
+              : () => navigate("/signin")
+          }
         >
           Generate Palette
         </button>

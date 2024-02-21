@@ -62,7 +62,7 @@ const GradientTwoTone = ({ msg }) => {
 
   return (
     <div>
-      <h2 className="text-center text-3xl mt-12 mb-10">Feeling Two Tone</h2>
+      <h1 className="text-center text-4xl my-7">Two Tone Gradient Colors</h1>
       <div>
         <div>
           {twoToneColorsResponse.apiStatus === 0 && <Loader height={"300px"} />}
@@ -71,6 +71,8 @@ const GradientTwoTone = ({ msg }) => {
               twoToneColorsResponse?.data?.gradients?.map((color) => (
                 <GradientColorBlock
                   color={color.colors || color}
+                  direction={color?.direction && color.direction}
+                  angle={color?.angle && color.angle}
                   varient={twoTone}
                   key={color._id}
                   info={color}
