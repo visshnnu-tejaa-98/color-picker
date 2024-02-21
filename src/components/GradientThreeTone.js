@@ -60,7 +60,7 @@ const GradientThreeTone = () => {
   }
   return (
     <div>
-      <h2 className="text-center text-3xl mt-12 mb-10">Feeling Three Tone</h2>
+      <h1 className="text-center text-4xl my-7">Two Tone Gradient Colors</h1>
       <div>
         <div>
           {threeToneColorsResponse.apiStatus === 0 && (

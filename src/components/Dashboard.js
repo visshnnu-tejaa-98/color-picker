@@ -120,19 +120,19 @@ const Dashboard = () => {
   };
   return (
     <div className="px-[7%] text-[#cccccc]">
-      <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center mt-5">
+      <h1 className="text-lg md:text-3xl lg:text-4xl px-[7%] text-center mt-5">
         Dashboard
       </h1>
-      {showLoader() && <Loader height={"300px"} />}
+      {showLoader() && <Loader height={"400px"} />}
       {twoToneColorsResponse.apiStatus === 1 &&
         palletResponse.apiStatus === 1 && (
           <div>
             <div>
               <div className="flex justify-between items-center mt-5">
-                <h3 className="text-3xl">Gradients</h3>
+                <h3 className="text-xl">Gradients</h3>
                 <Link to="/dashboard/gradients?page=1">
                   <div className="flex items-center text-[#FCD34D]">
-                    <h3 className="text-lg cursor-pointer">See All</h3>
+                    <h3 className="text-md cursor-pointer">See All</h3>
                     <span className="material-symbols-outlined">
                       navigate_next
                     </span>
@@ -165,10 +165,10 @@ const Dashboard = () => {
             </div>
             <div>
               <div className="flex justify-between items-center mt-5">
-                <h3 className="text-3xl">Palette</h3>
+                <h3 className="text-xl">Palette</h3>
                 <Link to="/dashboard/palette?page=1">
                   <div className="flex items-center text-[#FCD34D]">
-                    <h3 className="text-lg cursor-pointer">See All</h3>
+                    <h3 className="text-md cursor-pointer">See All</h3>
                     <span className="material-symbols-outlined">
                       navigate_next
                     </span>
