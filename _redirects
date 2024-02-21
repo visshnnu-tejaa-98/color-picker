@@ -1,0 +1,15 @@
+/*    /index.html   200
+/signup    /signup 200
+/signin    /signin 200
+/forgotPassword    /forgotPassword 200
+/dashboard    /dashboard 200
+/dashboard/gradients    /dashboard/gradients 200
+/dashboard/palette    /dashboard/palette 200
+/solid    /solid 200
+/gradient    /gradient 200
+/generateGradient    /generateGradient 200
+/editGradient/:id    /editGradient/:id 200
+/gradient/gradientDetails/*    /gradient/gradientDetails 200
+/palette/paletteDetails/*    /palette/paletteDetails 200
+/editPalette/:id    /editPalette/:id 200
+/palette    /palette 200

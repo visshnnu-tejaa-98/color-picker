@@ -5,7 +5,7 @@ const ColorBlock = ({ mainColor, colors }) => {
   return (
     <div>
       <div>
-        <h2 className="text-center md:text-left text-3xl my-5">
+        <h2 className="text-center md:text-left text-xl my-5">
           Feeling {mainColor}
         </h2>
         <div

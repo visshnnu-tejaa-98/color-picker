@@ -1,5 +1,7 @@
 export const twoTone = "TWO_TONE";
 export const threeTone = "THREE_TONE";
+export const twoToneGradientType = 2;
+export const threeToneGradientType = 3;
 
 export const twoToneGradientCopyCode = (color) => {
   return `background: ${color[0]}; /* fallback for old browsers */ 

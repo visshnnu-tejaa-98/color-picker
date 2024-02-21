@@ -4,23 +4,23 @@ import Logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <div className="px-[7%]">
-      <footer className="bg-inherit mt-5">
-        <div className="mx-auto w-full container p-4 sm:p-6">
-          <div className="md:flex md:justify-between">
-            <div className="mb-6 md:mb-0">
-              <Link to="/" className="flex items-center">
-                <img src={Logo} className="h-8 mr-3" alt="FlowBite Logo" />
-                <span className="self-center text-[#cccccc] text-2xl font-semibold whitespace-nowrap">
-                  Color Picker
-                </span>
-              </Link>
+    <div className="">
+      <section class="relative overflow-hidden py-10">
+        <div class="relative mx-auto max-w-7xl px-4">
+          <div class="-m-6 flex flex-wrap py-2">
+            <div class="w-full p-6 md:w-1/2 lg:w-6/12">
+              <div class="flex h-full flex-col justify-between">
+                <div class="mb-4 inline-flex items-center">
+                  <img src={Logo} className="h-8 mr-3" alt="FlowBite Logo" />
+                  <span class="ml-4 text-lg font-bold">UI Color Picker</span>
+                </div>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#cccccc] uppercase">
-                  Services
-                </h2>
+            <div class="w-full p-6 md:w-1/2 lg:w-2/12">
+              <div class="h-full">
+                <h3 class="tracking-px mb-9 text-sm font-semibold text-[#cccccc] uppercase">
+                  Company
+                </h3>
                 <ul className="text-[#aaaaaa]">
                   <li className="mb-4">
                     <Link to="/solid" className="hover:underline">
@@ -42,10 +42,12 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#cccccc] uppercase">
+            </div>
+            <div class="w-full p-6 md:w-1/2 lg:w-2/12">
+              <div class="h-full">
+                <h3 class="tracking-px mb-9 text-sm font-semibold uppercase text-[#cccccc]">
                   Resources
-                </h2>
+                </h3>
                 <ul className="text-[#aaaaaa]">
                   <li className="mb-4">
                     <Link
@@ -76,10 +78,12 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#cccccc] uppercase">
+            </div>
+            <div class="w-full p-6 md:w-1/2 lg:w-2/12">
+              <div class="h-full">
+                <h3 class="tracking-px mb-9 text-sm font-semibold uppercase text-[#cccccc]">
                   Follow us
-                </h2>
+                </h3>
                 <ul className="text-[#aaaaaa]">
                   <li className="mb-4">
                     <Link
@@ -115,8 +119,8 @@ const Footer = () => {
           <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
           <div className="sm:flex sm:items-center sm:justify-between">
             <span className="text-sm text-[#aaaaaa] sm:text-center">
-              © 2023{" "}
-              <a href="https://flowbite.com/" className="hover:underline">
+              © 2024{" "}
+              <a href="#" className="hover:underline">
                 Color Picker™
               </a>
               . All Rights Reserved.
@@ -178,7 +182,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </footer>
+      </section>
     </div>
   );
 };

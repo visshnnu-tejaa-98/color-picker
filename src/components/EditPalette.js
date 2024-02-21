@@ -4,6 +4,7 @@ import ApiColorsContext from "../contexts/apiColorsContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import DEV_API from "../config/config.development";
 import axios from "axios";
+import Loader from "./Loader";
 
 const EditPalette = () => {
   const [colors, setColors] = useState({
@@ -153,124 +154,130 @@ const EditPalette = () => {
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
       <h1 className="text-center text-4xl my-10">Edit Palette</h1>
-
-      <div className="flex flex-col items-center gap-5 md:flex md:justify-between md:flex-row md:w-[100%]">
-        <div className="flex justify-center md:w-[50%]">
-          <table>
-            <tbody>
-              <tr>
-                <th className="w-[100px] text-left h-[50px]">Color One</th>
-                <td>
-                  <div className="text-lg">
-                    <input
-                      type="color"
-                      name="color1"
-                      value={colors.color1}
-                      onChange={(e) =>
-                        setColors({ ...colors, color1: e.target.value })
-                      }
-                    />
+      {getPaletteByIdResponse.apiStatus === 0 && <Loader height={"300px"} />}
+      {getPaletteByIdResponse.apiStatus === 1 && (
+        <div>
+          <div className="flex flex-col items-center gap-5 md:flex md:justify-between md:flex-row md:w-[100%]">
+            <div className="flex justify-center md:w-[50%]">
+              <table>
+                <tbody>
+                  <tr>
+                    <th className="w-[100px] text-left h-[50px]">Color One</th>
+                    <td>
+                      <div className="text-lg">
+                        <input
+                          type="color"
+                          name="color1"
+                          value={colors.color1}
+                          onChange={(e) =>
+                            setColors({ ...colors, color1: e.target.value })
+                          }
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th className="w-[100px] text-left h-[50px]">Color Two</th>
+                    <td>
+                      <div className="text-lg">
+                        <input
+                          type="color"
+                          name="color2"
+                          value={colors.color2}
+                          onChange={(e) =>
+                            setColors({ ...colors, color2: e.target.value })
+                          }
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th className="w-[100px] text-left h-[50px]">
+                      Color Three
+                    </th>
+                    <td>
+                      <div className="text-lg">
+                        <input
+                          type="color"
+                          name="color3"
+                          value={colors.color3}
+                          onChange={(e) =>
+                            setColors({ ...colors, color3: e.target.value })
+                          }
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th className="w-[100px] text-left h-[50px]">Color Four</th>
+                    <td>
+                      <div className="text-lg">
+                        <input
+                          type="color"
+                          name="color4"
+                          value={colors.color4}
+                          onChange={(e) =>
+                            setColors({ ...colors, color4: e.target.value })
+                          }
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="flex justify-center md:w-[50%]">
+              <div className="w-[200px]">
+                <div className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow">
+                  <div
+                    style={{ backgroundColor: colors.color1 }}
+                    className="w-[100%] h-[75px] bg-teal-500 relative pallete-color"
+                  >
+                    <PalleteColorCopy color={colors.color1} />
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="w-[100px] text-left h-[50px]">Color Two</th>
-                <td>
-                  <div className="text-lg">
-                    <input
-                      type="color"
-                      name="color2"
-                      value={colors.color2}
-                      onChange={(e) =>
-                        setColors({ ...colors, color2: e.target.value })
-                      }
-                    />
+                  <div
+                    style={{ backgroundColor: colors.color2 }}
+                    className="w-[100%] h-[55px] bg-teal-300 relative pallete-color"
+                  >
+                    <PalleteColorCopy color={colors.color2} />
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="w-[100px] text-left h-[50px]">Color Three</th>
-                <td>
-                  <div className="text-lg">
-                    <input
-                      type="color"
-                      name="color3"
-                      value={colors.color3}
-                      onChange={(e) =>
-                        setColors({ ...colors, color3: e.target.value })
-                      }
-                    />
+                  <div
+                    style={{ backgroundColor: colors.color3 }}
+                    className="w-[100%] h-[40px] bg-teal-200 relative pallete-color"
+                  >
+                    <PalleteColorCopy color={colors.color3} />
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="w-[100px] text-left h-[50px]">Color Four</th>
-                <td>
-                  <div className="text-lg">
-                    <input
-                      type="color"
-                      name="color4"
-                      value={colors.color4}
-                      onChange={(e) =>
-                        setColors({ ...colors, color4: e.target.value })
-                      }
-                    />
+                  <div
+                    style={{ backgroundColor: colors.color4 }}
+                    className="w-[100%] h-[30px] bg-teal-100 relative pallete-color"
+                  >
+                    <PalleteColorCopy color={colors.color4} />
                   </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="flex justify-center md:w-[50%]">
-          <div className="w-[200px]">
-            <div className="w-[100%] h-[200px] bg-teal-100 rounded-lg overflow-hidden pallete-tile shadow">
-              <div
-                style={{ backgroundColor: colors.color1 }}
-                className="w-[100%] h-[75px] bg-teal-500 relative pallete-color"
-              >
-                <PalleteColorCopy color={colors.color1} />
-              </div>
-              <div
-                style={{ backgroundColor: colors.color2 }}
-                className="w-[100%] h-[55px] bg-teal-300 relative pallete-color"
-              >
-                <PalleteColorCopy color={colors.color2} />
-              </div>
-              <div
-                style={{ backgroundColor: colors.color3 }}
-                className="w-[100%] h-[40px] bg-teal-200 relative pallete-color"
-              >
-                <PalleteColorCopy color={colors.color3} />
-              </div>
-              <div
-                style={{ backgroundColor: colors.color4 }}
-                className="w-[100%] h-[30px] bg-teal-100 relative pallete-color"
-              >
-                <PalleteColorCopy color={colors.color4} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="flex justify-center">
-        <button
-          className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097] ${
-            !(
-              ApiColorsCtx.getAuthToken() &&
-              ApiColorsCtx.getAuthToken() !== "undefined"
-            ) && "hidden"
-          }`}
-          onClick={() =>
-            handleEditPalette(
-              location?.pathname?.split("/")[2],
-              ApiColorsCtx?.getUser()?.email
-            )
-          }
-        >
-          Update Palette
-        </button>
-      </div>
+          <div className="flex justify-center">
+            <button
+              className={`w-[200px] items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 mt-10 text-base font-semibold leading-7 text-white hover:bg-[#722097] ${
+                !(
+                  ApiColorsCtx.getAuthToken() &&
+                  ApiColorsCtx.getAuthToken() !== "undefined"
+                ) && "hidden"
+              }`}
+              onClick={() =>
+                handleEditPalette(
+                  location?.pathname?.split("/")[2],
+                  ApiColorsCtx?.getUser()?.email
+                )
+              }
+            >
+              Update Palette
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

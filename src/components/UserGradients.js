@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import GradientColorBlock from "./GradientColorBlock";
-import { twoTone } from "../utils/variables";
+import { twoTone, twoToneGradientType } from "../utils/variables";
 import DEV_API from "../config/config.development";
 import Pagination from "./Pagination";
+import Loader from "./Loader";
 
 const UserGradients = () => {
   const [paginationData, setPaginationData] = useState({
@@ -24,11 +25,12 @@ const UserGradients = () => {
   const navigate = useNavigate();
   const authToken = ApiColorsCtx.getAuthToken();
   useEffect(() => {
-    getAllTwoToneGradientsByUserId(page);
+    getAllTwoToneGradientsByUserId(page, twoToneGradientType);
   }, [page]);
 
-  async function getAllTwoToneGradientsByUserId() {
-    const url = DEV_API.getAllGradientsByUser?.url + `?page=${page}`;
+  async function getAllTwoToneGradientsByUserId(page, type) {
+    const url =
+      DEV_API.getAllGradientsByUser?.url + `?page=${page}&type=${type}`;
     let headers = {
       ...DEV_API.getAllGradientsByUser.headers,
       Authorization: `Bearer ${authToken}`,
@@ -78,12 +80,15 @@ const UserGradients = () => {
       </div>
       <div>
         <div>
+          {twoToneColorsResponse.apiStatus === 0 && <Loader height={"300px"} />}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
             {/* <AddGradientTemplate /> */}
             {twoToneColorsResponse.apiStatus === 1 &&
               twoToneColorsResponse?.data?.gradients?.map((color, idx) => (
                 <GradientColorBlock
                   color={color.colors}
+                  direction={color?.direction && color.direction}
+                  angle={color?.angle && color.angle}
                   varient={twoTone}
                   key={color._id}
                   info={color}
@@ -93,7 +98,7 @@ const UserGradients = () => {
         </div>
       </div>
       {twoToneColorsResponse.apiStatus === 1 && (
-        <div>
+        <div className="my-5">
           <Pagination
             paginationData={paginationData}
             setPaginationData={setPaginationData}

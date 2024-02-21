@@ -4,6 +4,8 @@ import ApiColorsContext from "../contexts/apiColorsContext";
 import DEV_API from "../config/config.development";
 import axios from "axios";
 import { twoToneGradientCopyCode } from "../utils/variables";
+import Loader from "./Loader";
+import ReactTimeAgo from "react-time-ago";
 
 const GradientDetails = () => {
   const [getGradientByIdResponse, setGradientByIdResponse] = useState({
@@ -78,7 +80,6 @@ const GradientDetails = () => {
   };
 
   const handleDelete = (id, email) => {
-    console.log(id, email);
     deleteGradient(id, email);
   };
 
@@ -96,13 +97,10 @@ const GradientDetails = () => {
       data: null,
       errorMessage: null,
     });
-    console.log(config);
     return await axios(config)
       .then((response) => {
-        console.log(response);
         try {
           if (response === null) throw new Error("API Error");
-          console.log(response);
           return response;
         } catch (error) {
           console.log(error);
@@ -149,11 +147,15 @@ const GradientDetails = () => {
         <h2 className="text-center text-3xl mt-10 mb-10">Gradient Details</h2>
         <span className="material-symbols-outlined invisible">arrow_back</span>
       </div>
+      {getGradientByIdResponse.apiStatus === 0 && <Loader height={"300px"} />}
       {getGradientByIdResponse.apiStatus === 1 && (
-        <div className="">
+        <div className="mb-5">
           <div
             className={`w-[100%] h-[250px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
             style={{
+              width: "100%",
+              height: "250px",
+              borderRadius: "7px",
               background: getGradientByIdResponse.data[0].angle
                 ? `linear-gradient(${getGradientByIdResponse.data[0].angle}deg, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`
                 : `linear-gradient(to ${getGradientByIdResponse.data[0].direction}, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`,
@@ -214,7 +216,7 @@ const GradientDetails = () => {
               )}
               {getGradientByIdResponse.data[0]?.angle && (
                 <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
-                  <span className=""> Angle:</span>
+                  <span className="">Angle:</span>
                   <span className="pl-2 font-semibold tracking-wider">
                     {getGradientByIdResponse.data[0].angle + "deg"}
                   </span>
@@ -225,6 +227,17 @@ const GradientDetails = () => {
                   <span className=""> User:</span>
                   <span className="pl-2 font-semibold tracking-wider">
                     {getGradientByIdResponse.data[0].userId.name}
+                  </span>
+                </p>
+              )}
+              {getGradientByIdResponse.data[0].userId.name && (
+                <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
+                  <span className="">Created At:</span>
+                  <span className="pl-2 font-semibold tracking-wider">
+                    <ReactTimeAgo
+                      date={getGradientByIdResponse.data[0].createdAt}
+                      locale="en-US"
+                    />
                   </span>
                 </p>
               )}
