@@ -153,7 +153,7 @@ const EditGradient = () => {
 
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
-      <h1 className="text-center text-7xl my-10">Edit Gradient</h1>
+      <h1 className="text-center text-4xl my-10">Edit Gradient</h1>
       <div className="flex flex-col items-center gap-5 md:flex md:justify-between md:flex-row">
         <table>
           <tbody>

@@ -67,10 +67,9 @@ const PalettePage = () => {
   };
   return (
     <div className="px-[7%] text-[#cccccc]">
-      <h1 className="text-3xl md:text-5xl lg:text-7xl  px-[7%] text-center mt-5">
+      <h1 className="textlgl md:text-2xl lg:text-4xl px-[7%] text-center mt-5">
         Color Palette
       </h1>
-      <h2 className="text-center text-3xl mt-12 mb-10">Click to Copy!</h2>
       <div className="my-12">
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
