@@ -196,7 +196,7 @@ const SignIn = () => {
                 <span className="capitalize text-[#FCD34D] px-2">
                   terms of service
                 </span>
-                to learn more
+                to Know more
               </span>
             </p>
           </div>

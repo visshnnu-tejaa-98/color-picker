@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import DEV_API from "../config/config.development";
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [forgotPasswordResponse, setForgotPasswordResponse] = useState({
+    apiStatus: 0,
+    data: null,
+    errorMessage: null,
+  });
+
+  const handleForgotPassword = async () => {
+    // delete token from local storage
+    localStorage.removeItem("");
+    const url = DEV_API.forgotPassword.url;
+    const options = {
+      ...DEV_API.forgotPassword,
+      url,
+      body: JSON.stringify({ email }),
+    };
+    setForgotPasswordResponse({ apiStatus: 0, error: null, data: null });
+    try {
+      const req = await fetch(url, options);
+      const res = await req.json();
+      console.log(res);
+      setForgotPasswordResponse({ apiStatus: 1, error: null, data: res });
+    } catch (error) {
+      console.log(error);
+      setForgotPasswordResponse({
+        apiStatus: -1,
+        error: error.message,
+        data: null,
+      });
+    }
+  };
   return (
     <div className="flex items-center justify-center">
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-10">
@@ -19,14 +51,23 @@ const ForgotPassword = () => {
               Sign Up
             </Link>
           </p>
-          <form action="#" autoComplete="off" method="POST" className="mt-8">
+          <div
+            className={`p-1 mt-1 text-sm text-red-800 rounded-lg bg-yellow-100 dark:bg-gray-800 dark:text-red-400 text-center ${
+              forgotPasswordResponse?.apiStatus === 0 && "invisible"
+            }`}
+            role="alert"
+          >
+            {/* <span className="font-semibold pr-2">Warning!</span> */}
+            {forgotPasswordResponse?.data?.message}
+          </div>
+          <form action="#" autoComplete="off" method="POST" className="mt-2">
             <div className="space-y-5">
               <div>
                 <label
                   htmlFor="email"
                   className="text-base font-medium text-gray-200"
                 >
-                  Email address
+                  Email address <span className="text-red-400">*</span>
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -34,6 +75,8 @@ const ForgotPassword = () => {
                     type="email"
                     placeholder="Enter Your Email"
                     id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -41,6 +84,7 @@ const ForgotPassword = () => {
                 <button
                   type="button"
                   className="inline-flex w-full items-center justify-center rounded-md bg-[#8425af] px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-[#722097]"
+                  onClick={handleForgotPassword}
                 >
                   Proceed
                   <svg
@@ -72,7 +116,7 @@ const ForgotPassword = () => {
                 <span className="capitalize text-[#FCD34D] px-2">
                   terms of service
                 </span>
-                to learn more
+                to Know more
               </span>
             </p>
           </div>
