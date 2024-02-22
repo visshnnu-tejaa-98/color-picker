@@ -26,6 +26,7 @@ import EditPalette from "./components/EditPalette";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import ru from "javascript-time-ago/locale/ru.json";
+import ResetPassword from "./components/ResetPassword.js";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -50,6 +51,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/forgotPassword",
         element: <ForgotPassword />,
+      },
+      {
+        path: "/reset",
+        element: <ResetPassword />,
       },
       {
         path: "/dashboard",

@@ -33,11 +33,14 @@ const Navbar = () => {
   const { isGradientOpen, isCreateOpen } = isAccordianOpenData;
 
   useEffect(() => {
-    let paths = ["/", "/signup", "/signin", "/forgotPassword"];
+    let paths = ["/", "/signup", "/signin", "/forgotPassword", "/reset"];
     if (paths.includes(window.location.pathname)) {
       setIsOpenSideBar(false);
     } else {
       setIsOpenSideBar(true);
+    }
+    if (window.location.pathname.includes("/reset")) {
+      setIsOpenSideBar(false);
     }
   }, [window.location.pathname]);
 
