@@ -20,6 +20,7 @@ const EditGradient = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [color1, setColor1] = useState(null);
   const [color2, setColor2] = useState(null);
+  const [color3, setColor3] = useState(null);
   const [direction, setDirection] = useState("bottom");
   const [angle, setAngle] = useState(180);
   const ApiColorsCtx = useContext(ApiColorsContext);
@@ -58,6 +59,7 @@ const EditGradient = () => {
         console.log(data);
         setColor1(data[0]?.colors[0]);
         setColor2(data[0]?.colors[1]);
+        setColor3(data[0]?.colors[2]);
         setDirection(data[0]?.direction);
         setAngle(data[0]?.angle);
         return setPaletteByIdResponse({
@@ -99,7 +101,13 @@ const EditGradient = () => {
   };
 
   const editGradient = async (id, email) => {
-    let data = { id, email, colors: `${color1};${color2}`, angle, direction };
+    let data = {
+      id,
+      email,
+      colors: color3 ? `${color1};${color2};${color3}` : `${color1};${color2}`,
+      angle,
+      direction,
+    };
     let api = DEV_API.editGradient;
     let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };
     let config = {
@@ -152,6 +160,26 @@ const EditGradient = () => {
       });
   };
 
+  const backgroundStyle = () => {
+    if (color1 && color2 && color3) {
+      if (angle) {
+        return `linear-gradient(${angle}deg, ${color1}, ${color2}, ${color3})`;
+      } else if (direction) {
+        return `linear-gradient(to ${direction}, ${color1}, ${color2}, ${color3})`;
+      } else {
+        return `linear-gradient(to right, ${color1}, ${color2}, ${color3})`;
+      }
+    } else {
+      if (angle) {
+        return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+      } else if (direction) {
+        return `linear-gradient(to ${direction}, ${color1}, ${color2})`;
+      } else {
+        return `linear-gradient(to right, ${color1}, ${color2})`;
+      }
+    }
+  };
+
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
       <h1 className="text-center text-4xl my-10">Edit Gradient</h1>
@@ -187,6 +215,23 @@ const EditGradient = () => {
                     </div>
                   </td>
                 </tr>
+                {color3 && (
+                  <tr>
+                    <th className="w-[100px] text-left h-[50px]">
+                      Color Three
+                    </th>
+                    <td>
+                      <div className="text-lg">
+                        <input
+                          type="color"
+                          name="color3"
+                          value={color3}
+                          onChange={(e) => setColor3(e.target.value)}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                )}
                 <tr>
                   <th className="w-[100px] text-left h-[50px]">Direction</th>
                   <td>
@@ -249,9 +294,7 @@ const EditGradient = () => {
             <div
               className={`w-[300px] h-[200px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
               style={{
-                background: angle
-                  ? `linear-gradient(${angle}deg, ${color1}, ${color2})`
-                  : `linear-gradient(to ${direction}, ${color1}, ${color2})`,
+                background: backgroundStyle(),
               }}
             >
               <span

@@ -27,6 +27,7 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import ru from "javascript-time-ago/locale/ru.json";
 import ResetPassword from "./components/ResetPassword.js";
+import GenerateGradientThreeTone from "./components/GenerateGradientThreeTone.js";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -91,6 +92,16 @@ const appRouter = createBrowserRouter([
       {
         path: "/generateGradient",
         element: <GenerateGradient />,
+        children: [
+          {
+            path: "twotone",
+            element: <GenerateGradient />,
+          },
+        ],
+      },
+      {
+        path: "/generateGradient/threetone",
+        element: <GenerateGradientThreeTone />,
       },
       {
         path: "/editGradient/:id",
