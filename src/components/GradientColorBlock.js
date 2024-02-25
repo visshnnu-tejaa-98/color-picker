@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   twoTone,
@@ -7,14 +7,20 @@ import {
   threeToneGradientCopyCode,
 } from "../utils/variables";
 import GradientColorCodeCopy from "./GradientColorCodeCopy";
+import ApiColorsContext from "../contexts/apiColorsContext";
 
 // props, color comes in the form of array : ["#1c1c1c","#cca1c3"]
 const GradientColorBlock = ({ color, varient, direction, angle, ...props }) => {
   const [isCopied, setIsCopied] = useState(false);
   const navigate = useNavigate();
+  const ApiColorsCtx = useContext(ApiColorsContext);
   const handleOnClick = (e) => {
     if (props.info && props.info._id && e.target.tagName === "DIV") {
-      navigate(`/gradient/gradientDetails/${props.info._id}`);
+      if (ApiColorsCtx.getAuthToken() !== "undefined") {
+        navigate(`/gradient/gradientDetails/${props.info._id}`);
+      } else {
+        navigate("/signin");
+      }
     }
   };
   return (

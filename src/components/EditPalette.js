@@ -153,7 +153,17 @@ const EditPalette = () => {
 
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
-      <h1 className="text-center text-4xl my-10">Edit Palette</h1>
+      <div className="flex justify-between items-center">
+        <span
+          className="material-symbols-outlined cursor-pointer hover:text-[#FCD34D]"
+          title="Back"
+          onClick={() => navigate(-1)}
+        >
+          arrow_back
+        </span>
+        <h2 className="text-center text-3xl mt-10 mb-10">Edit Palette</h2>
+        <span className="material-symbols-outlined invisible">arrow_back</span>
+      </div>
       {getPaletteByIdResponse.apiStatus === 0 && <Loader height={"300px"} />}
       {getPaletteByIdResponse.apiStatus === 1 && (
         <div>
