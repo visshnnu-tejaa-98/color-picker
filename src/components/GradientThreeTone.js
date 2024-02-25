@@ -72,6 +72,7 @@ const GradientThreeTone = () => {
                 <GradientColorBlock
                   color={color.colors || color}
                   varient={threeTone}
+                  angle={color?.angle && color.angle}
                   direction={color?.direction && color.direction}
                   key={color._id}
                   info={color}

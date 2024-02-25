@@ -11,7 +11,7 @@ const GradientTabs = () => {
             to="/generateGradient/twotone"
             className={
               location?.pathname === "/generateGradient/twotone"
-                ? "inline-block p-2 border-b-2 border-transparent rounded-t-lg hover:text-[#aaaaaa] hover:border-[#aaaaaa] border-[#FCD34D] text-[#FCD34D]"
+                ? "inline-block p-2 border-b-2 border-transparent rounded-t-lg hover:text-[#aaaaaa] hover:border-[#aaaaaa] border-[#FCD34D] bg-[#FCD34D] text-[#222222]"
                 : "inline-block p-2 border-b-2 border-transparent rounded-t-lg hover:text-[#aaaaaa] hover:border-[#aaaaaa]"
             }
           >
@@ -24,7 +24,7 @@ const GradientTabs = () => {
             aria-current="page"
             className={
               location?.pathname === "/generateGradient/threetone"
-                ? "inline-block p-2 border-b-2 border-transparent rounded-t-lg hover:text-[#aaaaaa] hover:border-[#aaaaaa] border-[#FCD34D] text-[#FCD34D]"
+                ? "inline-block p-2 border-b-2 border-transparent rounded-t-lg hover:text-[#aaaaaa] hover:border-[#aaaaaa] border-[#FCD34D] bg-[#FCD34D] text-[#222222]"
                 : "inline-block p-2 border-b-2 border-transparent rounded-t-lg hover:text-[#aaaaaa] hover:border-[#aaaaaa]"
             }
           >
