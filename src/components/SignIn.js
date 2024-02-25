@@ -146,16 +146,26 @@ const SignIn = () => {
                   />
                 </div>
               </div>
-              <p className="mt-2 text-base text-gray-400 400 mb-2 text-sm">
-                Forgot Password?
-                <Link
-                  to="/forgotPassword"
-                  title=""
-                  className="font-medium pl-2 text-[#FCD34D] transition-all duration-200 hover:underline focus:text-[#FCD34D]"
-                >
-                  Click Here
-                </Link>
-              </p>
+              <div className="flex justify-between">
+                <p className="mt-2 text-base text-gray-400 400 mb-2 text-sm">
+                  <Link
+                    to="/forgotPassword"
+                    title=""
+                    className="font-medium text-[#FCD34D] transition-all duration-200 hover:underline focus:text-[#FCD34D]"
+                  >
+                    Forgot Password?
+                  </Link>
+                </p>
+                <p className="mt-2 text-base text-gray-400 400 mb-2 text-sm">
+                  <Link
+                    to="/otplogin"
+                    title=""
+                    className="font-medium text-[#FCD34D] transition-all duration-200 hover:underline focus:text-[#FCD34D]"
+                  >
+                    Login Through OTP?
+                  </Link>
+                </p>
+              </div>
               <div>
                 <button
                   type="button"
@@ -196,7 +206,7 @@ const SignIn = () => {
                 <span className="capitalize text-[#FCD34D] px-2">
                   terms of service
                 </span>
-                to learn more
+                to Know more
               </span>
             </p>
           </div>

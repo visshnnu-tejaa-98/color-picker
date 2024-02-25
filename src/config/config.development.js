@@ -71,6 +71,34 @@ const DEV_API = {
       "Content-Type": "application/json",
     },
   },
+  forgotPassword: {
+    method: "post",
+    url: `${origin}` + "/api/v1/auth/forgot",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  resetPassword: {
+    method: "post",
+    url: `${origin}` + "/api/v1/auth/reset",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  sendOTP: {
+    method: "post",
+    url: `${origin}` + "/api/v1/auth/otprequest",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  submitOTP: {
+    method: "post",
+    url: `${origin}` + "/api/v1/auth/otpresponse",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
   addGradient: {
     method: "post",
     url: `${origin}` + "/api/v1/gradient/addGradient",
