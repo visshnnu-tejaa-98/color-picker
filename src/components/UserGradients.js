@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import GradientColorBlock from "./GradientColorBlock";
-import { twoTone, twoToneGradientType } from "../utils/variables";
+import { threeTone, twoTone, twoToneGradientType } from "../utils/variables";
 import DEV_API from "../config/config.development";
 import Pagination from "./Pagination";
 import Loader from "./Loader";
@@ -89,7 +89,7 @@ const UserGradients = () => {
                   color={color.colors}
                   direction={color?.direction && color.direction}
                   angle={color?.angle && color.angle}
-                  varient={twoTone}
+                  varient={color.colors.length === 3 ? threeTone : twoTone}
                   key={color._id}
                   info={color}
                 />

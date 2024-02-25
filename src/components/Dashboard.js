@@ -154,7 +154,9 @@ const Dashboard = () => {
                               color={color.colors}
                               direction={color.direction}
                               angle={color.angle}
-                              varient={twoTone}
+                              varient={
+                                color.colors.length === 3 ? threeTone : twoTone
+                              }
                               key={color._id}
                               info={color}
                             />

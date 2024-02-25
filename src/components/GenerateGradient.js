@@ -5,6 +5,7 @@ import DEV_API from "../config/config.development";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import GradientTabs from "./GradientTabs";
 
 const GenerateGradient = () => {
   const [isCopied, setIsCopied] = useState(false);
@@ -100,12 +101,14 @@ const GenerateGradient = () => {
 
   return (
     <div className="text-[#cccccc] px-[7%] mb-10">
-      <h1 className="text-center text-4xl my-7 mb-10">Create Gradient</h1>
+      <h1 className="text-center text-4xl mt-7 mb-2">Create Gradient</h1>
+      <GradientTabs />
+      {/* <Outlet /> */}
       <div className="flex flex-col items-center gap-5 md:flex md:justify-between md:flex-row">
         <table>
           <tbody>
             <tr>
-              <th className="w-[100px] text-left h-[50px]">Color One</th>
+              <th className="w-[100px] text-left h-[40px]">Color One</th>
               <td>
                 <div className="text-lg">
                   <input
@@ -118,7 +121,7 @@ const GenerateGradient = () => {
               </td>
             </tr>
             <tr>
-              <th className="w-[100px] text-left h-[50px]">Color Two</th>
+              <th className="w-[100px] text-left h-[40px]">Color Two</th>
               <td>
                 <div className="text-lg">
                   <input
@@ -131,14 +134,14 @@ const GenerateGradient = () => {
               </td>
             </tr>
             <tr>
-              <th className="w-[100px] text-left h-[50px]">Direction</th>
+              <th className="w-[100px] text-left h-[40px]">Direction</th>
               <td>
                 <div className="text-lg">
                   <select
                     name="direction"
                     id="direction"
                     onChange={(e) => handleDirection(e)}
-                    className="bg-[#cccccc] text-[#1c1c1c] rounded border-transparent focus:border-transparent focus:ring-0 py-2"
+                    className="bg-[#cccccc] text-[#1c1c1c] rounded border-transparent focus:border-transparent focus:ring-0 px-[1rem] py-[3px]"
                     value={direction}
                   >
                     <option
@@ -167,7 +170,7 @@ const GenerateGradient = () => {
               </td>
             </tr>
             <tr>
-              <th className="w-[100px] text-left h-[50px]">Angle</th>
+              <th className="w-[100px] text-left h-[40px]">Angle</th>
               <td>
                 <div className="text-lg slidecontainer">
                   <input

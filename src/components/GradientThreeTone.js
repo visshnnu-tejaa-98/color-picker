@@ -60,7 +60,7 @@ const GradientThreeTone = () => {
   }
   return (
     <div>
-      <h1 className="text-center text-4xl my-7">Two Tone Gradient Colors</h1>
+      <h1 className="text-center text-4xl my-7">Three Tone Gradient Colors</h1>
       <div>
         <div>
           {threeToneColorsResponse.apiStatus === 0 && (
@@ -72,6 +72,7 @@ const GradientThreeTone = () => {
                 <GradientColorBlock
                   color={color.colors || color}
                   varient={threeTone}
+                  direction={color?.direction && color.direction}
                   key={color._id}
                   info={color}
                 />

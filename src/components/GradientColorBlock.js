@@ -69,8 +69,13 @@ const GradientColorBlock = ({ color, varient, direction, angle, ...props }) => {
           <div
             className={`w-[100%] h-[120px] rounded bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-center items-center gradient-tile`}
             style={{
-              background: `linear-gradient(to ${direction}, ${color[0]} , ${color[1]}, ${color[2]})`,
+              background: angle
+                ? `linear-gradient(${angle}deg, ${color[0]}, ${color[1]}, ${color[2]})`
+                : direction
+                ? `linear-gradient(to ${direction}, ${color[0]}, ${color[1]}, ${color[2]})`
+                : `linear-gradient(to right, ${color[0]}, ${color[1]}, ${color[2]})`,
             }}
+            onClick={(e) => handleOnClick(e)}
           >
             <span
               className="bg-[#333333] rounded px-2 py-1 cursor-pointer"

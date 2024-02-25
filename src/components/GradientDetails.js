@@ -134,6 +134,27 @@ const GradientDetails = () => {
       });
   };
 
+  const backgroundStyle = () => {
+    if (getGradientByIdResponse.data[0].colors.length === 3) {
+      if (getGradientByIdResponse.data[0].angle) {
+        return `linear-gradient(${getGradientByIdResponse.data[0].angle}deg, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]}, ${getGradientByIdResponse.data[0].colors[2]})`;
+      } else if (getGradientByIdResponse.data[0].direction) {
+        return `linear-gradient(to ${getGradientByIdResponse.data[0].direction}, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]}, ${getGradientByIdResponse.data[0].colors[2]})`;
+      } else {
+        return `linear-gradient(to right, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]}, ${getGradientByIdResponse.data[0].colors[2]})`;
+      }
+    } else if (getGradientByIdResponse.data[0].colors.length === 2) {
+      if (getGradientByIdResponse.data[0].angle) {
+        return `linear-gradient(${getGradientByIdResponse.data[0].angle}deg, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`;
+      } else if (getGradientByIdResponse.data[0].direction) {
+        return `linear-gradient(to ${getGradientByIdResponse.data[0].direction}, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`;
+      } else {
+        return `linear-gradient(to right, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`;
+      }
+    }
+  };
+  //
+
   return (
     <div className="px-[7%] text-[#cccccc]">
       <div className="flex justify-between items-center">
@@ -156,9 +177,7 @@ const GradientDetails = () => {
               width: "100%",
               height: "250px",
               borderRadius: "7px",
-              background: getGradientByIdResponse.data[0].angle
-                ? `linear-gradient(${getGradientByIdResponse.data[0].angle}deg, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`
-                : `linear-gradient(to ${getGradientByIdResponse.data[0].direction}, ${getGradientByIdResponse.data[0].colors[0]}, ${getGradientByIdResponse.data[0].colors[1]})`,
+              background: backgroundStyle(),
             }}
           >
             <span
@@ -206,6 +225,14 @@ const GradientDetails = () => {
                   {getGradientByIdResponse.data[0].colors[1].toUpperCase()}
                 </span>
               </p>
+              {getGradientByIdResponse.data[0].colors[2] && (
+                <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
+                  <span className=""> Color Three:</span>
+                  <span className="pl-2 font-semibold tracking-wider">
+                    {getGradientByIdResponse.data[0].colors[2].toUpperCase()}
+                  </span>
+                </p>
+              )}
               {getGradientByIdResponse.data[0].direction && (
                 <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
                   <span className=""> Direction:</span>
@@ -222,32 +249,34 @@ const GradientDetails = () => {
                   </span>
                 </p>
               )}
-              {getGradientByIdResponse.data[0].userId.name && (
-                <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
-                  <span className=""> User:</span>
-                  <span className="pl-2 font-semibold tracking-wider">
-                    {getGradientByIdResponse.data[0].userId.name}
-                  </span>
-                </p>
-              )}
-              {getGradientByIdResponse.data[0].userId.name && (
-                <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
-                  <span className="">Created At:</span>
-                  <span className="pl-2 font-semibold tracking-wider">
-                    <ReactTimeAgo
-                      date={getGradientByIdResponse.data[0].createdAt}
-                      locale="en-US"
-                    />
-                  </span>
-                </p>
-              )}
+              {getGradientByIdResponse?.data[0]?.userId &&
+                getGradientByIdResponse?.data[0]?.userId?.name && (
+                  <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
+                    <span className=""> User:</span>
+                    <span className="pl-2 font-semibold tracking-wider">
+                      {getGradientByIdResponse?.data[0]?.userId?.name}
+                    </span>
+                  </p>
+                )}
+              {getGradientByIdResponse?.data[0]?.userId &&
+                getGradientByIdResponse?.data[0]?.userId?.name && (
+                  <p className="p-2 border-[1px] border-[#aaaaaa] border-opacity-75">
+                    <span className="">Created At:</span>
+                    <span className="pl-2 font-semibold tracking-wider">
+                      <ReactTimeAgo
+                        date={getGradientByIdResponse.data[0].createdAt}
+                        locale="en-US"
+                      />
+                    </span>
+                  </p>
+                )}
             </div>
           </div>
         </div>
       )}
       {getGradientByIdResponse.apiStatus === 1 &&
         ApiColorsCtx?.getUser()?.email ===
-          getGradientByIdResponse.data[0].userId.email && (
+          getGradientByIdResponse?.data[0]?.userId?.email && (
           <div className="my-8">
             <Link
               to={`/editGradient/${getGradientByIdResponse.data[0]._id}`}
