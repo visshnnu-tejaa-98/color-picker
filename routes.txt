@@ -2,6 +2,7 @@
 /signup    /signup 200
 /signin    /signin 200
 /forgotPassword    /forgotPassword 200
+/reset    /reset 200
 /dashboard    /dashboard 200
 /dashboard/gradients    /dashboard/gradients 200
 /dashboard/palette    /dashboard/palette 200

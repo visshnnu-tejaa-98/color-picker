@@ -130,14 +130,16 @@ const Dashboard = () => {
             <div>
               <div className="flex justify-between items-center mt-5">
                 <h3 className="text-xl">Gradients</h3>
-                <Link to="/dashboard/gradients?page=1">
-                  <div className="flex items-center text-[#FCD34D]">
-                    <h3 className="text-md cursor-pointer">See All</h3>
-                    <span className="material-symbols-outlined">
-                      navigate_next
-                    </span>
-                  </div>
-                </Link>
+                {twoToneColorsResponse.data.gradients.length > 2 && (
+                  <Link to="/dashboard/gradients?page=1">
+                    <div className="flex items-center text-[#FCD34D]">
+                      <h3 className="text-md cursor-pointer">See All</h3>
+                      <span className="material-symbols-outlined">
+                        navigate_next
+                      </span>
+                    </div>
+                  </Link>
+                )}
               </div>
               <hr className="opacity-50"></hr>
               <div>
@@ -168,14 +170,16 @@ const Dashboard = () => {
             <div>
               <div className="flex justify-between items-center mt-5">
                 <h3 className="text-xl">Palette</h3>
-                <Link to="/dashboard/palette?page=1">
-                  <div className="flex items-center text-[#FCD34D]">
-                    <h3 className="text-md cursor-pointer">See All</h3>
-                    <span className="material-symbols-outlined">
-                      navigate_next
-                    </span>
-                  </div>
-                </Link>
+                {palletResponse.data.palette.length > 3 && (
+                  <Link to="/dashboard/palette?page=1">
+                    <div className="flex items-center text-[#FCD34D]">
+                      <h3 className="text-md cursor-pointer">See All</h3>
+                      <span className="material-symbols-outlined">
+                        navigate_next
+                      </span>
+                    </div>
+                  </Link>
+                )}
               </div>
               <hr className="opacity-50"></hr>
               <div>
