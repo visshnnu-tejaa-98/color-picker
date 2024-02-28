@@ -1,7 +1,7 @@
 const protocol = "http:";
 const host = "//localhost:8000";
-// const origin = "http://localhost:8000";
-const origin = "https://color-picker-server-production.up.railway.app";
+const origin = "http://localhost:8000";
+// const origin = "https://color-picker-server-production.up.railway.app";
 export const feOrigin = "https://dev-color-picker.netlify.app";
 
 const DEV_API = {
@@ -95,6 +95,13 @@ const DEV_API = {
   submitOTP: {
     method: "post",
     url: `${origin}` + "/api/v1/auth/otpresponse",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  googleLogin: {
+    method: "post",
+    url: `${origin}` + "/api/v1/auth/googlelogin",
     headers: {
       "Content-Type": "application/json",
     },

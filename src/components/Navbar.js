@@ -27,6 +27,7 @@ const Navbar = () => {
     errorMessage: null,
   });
   const [userData, setUserData] = useState(null);
+  const [showUserDropDown, setShowUserDropdown] = useState(false);
   const ApiColorsCtx = useContext(ApiColorsContext);
   const navigate = useNavigate();
 
@@ -53,6 +54,7 @@ const Navbar = () => {
   }, [window.location.pathname]);
 
   useEffect(() => {
+    console.log("Auth Token", ApiColorsCtx.getAuthToken());
     if (
       ApiColorsCtx.getAuthToken() &&
       ApiColorsCtx.getAuthToken() !== "undefined"
@@ -67,10 +69,19 @@ const Navbar = () => {
   }, [ApiColorsCtx.getAuthToken()]);
 
   const handleSignOut = () => {
+    setIsLoggedIn(false);
+    console.log("Trigger Signout");
     signOut();
   };
 
   const signOut = async (user) => {
+    const loggedUser = ApiColorsCtx.getUser();
+    if (loggedUser?.googleUser === true) {
+      ApiColorsCtx.removeAuthToken();
+      ApiColorsCtx.removeUser();
+      navigate("/solid");
+      return;
+    }
     let data = user;
     let api = DEV_API.signOut;
     let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };
@@ -151,6 +162,16 @@ const Navbar = () => {
     return result;
   };
 
+  const handleToggleUserDropdown = () => {
+    console.log(111);
+    setShowUserDropdown((prev) => {
+      console.log(prev, typeof prev);
+      return !prev;
+    });
+  };
+  useEffect(() => {
+    console.log("isLoggedIn:::", isLoggedIn);
+  }, [isLoggedIn]);
   return (
     <div>
       <div className="text-[#CCCCCC] px-[7%] sticky top-0 bg-[#1E0927] z-10 shadow-[0_8px_6px_-6px_rgba(204,204,204,0.3)]   ">
@@ -417,6 +438,31 @@ const Navbar = () => {
           }`}
         >
           <div className="h-full px-3 py-4 overflow-y-auto bg-[#310f41]">
+            {isLoggedIn && userData && (
+              <div className="p-3">
+                {userData?.avatar ? (
+                  <div className="flex justify-center">
+                    <img
+                      className="w-[80px] h-[80px] rounded-full border-2 border-[#FCD34D]"
+                      src={userData.avatar}
+                      alt="avatar"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex justify-center">
+                    <div className="w-[80px] h-[80px] bg-[#581C87] rounded-full flex justify-center items-center text-[#FCD34D] text-[35px] border-2 border-[#FCD34D]">
+                      VT
+                    </div>
+                  </div>
+                )}
+
+                <div className="text-center text-[#cccccc]">
+                  <p className="text-lg font-bold">{userData.name}</p>
+                  <p className="text-sm ">{userData.email}</p>
+                </div>
+                <hr className="opacity-50 mt-3"></hr>
+              </div>
+            )}
             <ul className="space-y-2 font-medium">
               <li className={!isLoggedIn && "hidden"}>
                 <NavLink
