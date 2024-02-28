@@ -210,47 +210,221 @@ const Navbar = () => {
               id="navbar-default"
             >
               <ul className="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
-                {isLoggedIn && (
-                  <li>
-                    <NavLink
-                      to="/dashboard"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
-                          : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
-                      }
+                <li className={`${isLoggedIn && "hidden"}`}>
+                  <NavLink
+                    to="/signin"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    }
+                  >
+                    Sign In
+                  </NavLink>
+                </li>
+                {/* <li className={`${!isLoggedIn && "hidden"}`}>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    }
+                    onClick={handleSignOut}
+                  >
+                    Sign Out
+                  </NavLink>
+                </li> */}
+                <li>
+                  <NavLink
+                    to="/solid"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    }
+                  >
+                    Solid
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/palette?page=1"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] rounded hover:text-[#1c1c1c] hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    }
+                  >
+                    palette
+                  </NavLink>
+                </li>
+                <li>
+                  <button
+                    // id="dropdownNavbarLink"
+                    // data-dropdown-toggle="dropdownNavbar"
+                    className="flex py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                    onClick={() => setIsOpenTop((prev) => !prev)}
+                  >
+                    Gradient
+                    <svg
+                      className="w-5 h-5 ml-1"
+                      aria-hidden="true"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      Dashboard
-                    </NavLink>
-                  </li>
-                )}
-                {isLoggedIn ? (
-                  <li>
-                    <NavLink
-                      to="/"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
-                          : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
-                      }
-                      onClick={handleSignOut}
-                    >
-                      Sign Out
-                    </NavLink>
-                  </li>
-                ) : (
-                  <li>
-                    <NavLink
-                      to="/signin"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
-                          : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
-                      }
-                    >
-                      Sign In
-                    </NavLink>
-                  </li>
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </button>
+                  {isOpenTop && (
+                    <div className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute">
+                      <ul className="py-2 text-sm text-gray-700">
+                        <li>
+                          <Link
+                            to="/gradient?page=1"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                            onClick={() => setIsOpenTop(false)}
+                          >
+                            Two Tone Gradient
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/gradient/threetone?page=1"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                            onClick={() => setIsOpenTop(false)}
+                          >
+                            Three Tone Gradient
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/gradient/generate"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                            onClick={() => setIsOpenTop(false)}
+                          >
+                            Generate Gradient
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                    {isOpenTop && (
+                      <ul className="py-2 text-sm text-gray-700">
+                        <li>
+                          <Link
+                            to="/gradient?page=1"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Two Tone Gradient
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/gradient/threetone?page=1"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Three Tone Gradient
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/gradient/generate"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Generate Gradient
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
+                  </div>
+                </li>
+                {userData && (
+                  <div className={`${!isLoggedIn && "hidden"}`}>
+                    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                      <button
+                        type="button"
+                        class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-2 focus:ring-gray-300"
+                        id="user-menu-button"
+                        aria-expanded="false"
+                        data-dropdown-toggle="user-dropdown"
+                        data-dropdown-placement="bottom"
+                      >
+                        <span class="sr-only">Open user menu</span>
+                        <div className="h-8 w-8 bg-[#FCD34D] text-[#222222] font-bold text-xl rounded-full flex justify-center items-center">
+                          <div>{userData.name.slice(0, 1).toUpperCase()}</div>
+                        </div>
+                        {/* <img
+                      class="w-8 h-8 rounded-full"
+                      src="/docs/images/people/profile-picture-3.jpg"
+                      alt="user photo"
+                    /> */}
+                      </button>
+                      <div
+                        class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
+                        id="user-dropdown"
+                      >
+                        <div class="px-4 py-3">
+                          <span class="block text-sm text-gray-900">
+                            {userData.name}
+                          </span>
+                          <span class="block text-sm  text-gray-500 truncate">
+                            {userData.email}
+                          </span>
+                        </div>
+                        <ul class="py-2" aria-labelledby="user-menu-button">
+                          <li>
+                            <Link
+                              to="/dashboard"
+                              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                              Dashboard
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="#"
+                              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              onClick={handleSignOut}
+                            >
+                              Sign Out
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                      <button
+                        data-collapse-toggle="navbar-user"
+                        type="button"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                        aria-controls="navbar-user"
+                        aria-expanded="false"
+                      >
+                        <span class="sr-only">Open main menu</span>
+                        <svg
+                          class="w-5 h-5"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 17 14"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
                 )}
               </ul>
             </div>
