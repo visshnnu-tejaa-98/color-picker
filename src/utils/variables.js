@@ -2,6 +2,8 @@ export const twoTone = "TWO_TONE";
 export const threeTone = "THREE_TONE";
 export const twoToneGradientType = 2;
 export const threeToneGradientType = 3;
+export const google_client_id =
+  "26563413783-snc23qd1k4qne0op59r8ledbgsjr1c3e.apps.googleusercontent.com";
 
 export const twoToneGradientCopyCode = (color) => {
   return `background: ${color[0]}; /* fallback for old browsers */ 
