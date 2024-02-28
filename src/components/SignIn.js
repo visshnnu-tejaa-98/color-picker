@@ -1,8 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DEV_API from "../config/config.development";
 import axios from "axios";
 import ApiColorsContext from "../contexts/apiColorsContext";
+import { jwtDecode } from "jwt-decode";
+import { GoogleLogin } from "@react-oauth/google";
+import { google_client_id } from "../utils/variables";
 
 const SignIn = () => {
   const [user, setUser] = useState({
@@ -13,6 +16,11 @@ const SignIn = () => {
     apiStatus: 0,
     data: null,
     errorMessage: null,
+  });
+  const [googleLoginResponse, setGoogleLoginResponse] = useState({
+    apiStatus: 0,
+    data: null,
+    error: null,
   });
   const ApiColorsCtx = useContext(ApiColorsContext);
   const navigate = useNavigate();
@@ -52,6 +60,7 @@ const SignIn = () => {
       })
       .then((data) => {
         ApiColorsCtx.updateAuthToken(data?.data?.token);
+        console.log("Apple", data?.data?.user);
         ApiColorsCtx.updateUser(data?.data?.user);
         navigate("/solid");
         return;
@@ -73,6 +82,70 @@ const SignIn = () => {
           errorMessage: error?.response?.data?.message || error?.message,
         });
       });
+  };
+
+  const googleLogin = async (decodedUser, token) => {
+    const url = DEV_API.googleLogin?.url;
+    let options = {
+      ...DEV_API.getAllGradientsByUser.headers,
+    };
+    const user = {
+      ...decodedUser,
+      token: token,
+    };
+    setGoogleLoginResponse({
+      apiStatus: 0,
+      data: null,
+      error: null,
+    });
+    try {
+      const req = await fetch(url, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      const res = await req.json();
+      console.log(res);
+      setGoogleLoginResponse({
+        apiStatus: 1,
+        data: res,
+        error: null,
+      });
+      const userFromGoogle = {
+        ...decodedUser,
+        googleUser: true,
+        _id: res.user?._id,
+      };
+      ApiColorsCtx.updateAuthToken(token);
+      ApiColorsCtx.updateUser(userFromGoogle);
+      if (res.success === true) {
+        navigate("/solid");
+      }
+    } catch (error) {
+      console.log(error);
+      setGoogleLoginResponse({
+        apiStatus: -1,
+        data: null,
+        error: error.message,
+      });
+    }
+  };
+
+  const handleSuccess = (credentialResponse) => {
+    const token = credentialResponse.credential;
+    const decodedUser = jwtDecode(credentialResponse.credential);
+    const requiredUser = {
+      name: decodedUser.name,
+      email: decodedUser.email,
+      avatar: decodedUser.picture,
+    };
+    googleLogin(requiredUser, token);
+  };
+
+  const handleError = () => {
+    console.log("Login Failed");
   };
   return (
     <div className="flex items-center justify-center">
@@ -165,6 +238,23 @@ const SignIn = () => {
                     Login Through OTP?
                   </Link>
                 </p>
+              </div>
+              <div className="flex gap-2 text-[#CCCCCC]">
+                <div className="flex gap-2 w-[100%] items-center">
+                  <hr className="w-[50%]"></hr>
+                  <div>(or)</div>
+                  <hr className="w-[50%]"></hr>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <GoogleLogin
+                  clientId={google_client_id}
+                  onSuccess={handleSuccess}
+                  onError={handleError}
+                  // size="medium"
+                >
+                  {/* Your app components go here */}
+                </GoogleLogin>
               </div>
               <div>
                 <button

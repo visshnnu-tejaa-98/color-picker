@@ -35,6 +35,7 @@ const GenerateGradient = () => {
   };
 
   const addGradient = async (gradient) => {
+    console.log("Ball", ApiColorsCtx?.getUser());
     let data = {
       userId: ApiColorsCtx?.getUser()?._id,
       colors: `${color1};${color2}`,

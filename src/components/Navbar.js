@@ -1,4 +1,3 @@
-import { Footer } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
 import {
   Link,
@@ -27,6 +26,8 @@ const Navbar = () => {
     data: null,
     errorMessage: null,
   });
+  const [userData, setUserData] = useState(null);
+  const [showUserDropDown, setShowUserDropdown] = useState(false);
   const ApiColorsCtx = useContext(ApiColorsContext);
   const navigate = useNavigate();
 
@@ -53,21 +54,34 @@ const Navbar = () => {
   }, [window.location.pathname]);
 
   useEffect(() => {
+    console.log("Auth Token", ApiColorsCtx.getAuthToken());
     if (
       ApiColorsCtx.getAuthToken() &&
       ApiColorsCtx.getAuthToken() !== "undefined"
     ) {
       setIsLoggedIn(true);
+      setUserData(ApiColorsCtx.getUser());
     } else {
       setIsLoggedIn(false);
+      localStorage.removeItem("user");
+      localStorage.removeItem("colorPicker");
     }
   }, [ApiColorsCtx.getAuthToken()]);
 
   const handleSignOut = () => {
+    setIsLoggedIn(false);
+    console.log("Trigger Signout");
     signOut();
   };
 
   const signOut = async (user) => {
+    const loggedUser = ApiColorsCtx.getUser();
+    if (loggedUser?.googleUser === true) {
+      ApiColorsCtx.removeAuthToken();
+      ApiColorsCtx.removeUser();
+      navigate("/solid");
+      return;
+    }
     let data = user;
     let api = DEV_API.signOut;
     let headers = { Authorization: `Bearer ${ApiColorsCtx.getAuthToken()}` };
@@ -148,6 +162,16 @@ const Navbar = () => {
     return result;
   };
 
+  const handleToggleUserDropdown = () => {
+    console.log(111);
+    setShowUserDropdown((prev) => {
+      console.log(prev, typeof prev);
+      return !prev;
+    });
+  };
+  useEffect(() => {
+    console.log("isLoggedIn:::", isLoggedIn);
+  }, [isLoggedIn]);
   return (
     <div>
       <div className="text-[#CCCCCC] px-[7%] sticky top-0 bg-[#1E0927] z-10 shadow-[0_8px_6px_-6px_rgba(204,204,204,0.3)]   ">
@@ -186,142 +210,48 @@ const Navbar = () => {
               id="navbar-default"
             >
               <ul className="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
-                <li className={`${isLoggedIn && "hidden"}`}>
-                  <NavLink
-                    to="/signin"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
-                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
-                    }
-                  >
-                    Sign In
-                  </NavLink>
-                </li>
-                <li className={`${!isLoggedIn && "hidden"}`}>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
-                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
-                    }
-                    onClick={handleSignOut}
-                  >
-                    Sign Out
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/solid"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
-                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
-                    }
-                  >
-                    Solid
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/palette?page=1"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
-                        : "block py-2 pl-3 pr-4 text-[#CCCCCC] rounded hover:text-[#1c1c1c] hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
-                    }
-                  >
-                    palette
-                  </NavLink>
-                </li>
-                <li>
-                  <button
-                    // id="dropdownNavbarLink"
-                    // data-dropdown-toggle="dropdownNavbar"
-                    className="flex py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
-                    onClick={() => setIsOpenTop((prev) => !prev)}
-                  >
-                    Gradient
-                    <svg
-                      className="w-5 h-5 ml-1"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
+                {isLoggedIn && (
+                  <li>
+                    <NavLink
+                      to="/dashboard"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                          : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                      }
                     >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
-                  {isOpenTop && (
-                    <div className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute">
-                      <ul className="py-2 text-sm text-gray-700">
-                        <li>
-                          <Link
-                            to="/gradient?page=1"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setIsOpenTop(false)}
-                          >
-                            Two Tone Gradient
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/gradient/threetone?page=1"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setIsOpenTop(false)}
-                          >
-                            Three Tone Gradient
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/gradient/generate"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setIsOpenTop(false)}
-                          >
-                            Generate Gradient
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-
-                  <div className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                    {isOpenTop && (
-                      <ul className="py-2 text-sm text-gray-700">
-                        <li>
-                          <Link
-                            to="/gradient?page=1"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                          >
-                            Two Tone Gradient
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/gradient/threetone?page=1"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                          >
-                            Three Tone Gradient
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/gradient/generate"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                          >
-                            Generate Gradient
-                          </Link>
-                        </li>
-                      </ul>
-                    )}
-                  </div>
-                </li>
+                      Dashboard
+                    </NavLink>
+                  </li>
+                )}
+                {isLoggedIn ? (
+                  <li>
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                          : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                      }
+                      onClick={handleSignOut}
+                    >
+                      Sign Out
+                    </NavLink>
+                  </li>
+                ) : (
+                  <li>
+                    <NavLink
+                      to="/signin"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "block py-2 pl-3 pr-4 text-[#1c1c1c] rounded bg-[#CCCCCC] md:bg-transparent md:text-white md:p-0 my-1"
+                          : "block py-2 pl-3 pr-4 text-[#CCCCCC] hover:text-[#1c1c1c] rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#dddddd] md:p-0 my-1"
+                      }
+                    >
+                      Sign In
+                    </NavLink>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -334,6 +264,31 @@ const Navbar = () => {
           }`}
         >
           <div className="h-full px-3 py-4 overflow-y-auto bg-[#310f41]">
+            {isLoggedIn && userData && (
+              <div className="p-3">
+                {userData?.avatar ? (
+                  <div className="flex justify-center">
+                    <img
+                      className="w-[80px] h-[80px] rounded-full border-2 border-[#FCD34D]"
+                      src={userData.avatar}
+                      alt="avatar"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex justify-center">
+                    <div className="w-[80px] h-[80px] bg-[#581C87] rounded-full flex justify-center items-center text-[#FCD34D] text-[35px] border-2 border-[#FCD34D]">
+                      VT
+                    </div>
+                  </div>
+                )}
+
+                <div className="text-center text-[#cccccc]">
+                  <p className="text-lg font-bold">{userData.name}</p>
+                  <p className="text-sm ">{userData.email}</p>
+                </div>
+                <hr className="opacity-50 mt-3"></hr>
+              </div>
+            )}
             <ul className="space-y-2 font-medium">
               <li className={!isLoggedIn && "hidden"}>
                 <NavLink
