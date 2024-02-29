@@ -1,7 +1,7 @@
 const protocol = "http:";
 const host = "//localhost:8000";
-const origin = "http://localhost:8000";
-// const origin = "https://color-picker-server-production.up.railway.app";
+// const origin = "http://localhost:8000";
+const origin = "https://color-picker-server-production.up.railway.app";
 export const feOrigin = "https://dev-color-picker.netlify.app";
 
 const DEV_API = {
