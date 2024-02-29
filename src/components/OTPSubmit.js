@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ApiColorsContext from "../contexts/apiColorsContext";
 import { Link, useNavigate } from "react-router-dom";
 import DEV_API from "../config/config.development";
@@ -17,8 +17,31 @@ const OTPSubmit = () => {
     data: null,
     error: null,
   });
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(59);
   const ApiColorsCtx = useContext(ApiColorsContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(interval);
+        } else {
+          setSeconds(59);
+          setMinutes(minutes - 1);
+        }
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [seconds]);
 
   const handleSubmitOtp = async (otp) => {
     const email = localStorage.getItem("resend-email-otp");
@@ -65,6 +88,7 @@ const OTPSubmit = () => {
         localStorage.removeItem("resend-email-otp");
       } else {
         setSubmitWarningMessage(res.message);
+        setSeconds(59);
       }
     } catch (error) {
       console.log(error);
@@ -125,17 +149,39 @@ const OTPSubmit = () => {
                       color: "#CCCCCC",
                     }}
                   />
-                  <p className="mt-2 text-base text-gray-400 400 mb-2 text-sm">
-                    Resend Otp?
-                    <Link
-                      to="#"
-                      title=""
-                      className="font-medium pl-1 text-[#FCD34D] transition-all duration-200 hover:underline focus:text-[#FCD34D]"
-                      onClick={handleSendOtp}
-                    >
-                      Click Here
-                    </Link>
-                  </p>
+                  <div className="flex justify-between">
+                    <div>
+                      {seconds > 0 || minutes > 0 ? (
+                        <p className="mt-2 text-base text-gray-400 400 mb-2 text-sm text-[#cccccc]">
+                          Resend OTP in :{" "}
+                          {minutes < 10 ? `0${minutes}` : minutes}:
+                          {seconds < 10 ? `0${seconds}` : seconds}
+                        </p>
+                      ) : (
+                        <p className="mt-2 text-base text-gray-400 400 mb-2 text-sm text-[#cccccc]">
+                          Didn't recieve code?{" "}
+                          <Link
+                            to="#"
+                            title=""
+                            className="font-medium pl-1 text-[#FCD34D] transition-all duration-200 hover:underline focus:text-[#FCD34D]"
+                            onClick={handleSendOtp}
+                          >
+                            Resend OTP
+                          </Link>
+                        </p>
+                      )}
+                    </div>
+                    {/* <p className="mt-2 text-base text-gray-400 400 mb-2 text-sm">
+                      <Link
+                        to="#"
+                        title=""
+                        className="font-medium pl-1 text-[#FCD34D] transition-all duration-200 hover:underline focus:text-[#FCD34D]"
+                        onClick={handleSendOtp}
+                      >
+                        Resend OTP
+                      </Link>
+                    </p> */}
+                  </div>
                 </div>
               </div>
               <button
